@@ -1,8 +1,23 @@
 <?php
-// Define the location of font files and get the fpdf library
+// F1.3 — Migrated from UFPDF (unmaintained, not shipped by modern pdf plugin)
+// to TCPDF, which is what the current e107 `pdf` plugin bundles. TCPDF is a
+// drop-in for FPDF's API surface used here (Header/Footer/Cell/MultiCell/
+// SetFont/AddPage/AliasNbPages/Output) and is UTF-8 native, so no separate
+// Unicode wrapper is required.
 require_once("../../class2.php");
-define('FPDF_FONTPATH', e_PLUGIN . 'pdf/font/');
-require(e_PLUGIN . 'pdf/ufpdf.php');
+
+if (!e107::isInstalled('pdf'))
+{
+    require_once(HEADERF);
+    echo e107::getMessage()
+        ->addWarning("PDF plugin is not installed — cannot render ticket to PDF.")
+        ->render();
+    require_once(FOOTERF);
+    exit();
+}
+
+define('K_TCPDF_EXTERNAL_CONFIG', true);
+require_once(e_PLUGIN . 'pdf/tcpdf.php');
 
 if (!is_object($helpdesk_obj))
 {
@@ -10,8 +25,8 @@ if (!is_object($helpdesk_obj))
     $helpdesk_obj = new helpdesk;
 }
 
-// Create a new class extending fpdf to have custom header and footer for the page
-class HDUPDF extends UFPDF
+// Create a new class extending TCPDF to have custom header and footer for the page
+class HDUPDF extends TCPDF
 {
     // Page header
     function Header()

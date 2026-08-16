@@ -1,4 +1,4 @@
-# Changelog# Changelog# Changelog# Changelog# Changelog
+# Changelog# Changelog# Changelog# Changelog# Changelog# Changelog
 
 
 
@@ -30,7 +30,7 @@ versionado se rige por [SemVer](https://semver.org/spec/v2.0.0.html).registrados
 
 
 
-Ver `MIGRATION_PLAN.md` Fase 1.> **Convención de trabajo**: cada release documenta *Added / Changed / Fixed /Todos los cambios notables del plugin **Helpdesk** para e107 CMS quedanAll notable changes to the **Helpdesk** plugin for e107 CMS will be documented in this file.
+Ver `MIGRATION_PLAN.md` Fase 1.> **Convención de trabajo**: cada release documenta *Added / Changed / Fixed /Todos los cambios notables del plugin **Helpdesk** para e107 CMS quedan
 
 
 
@@ -38,61 +38,156 @@ Ver `MIGRATION_PLAN.md` Fase 1.> **Convención de trabajo**: cada release docume
 
 - `plugin.xml`: bump a `2.1.0-dev` como marcador de rama de trabajo Fase 1.
 
-> mapean 1:1 a una versión de esta lista.El formato sigue [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) y el
+- Repositorio git local inicializado con `main` como rama por defecto y> mapean 1:1 a una versión de esta lista.El formato sigue [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) y el
+
+  `.gitignore` que excluye artefactos (`pdfout/*.pdf`, `vendor/`, IDE files).
+
+
 
 ### Changed
 
-- **F1.1a** — `includes/helpdesk_class.php`: 55 propiedades `var $x;` (sintaxis
+- **F1.1a** — `includes/helpdesk_class.php`: 55 propiedades `var $x;` (PHP 4)---versionado se rige por [SemVer](https://semver.org/spec/v2.0.0.html).registrados en este archivo.
 
-  PHP 4) migradas a **`public <tipo> $x`** con tipos declarados. Los `?tipo`
+  migradas a `public <tipo> $x` con tipos declarados. Nullables (`?tipo`)
 
-  nullables se usan en todo lo hidratado desde `e107::pref('helpdesk')` porque---versionado se rige por [SemVer](https://semver.org/spec/v2.0.0.html).registrados en este archivo.
+  para todo lo hidratado desde `e107::pref('helpdesk')` (un pref jamás
 
-  un pref jamás guardado retorna `null`, no el default XML. Bloques comentados
+  guardado retorna `null`, no el default XML). Agrupadas por dominio.
+
+- **F1.1b** — Saneado accesos a superglobales y variables no inicializadas## [Unreleased] — rama de trabajo hacia `2.1.0`
+
+  en `pdfit.php`, `pdfrep.php`, `helpdesk.php`. Fix firma `pdfit()`
+
+  (deprecado PHP 8.1+: parámetro obligatorio tras opcional). Sustituido
+
+  `$hdu_super` global huérfano por `$helpdesk_obj->hdu_super` y
+
+  `$PLUGINS_DIRECTORY` (var legacy pre-e107 v2) por `e_PLUGIN`.Ver `MIGRATION_PLAN.md` Fase 1.> **Convención de trabajo**: cada release documenta *Added / Changed / Fixed /Todos los cambios notables del plugin **Helpdesk** para e107 CMS quedanAll notable changes to the **Helpdesk** plugin for e107 CMS will be documented in this file.
+
+- **F1.2** — `helpdesk.php`: descomentado y corregido el bloque de definición
+
+  de `HDU_LOGO` (tenía un espacio final `"HDU_LOGO "` — jamás matcheaba).
+
+- **F1.3** — `helpdesk.php`: `require_once("printit.php")` → path absoluto
+
+  vía `e_PLUGIN`. El include relativo rompía cuando `helpdesk.php` se### Added> Removed / Security / Migration notes*. Las fases del `MIGRATION_PLAN.md`
+
+  alcanzaba desde una URL con rewrite (cwd distinto), causando el error
+
+  "Print → File Not Found" reportado en pruebas.- `plugin.xml`: bump a `2.1.0-dev` como marcador de rama de trabajo Fase 1.
+
+- **F1.3** — `pdfit.php`: migrado de **UFPDF** (obsoleto, ya no lo trae el
+
+  plugin `pdf` moderno) a **TCPDF** (bundleado por el plugin `pdf` actual y> mapean 1:1 a una versión de esta lista.El formato sigue [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) y el
+
+  UTF-8 nativo). `HDUPDF extends UFPDF` → `HDUPDF extends TCPDF`. La API
+
+  usada (`Header/Footer/Cell/MultiCell/SetFont/AddPage/AliasNbPages/Output`)### Changed
+
+  es compatible entre ambos. Añadido guard `e107::isInstalled('pdf')` con
+
+  mensaje amable en lugar de fatal `require` si el plugin `pdf` falta.- **F1.1a** — `includes/helpdesk_class.php`: 55 propiedades `var $x;` (sintaxis
+
+
+
+### Deferred to Fase 2  PHP 4) migradas a **`public <tipo> $x`** con tipos declarados. Los `?tipo`
+
+- **F1.1c** (rename tabla `hdunit` → `hdu_tickets`): pospuesto. Hay 30
+
+  ocurrencias literales dispersas en 8 archivos. Se hará junto con la  nullables se usan en todo lo hidratado desde `e107::pref('helpdesk')` porque---versionado se rige por [SemVer](https://semver.org/spec/v2.0.0.html).registrados en este archivo.
+
+  migración de queries a placeholders en Fase 2 (v2.2.0).
+
+- Legacy class `DB` en `pdfit.php`/`report0.php`/`report1.php` (líneas  un pref jamás guardado retorna `null`, no el default XML. Bloques comentados
+
+  `new DB;`) — no existe en e107 moderno. Reemplazar por `e107::getDb()`.
 
   legacy eliminados. Agrupadas por dominio (Access flags · Prefs · UI/action ·
 
+---
+
   Notification · Financial/SLA).
+
+## [2.0.1] — 2026-08-16
 
 - **F1.1b** — Saneado accesos a superglobales y variables no inicializadas:## [Unreleased] — rama de trabajo hacia `2.1.0`
 
-  - `pdfit.php`: `$_GET['hdu_id'/'hdu_dest'/'hdu_pagesize']` casteados con
+Release "puente" para desbloquear la instalación limpia sobre e107 2.3.x /
 
-    `(int) / (string)` y `?? default`. Además fix de firma
+PHP 8.0+. No cambia esquema de BD ni prefs — no requiere migración.  - `pdfit.php`: `$_GET['hdu_id'/'hdu_dest'/'hdu_pagesize']` casteados con
 
-    `function pdfit(..., $hdu_pdf_fname, $hdu_pdf_size = "A4")` (parámetro
 
-    obligatorio tras opcional → deprecado PHP 8.1+) aVer `MIGRATION_PLAN.md` Fase 1.> **Convención de trabajo**: cada release documenta *Added / Changed / Fixed /The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
-    `$hdu_pdf_fname = ""`.
+### Fixed    `(int) / (string)` y `?? default`. Además fix de firma
 
-  - `pdfrep.php`: `(int) ($_GET['hdu_repselection'] ?? 0)`.
 
-  - `helpdesk.php`: inicialización de `$hdu_savemsg`, `$sqlmsg`, `$filter`,
 
-    `$hdu_text`, `$tp` (todas usadas por el flujo `switch(action)` sin### Added> Removed / Security / Migration notes*. Las fases del `MIGRATION_PLAN.md`
+- **Instalación bloqueada por dependencia obligatoria** `bootstrap_colorpicker`.    `function pdfit(..., $hdu_pdf_fname, $hdu_pdf_size = "A4")` (parámetro
 
-    declarar). Sustituido `$hdu_super` global huérfano por
+  Ya no se exige ese plugin externo para instalar Helpdesk.
 
-    `$helpdesk_obj->hdu_super`. `$PLUGINS_DIRECTORY` (var legacy pre-e107 v2)- `plugin.xml`: bump a `2.1.0-dev` como marcador de rama de trabajo Fase 1.
+- **Warnings PHP 8 al entrar a `helpdesk.php`** (`Undefined variable $R1`,    obligatorio tras opcional → deprecado PHP 8.1+) aVer `MIGRATION_PLAN.md` Fase 1.> **Convención de trabajo**: cada release documenta *Added / Changed / Fixed /The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+
+  `$hdu_goto`, `$hdu_aaction`). Inicialización explícita + `?? …`.
+
+- **Bug lógico en el filtro de lista**: `hdu_savemsg` sobreescribía `$R1`.    `$hdu_pdf_fname = ""`.
+
+
+
+### Notes  - `pdfrep.php`: `(int) ($_GET['hdu_repselection'] ?? 0)`.
+
+
+
+- Verificado con e107 2.3.4 + PHP 8.3 sobre WAMP.  - `helpdesk.php`: inicialización de `$hdu_savemsg`, `$sqlmsg`, `$filter`,
+
+
+
+---    `$hdu_text`, `$tp` (todas usadas por el flujo `switch(action)` sin### Added> Removed / Security / Migration notes*. Las fases del `MIGRATION_PLAN.md`
+
+
+
+## [2.0.0] — 2025-04-19    declarar). Sustituido `$hdu_super` global huérfano por
+
+
+
+Versión heredada de upstream (Father Barry). Reintroducida en este repo como    `$helpdesk_obj->hdu_super`. `$PLUGINS_DIRECTORY` (var legacy pre-e107 v2)- `plugin.xml`: bump a `2.1.0-dev` como marcador de rama de trabajo Fase 1.
+
+línea base tras el fork.
 
     reemplazado por derivación de `e_PLUGIN`.
 
+### Added
+
 - **F1.2** — `helpdesk.php`: descomentado y corregido el bloque de definición> mapean 1:1 a una versión de esta lista.El formato sigue [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) y eland this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-  de `HDU_LOGO` (tenía un espacio final `"HDU_LOGO "` — jamás matcheaba con
+- Compatibilidad declarada con e107 **2.3** y PHP **8.0.0**.
+
+- Prefs de colores por prioridad (`hduprefs_p1col`..`p5col`), rate/hora,  de `HDU_LOGO` (tenía un espacio final `"HDU_LOGO "` — jamás matcheaba con
+
+  auto-cierre, escalado, notificaciones por email / PM.
 
   las referencias del template). Ahora el logo del tema se activa si existe### Changed
 
+### Known limitations (pendientes de fases 1–3)
+
   `THEME/helpdesk.png`, con fallback al PNG del plugin.
 
-- **F1.1a** — `includes/helpdesk_class.php`: 55 propiedades `var $x;` (sintaxis
+- Admin CRUD (categorías, helpdesks, técnicos, resoluciones, fixes) todavía se
 
-### Deferred to Fase 2
+  hace con formularios manuales; no usa `e_admin_ui`.- **F1.1a** — `includes/helpdesk_class.php`: 55 propiedades `var $x;` (sintaxis
 
-- **F1.1c (rename tabla `hdunit` → `hdu_tickets`)**: pospuesto. Hay 30  PHP 4) migradas a **`public <tipo> $x`** con tipos declarados (`bool`,
+- **No hay lista de tickets en el admin** (es diseño del legacy): supervisores
 
-  ocurrencias literales dispersas en 8 archivos (`helpdesk.php`,
+  gestionan tickets desde el frontend `helpdesk.php`. Fase 3 añade una lista### Deferred to Fase 2
+
+  admin nativa vía `e_admin_ui` sobre `hdu_tickets`.
+
+- Templates HTML sin Bootstrap 5.- **F1.1c (rename tabla `hdunit` → `hdu_tickets`)**: pospuesto. Hay 30  PHP 4) migradas a **`public <tipo> $x`** con tipos declarados (`bool`,
+
+- Notificaciones no pasan por `e107::getNotify()`.
+
+- Interpolación SQL directa en varios sitios (`"hd_id={$id}"`).  ocurrencias literales dispersas en 8 archivos (`helpdesk.php`,
+
 
   `includes/helpdesk_class.php`, `pdfit.php`, `e_dashboard.php`,  `int`, `float`, `string`). Los tipos coinciden con los defaults ya---versionado se rige por [SemVer](https://semver.org/spec/v2.0.0.html).
 

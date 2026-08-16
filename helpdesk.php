@@ -211,7 +211,10 @@ switch ($hdu_aaction)
         }
         break;
     case "print":
-        require_once("printit.php");
+        // F1.3 — use absolute path via e_PLUGIN; relative include broke when
+        // helpdesk.php was reached through an URL rewrite (cwd was not the
+        // plugin folder, causing "File Not Found").
+        require_once(e_PLUGIN . HELPDESK_FOLDER . "/printit.php");
         exit();
         break;
     case "updet":
