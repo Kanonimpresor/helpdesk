@@ -28,8 +28,13 @@ if (!isset($helpdesk_obj) || !is_object($helpdesk_obj))
 // (send to login) instead of the generic "no permission" one.
 if (((int) USERID) === 0)
 {
-    // Send to login page with a return-to.
-    header('Location: ' . e_HTTP . 'login.php?redir=' . rawurlencode(e_REQUEST_URI));
+    // F2.6.1 — use e107's redirect handler. The core login.php has NO
+    // `?redir=` param; instead it consumes whatever URL you register via
+    // getRedirect()->setLoginDestination() and jumps there after a
+    // successful login. Passing ?redir= manually did nothing and the
+    // login form failed silently for anonymous users.
+    e107::getRedirect()->setLoginDestination(e_REQUEST_URI);
+    e107::redirect(e_HTTP . 'login.php');
     exit();
 }
 
