@@ -828,22 +828,35 @@ class helpdesk
             }
             
             // Display top table containing back or print record // Not needed in normal view, only when editing or new, right?
-            $hdu_retval = $this->hdu_new?"
+            // F2.2c-fix (bug B-comment): the whole <script>+<form>+hidden
+            // inputs block used to be emitted ONLY when $this->hdu_new was
+            // true. On an existing (open) ticket, the comment textarea and
+            // the submit button (rendered by sc_hdu_show_newcomment /
+            // sc_hdu_show_submit) would render OUTSIDE any <form>, so the
+            // "save comment" button never worked. Also, changed() JS was
+            // missing so the disabled button could never enable.
+            //
+            // Fix: always emit the <script> and <form>, and make checkform()
+            // tolerant to missing fields (in read-only mode the input
+            // elements do not exist; accessing them as undefined must not
+            // block the submit).
+            $hdu_retval = "
 <script type='text/javascript'>
 <!--
 function checkform(theform)
 {
-	if (theform.hdu_summary.value==null || theform.hdu_summary.value == \"\")
+	// F2.2c-fix: fields only exist on new ticket / edit; guard access.
+	if (theform.hdu_summary && (theform.hdu_summary.value==null || theform.hdu_summary.value == \"\"))
 	{
 		alert(\"" . HDU_213 . "\");
 		return false;
 	}
-	if (theform.hdu_category.value==0 )
+	if (theform.hdu_category && theform.hdu_category.value==0 )
 	{
 		alert(\"" . HDU_212 . "\");
 		return false;
 	}
-	if (theform.hdu_description.value==null || theform.hdu_description.value == \"\")
+	if (theform.hdu_description && (theform.hdu_description.value==null || theform.hdu_description.value == \"\"))
 	{
 		alert(\"" . HDU_211 . "\");
 		return false;
@@ -852,9 +865,10 @@ function checkform(theform)
 }
 function changed()
 {
-	document.getElementById('formok').disabled=false
-	document.getElementById('formok').value='" . HDU_5 . "'
-	document.getElementById('hdu_changed').value='yes'
+	document.getElementById('formok').disabled=false;
+	document.getElementById('formok').value='" . HDU_5 . "';
+	var h = document.getElementById('hdu_changed');
+	if (h) { h.value='yes'; }
 }
 -->
 </script>
@@ -870,7 +884,7 @@ function changed()
 		<input type='hidden' name='hduposterid' value='" . $hduposterid . "' />
 		<input type='hidden' name='hdu_ctech' value='" . $hdu_tech . "' />
 		<input type='hidden' id='hdu_changed' name='hdu_changed' value='no' />
-		<input type='hidden' id='hdu_lasttime' name='hdu_lasttime' value='" . $hdu_lastchanged . "' />":"";
+		<input type='hidden' id='hdu_lasttime' name='hdu_lasttime' value='" . $hdu_lastchanged . "' />";
             /*
             if (!$helpdesk_obj->hdu_new && (USERID == $hdu_posterid || $helpdesk_obj->hduprefs_allread) && !$helpdesk_obj->hdu_super && !$helpdesk_obj->hdu_technician)
             {
@@ -945,7 +959,8 @@ function changed()
 
             $hdu_retval .= $this->hdu_new?"":'</div></div>';
             $hdu_retval .= $this->tp->parseTemplate($HDU_SHOWTICKET["footer"], true, $hdu_shortcodes);
-            $hdu_retval .= $this->hdu_new?"</form>":"";
+            // F2.2c-fix: always close the form (opened unconditionally above).
+            $hdu_retval .= "</form>";
         }
 /*
         echo "<pre>";
