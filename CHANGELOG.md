@@ -12,36 +12,121 @@ versionado se rige por [SemVer](https://semver.org/spec/v2.0.0.html).
 
 ---
 
-## [Unreleased] — rama de trabajo hacia `2.2.0`
+## [Unreleased]
 
-Ver `MIGRATION_PLAN.md` Fase 2 (seguridad + consistencia de datos).
+Rama de trabajo hacia `2.3.0` (Fase 3b — Guide + About + Spanish locale).
+Sin cambios todavía.
+
+---
+
+## [2.2.0] — 2026-08-16 — Fase 2 (seguridad + consistencia de datos)
+
+Cierra `MIGRATION_PLAN.md` Fase 2. Cinco sub-releases mergeados:
+F2.1 (rename), F2.2a-e (SQL sanitize), F2.2c-fix (comment form bug),
+F2.5 (privacy hotfix).
+
+### Security
+
+- **F2.5 (privacy leak — CRÍTICO)** — Cualquier miembro registrado veía
+  todos los tickets del sitio, no solo los propios. Causa: en
+  `helpdesk.php` el filtro `hduprefs_posteronly` era sobreescrito
+  incondicionalmente por un segundo `if` que ponía `where hdu_id > 0`
+  cuando la pref estaba desactivada (default de fresh install).
+  Reescrito como política role-first (`hdu_super` o `hdu_technician` →
+  ven todo; resto → solo propios). `hduprefs_posteronly` queda
+  efectivamente deprecada hasta el rediseño de visibilidad de Fase 4
+  (DEV_NOTES §8.1 documenta el plan completo).
+- **F2.2a** — `helpdesk.php`: DELETE queries con guard `$id > 0` para
+  bloquear borrados en masa vía POST maliciosos con `id=0`.
+- **F2.2c** — `hduc_body !== ''` guard en `post_comment()` — antes se
+  podía crear comentarios vacíos.
 
 ### Added
+
 - **F2.1** — `helpdesk_setup.php` nuevo. Clase `helpdesk_setup` con hook
-  `upgrade_post($var)` (convención e107) que ejecuta un `RENAME TABLE`
-  idempotente de `#hdunit` a `#hdu_tickets` cuando se actualiza desde
-  versiones ≤ 2.1.x. Contrato:
-  - `hdu_tickets` existe → no-op.
-  - `hdunit` existe y `hdu_tickets` no → `RENAME` + mensaje de éxito.
-  - Ninguna existe → no-op (instalación nueva).
-- `plugin.xml` bump a `2.2.0-dev` como marcador de rama Fase 2.
+  `upgrade_post($var)` que hace un `RENAME TABLE` idempotente de
+  `#hdunit` a `#hdu_tickets` cuando se actualiza desde ≤ 2.1.x.
+  Contrato: si `hdu_tickets` ya existe, no-op; si solo existe `hdunit`,
+  rename + mensaje éxito; si ninguna existe (fresh install), no-op.
 
 ### Changed
-- **F2.1** — Renombrada la tabla `hdunit` → `hdu_tickets` para alinearla
-  con el resto del esquema (`hdu_helpdesk`, `hdu_comments`,
-  `hdu_categories`, `hdu_fixes`, `hdu_resolve`). Sustituidas 30+
-  referencias literales vía `sed` en 9 archivos PHP:
-  `helpdesk.php`, `includes/helpdesk_class.php`, `pdfit.php`,
-  `e_emailprint.php`, `e_latest.php`, `helpdesk_menu.php`,
-  `reports/report0.php`, `reports/report1.php`, `search/search.php`.
-  `helpdesk_sql.php` actualizado para que instalaciones nuevas creen la
-  tabla con el nombre nuevo.
+
+- **F2.1** — Renombrada tabla `hdunit` → `hdu_tickets` (alinea con
+  `hdu_comments`, `hdu_categories`, etc.). 30+ referencias literales
+  sustituidas en 9 archivos PHP. `helpdesk_sql.php` actualizado.
+- **F2.2b** — `pdfit.php`: reemplazado `new DB` legacy (clase inexistente
+  en e107 2.x; probablemente causaba fatal en la sección de comentarios
+  del PDF) por `e107::getDb('name')`. 3 instancias convertidas.
+- **F2.2b** — Fuentes TCPDF core: `Arial` → `helvetica`, `Times` → `times`
+  (mayúsculas fallan; TCPDF solo tiene 5 fuentes core embebidas).
+  Aplicado en `pdfit.php`, `reports/report0.php`, `reports/report1.php`.
+- **F2.2b** — `reports/report1.php`: heredaba de `UFPDF` (clase de FPDF
+  legacy jamás cargada). Migrado a `TCPDF` con `class_exists` guard,
+  path absoluto del logo, y sin `AliasNbPages()` (TCPDF autoresuelve
+  `{nb}`).
+- **F2.2d** — `update_ticket()`: refactor. Antes leía `$_POST[...]` 30+
+  veces mezclando `intval()` esparcidos con accesos raw (warnings
+  PHP 8 "undefined array key" a montones). Ahora sanea **una vez** al
+  entrar (`$p_new`, `$p_category`, `$p_summary`, ...) y todo el resto
+  del método consume solo esos locales tipados. Efectos colaterales
+  arreglados: mutación de `$_POST['hdu_resolution']` (side effect del
+  auto-assign) → asignación a `$p_resolution`; `hdu_email` en UPDATE
+  pasa por `$tp->toDB()` (antes se interpolaba raw).
+- **F2.2c/d** — Todas las queries de `helpdesk.php`, `pdfit.php`,
+  `post_comment()` y el bucle de comentarios de `show()` reescritas
+  con enteros casteados sin comillas engañosas (`'$id'` → `. (int) $id`).
+- **F2.2e** — `reports/report0.php` + `report1.php`: sanitización de
+  `$_GET` (`hdu_rep`, `hdu_pagesize`, `hdu_dest`, `hdu_fromd`, `hdu_tod`)
+  con whitelist para enums (`hdu_dest` solo permite `I/D/F/S`,
+  `hdu_pagesize` solo `A4/A3/Letter/Legal`). Totales financieros
+  inicializados a 0 antes del bucle (antes: warnings undefined var).
+- **F2.5** — Fix menor: `case "mine"` tenía `"hdu_posterid=' " . USERID`
+  (espacio antes de USERID) que rompía match contra columna int.
+
+### Fixed
+
+- **F2.2c-fix (bug UI reportado por el operador)** — el botón "Guardar
+  comentario" no aparecía en tickets existentes. Root cause en
+  `helpdesk_class.php::show()`: el bloque `<script>` con `checkform()` +
+  `changed()`, el `<form>`, y todos los `<input type='hidden'>` estaban
+  gateados por un ternario `$this->hdu_new ? "..." : ""`. En un ticket
+  existente, el textarea del comentario y el submit renderizaban
+  **fuera** de cualquier `<form>`, y `changed()` no existía para
+  habilitar el botón. Fix: emitir siempre el form, hacer `checkform()`
+  tolerante a campos ausentes (`if (theform.hdu_summary && ...)`), y
+  cerrar `</form>` incondicional.
+- **F2.2b/c** — `explode(".", $hduc_poster)` reasignando a la misma
+  variable (string → array) → warning PHP 8. Aplicado el fix
+  `$parts = explode(...)` en `pdfit.php`, `helpdesk_class.php::show()`
+  loop de comentarios, y `reports/report1.php`.
 
 ### Migration notes
-- Al actualizar de 2.1.x, e107 invocará `helpdesk_setup::upgrade_post()`
-  desde la página de plugins (Admin → Plugin Manager → Upgrade).
-  Si por algún motivo no se dispara, se puede renombrar manualmente:
-  `RENAME TABLE e107_hdunit TO e107_hdu_tickets;` (ajustar prefijo).
+
+- Al actualizar desde 2.1.x, e107 invocará `helpdesk_setup::upgrade_post()`
+  al pulsar **Upgrade** en Admin → Plugin Manager. Si falla, el rename
+  se puede hacer a mano: `RENAME TABLE e107_hdunit TO e107_hdu_tickets;`
+  (ajustar prefijo).
+- El pref `hduprefs_posteronly` queda **efectivamente ignorado**
+  (la política de visibilidad ahora es role-first, ver F2.5). El pref
+  seguirá presente en la UI hasta que la Fase 4 introduzca el modelo
+  de participantes completo.
+- Instalaciones nuevas crean directamente la tabla con el nombre
+  `hdu_tickets` desde `helpdesk_sql.php`.
+
+### Backlog registrado en DEV_NOTES §8
+
+Cinco observaciones de lógica de negocio salidas del smoke test
+2026-08-16 se documentaron pero **no se implementaron** en 2.2.0:
+
+- §8.1 Visibilidad completa por participante (Fase 4 — F2.5 cierra el
+  agujero pero no el modelo).
+- §8.2 Widget de perfil con conteo de tickets (Fase 4 / `e_user.php`).
+- §8.3 Refactor de notificaciones PM/email a eventos `e_notify.php`
+  (Fase 6).
+- §8.4 Verificar visibilidad de comentarios post F2.2c-fix (probable
+  ya resuelto por rebote).
+- §8.5 Decisión pendiente sobre el módulo financiero (opt-in pref,
+  sub-plugin o integración externa).
 
 ---
 

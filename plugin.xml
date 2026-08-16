@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e107Plugin name="Help Desk" lan="HDU_G001" version="2.2.0-dev" date="2026-08-16" compatibility="2.3" installRequired="true" >
+<e107Plugin name="Help Desk" lan="HDU_G001" version="2.2.0" date="2026-08-16" compatibility="2.3" installRequired="true" >
 	<author name="Father Barry" url="http://www.keal.me.uk" />
 	<summary lan="HDU_G002">Helpdesk plugin allows users of your system to post help requests and track their progress.</summary>
 	<description lan="HDU_G003">Helpdesk plugin allows users of your system to post help requests and track their progress.</description>

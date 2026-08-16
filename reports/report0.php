@@ -14,7 +14,7 @@ class HDU_PDF extends TCPDF
             $this->Image(e_PLUGIN . HELPDESK_FOLDER . "/images/logo_hd.png", 10, 8, 33, '', '', $hdu_siteurl);
         }
         // Helvetica bold 15
-        $this->SetFont('Helvetica', 'B', 15);
+        $this->SetFont('helvetica', 'B', 15);
         // Move to the right
         #$this->Cell(80);
         // Title
@@ -23,12 +23,12 @@ class HDU_PDF extends TCPDF
         #$this->Cell(80);
         // Line break
         $this->Line(0, 33, 300, 33);
-        $this->SetFont('Helvetica', 'bu', 9);
+        $this->SetFont('helvetica', 'bu', 9);
         $hdu_tit = $hdu_title . " " . HDU_121 . " " . $hdu_now;
         $this->Cell(0, 6, $hdu_tit, 0, 1,'C');
-        $this->SetFont('Helvetica', 'b', 9);
+        $this->SetFont('helvetica', 'b', 9);
         $this->Cell(0, 6, $hdu_subtitle, 0, 1,'C');
-        $this->SetFont('Helvetica', 'b', 9);
+        $this->SetFont('helvetica', 'b', 9);
         $this->Cell(10, 6, HDU_216, 0, 0, "R");
         $this->Cell(27, 6, HDU_217, 0, 0);
         $this->Cell(35, 6, HDU_227, 0, 0);
@@ -49,52 +49,70 @@ class HDU_PDF extends TCPDF
         // Position at 1.5 cm from bottom
         $this->SetY(-15);
         // Helvetica italic 8
-        $this->SetFont('Helvetica', 'I', 8);
+        $this->SetFont('helvetica', 'I', 8);
         // Page number
         $this->Cell(0, 10, 'Page ' . $this->PageNo() . '/{nb}', 0, 0, 'C');
     }
 }
 // ####################### get the data ############################
- 
+
+// F2.2e — sanitize $_GET once. Whitelist for enum-ish inputs, cast for
+// ints, defaults for the rest. Every subsequent read uses these locals.
+$g_rep      = (int)    ($_GET['hdu_rep']      ?? 0);
+$g_fromd    = (string) ($_GET['hdu_fromd']    ?? '');
+$g_tod      = (string) ($_GET['hdu_tod']      ?? '');
+$g_pagesize = (string) ($_GET['hdu_pagesize'] ?? 'A4');
+if (!in_array($g_pagesize, ['A4', 'A3', 'Letter', 'Legal'], true))
+{
+    $g_pagesize = 'A4';
+}
+$g_dest = (string) ($_GET['hdu_dest'] ?? 'I');
+if (!in_array($g_dest, ['I', 'D', 'F', 'S'], true))
+{
+    $g_dest = 'I';
+}
+
 $hdu_now = e107::getDate()->convert_date(time());
 $hdu_siteurl = SITEURL . "index.php";
 
-$hdu_udb = new DB;
+// F2.2e — legacy `new DB` replaced with named service-locator instance.
+$hdu_udb = e107::getDb('hdu_udb');
 
-switch ($_GET['hdu_rep'])
+switch ($g_rep)
 {
-    case "1":
+    case 1:
         // All open tickets
         $hdu_dbarg = "hdu_closed = '0' order by hdu_id desc";
         $hdu_title = HDU_129;
         break;
-    case "2":
+    case 2:
         // All closed tickets
         $hdu_dbarg = "hdu_closed > '0' order by hdu_id desc";
         $hdu_title = HDU_130;
         break;
-    case "3":
+    case 3:
         // All unassigned tickets
         $hdu_dbarg = "hdu_allocated = '0' order by hdu_id desc";
         $hdu_title = HDU_131;
         break;
-    case "4":
-        // All  tickets
+    case 4:
+    default:
+        // All tickets (safe default)
         $hdu_dbarg = "hdu_id > '0' order by hdu_id desc";
         $hdu_title = HDU_132;
         break;
 }
-$hdu_from = $helpdesk_obj->hdu_indate($_GET['hdu_fromd']);
-$hdu_to = $helpdesk_obj->hdu_indate($_GET['hdu_tod']);
+$hdu_from = (int) $helpdesk_obj->hdu_indate($g_fromd);
+$hdu_to   = (int) $helpdesk_obj->hdu_indate($g_tod);
 $hdu_subtitle = HDU_215;
 if ($hdu_from > 0 && $hdu_to > 0)
 {
     // Make date from
-    $hdu_dbarg = "hdu_datestamp >'$hdu_from' and hdu_datestamp < '$hdu_to' and " . $hdu_dbarg;
+    $hdu_dbarg = "hdu_datestamp > " . $hdu_from . " and hdu_datestamp < " . $hdu_to . " and " . $hdu_dbarg;
     $hdu_subtitle = "posted between " . date("d F Y", $hdu_from) . " and " . date("d F Y", $hdu_to);
 }
 // Create the pdf documet
-$hdu_pdf = new HDU_PDF("l", "mm", $_GET['hdu_pagesize']);
+$hdu_pdf = new HDU_PDF("l", "mm", $g_pagesize);
 
 $hdu_pdf->SetCompression(true);
 // #### DO NOT CHANGE THIS
@@ -115,7 +133,7 @@ $hdu_count = 0;
 while ($hdu_row = $hdu_udb->db_Fetch())
 {
     extract($hdu_row);
-    $hdu_pdf->SetFont('Times', '', 8);
+    $hdu_pdf->SetFont('times', '', 8);
     $hdu_pdf->Cell(10, 6, "$hdu_id", 0, 0, "R");
     $hdu_p = explode(".", $hdu_poster,2);
     $hdu_postername = $hdu_p[1];
@@ -175,6 +193,6 @@ if ($hdu_count > 0)
 }
 // ensure buffer is clean before generating output
 #while (@ob_end_clean());
-$hdu_pdf->Output("helpdesk.pdf", $_GET['hdu_dest']);
+$hdu_pdf->Output("helpdesk.pdf", $g_dest);
 
 ?>
