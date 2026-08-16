@@ -632,10 +632,12 @@ class helpdesk
     // **********************************************************************************************
     function post_comment()
     {
-//        global $sql;
-        $hdu_id = intval($_POST['id']);
+        // F2.2c — sanitize inputs. $hdu_id was intval'd but $_POST['hduc_comment']
+        // was accessed twice without null-coalesce (PHP 8 warning if absent).
+        $hdu_id      = (int)   ($_POST['id']           ?? 0);
+        $hduc_body   = (string)($_POST['hduc_comment'] ?? '');
 
-        if (!empty($_POST['hduc_comment']))
+        if ($hdu_id > 0 && $hduc_body !== '')
         {
             $hduc_args = "
 		'0',
@@ -644,11 +646,11 @@ class helpdesk
 		'" . USERID . "',
 		'" . time() . "',
 		'0',
-		'" . $this->tp->toDB($_POST['hduc_comment']) . "'";
+		'" . $this->tp->toDB($hduc_body) . "'";
             $hduc = $this->sql->insert("hdu_comments", $hduc_args);
 			$hduc_msg = $this->tp->lanVars(HDU_92, array($hdu_id));
         }
-        $this->sql->select("hdu_tickets", "*", "where hdu_id = $hdu_id", "nowhere");
+        $this->sql->select("hdu_tickets", "*", "where hdu_id = " . $hdu_id, "nowhere");
         $hdu_row = $this->sql->fetch();
         extract($hdu_row);
         // print $hdu_tech . "AL";
@@ -944,14 +946,16 @@ function changed()
                 $hdu_retval .= $this->hdu_new?"":'</div><div id="tab3" class="tab-pane fade" role="tabpanel" aria-labelledby="tab3" tabindex="0">';
                 $hdu_retval .= $this->tp->parseTemplate($HDU_SHOWTICKET["comment_header"], true, $hdu_shortcodes);
 		
-				$where = " hduc_ticketid='$hdu_showid' order by hduc_date asc";
+				$where = " hduc_ticketid = " . (int) $hdu_showid . " order by hduc_date asc";
 				$hducrows = e107::getDb()->retrieve("hdu_comments", "*", $where, true);
 				foreach($hducrows AS $hducrow)
                 {
                     extract($hducrow);
-                    $hduc_poster = explode(".", $hduc_poster);
-                    $hduc_posterid = $hduc_poster[0];
-                    $hduc_postername = $hduc_poster[1];
+                    // F2.2c — split to a temp var; reusing $hduc_poster as
+                    // both string and array upsets PHP 8 static analyzers.
+                    $hduc_poster_parts = explode(".", (string) $hduc_poster, 2);
+                    $hduc_posterid     = (int)    ($hduc_poster_parts[0] ?? 0);
+                    $hduc_postername   = (string) ($hduc_poster_parts[1] ?? '');
                     $hdu_retval .= $this->tp->parseTemplate($HDU_SHOWTICKET["comment_detail"], true, $hdu_shortcodes);
                 }
                 $hdu_retval .= $this->tp->parseTemplate($HDU_SHOWTICKET["comment_footer"], true, $hdu_shortcodes);
@@ -989,9 +993,48 @@ function changed()
         global $id;
         unset($hdu_up_closed);
         unset($hdu_args);
- 
-        $this->hdu_new = intval($_POST['hdu_new']) == 1;
-        if ($_POST['hdu_changed'] == "yes")
+
+        // ------------------------------------------------------------------
+        // F2.2d — sanitize every $_POST value up-front. Every subsequent
+        // read goes through these locals, so:
+        //   * PHP 8+ no longer warns on missing array keys.
+        //   * integers are safe to interpolate in SQL.
+        //   * strings pass through $tp->toDB() once at write time.
+        //   * numerics (money) keep float precision.
+        // Nothing here writes to DB; that happens in the INSERT/UPDATE
+        // blocks below, which now consume these locals.
+        // ------------------------------------------------------------------
+        $p_new          = (int)   ($_POST['hdu_new']         ?? 0);
+        $p_changed      = (string)($_POST['hdu_changed']     ?? '');
+        $p_commentonly  = (string)($_POST['hdu_commentonly'] ?? 'no');
+        $p_category     = (int)   ($_POST['hdu_category']    ?? 0);
+        $p_priority     = (int)   ($_POST['hdu_priority']    ?? 0);
+        $p_resolution   = (int)   ($_POST['hdu_resolution']  ?? 0);
+        $p_tech         = (int)   ($_POST['hdu_tech']        ?? 0);
+        $p_ctech        = (int)   ($_POST['hdu_ctech']       ?? 0);
+        $p_callocated   = (int)   ($_POST['hdu_callocated']  ?? 0);
+        $p_readyclosed  = (int)   ($_POST['hdu_readyclosed'] ?? 0);
+        $p_fix          = (int)   ($_POST['hdu_fix']         ?? 0);
+        $p_cfix         = (int)   ($_POST['hdu_cfix']        ?? 0);
+        $p_selusers     = (int)   ($_POST['hdu_selusers']    ?? 0);
+        $p_summary      = (string)($_POST['hdu_summary']     ?? '');
+        $p_description  = (string)($_POST['hdu_description'] ?? '');
+        $p_tagno        = (string)($_POST['hdu_tagno']       ?? '');
+        $p_email        = (string)($_POST['hdu_email']       ?? '');
+        $p_fixother     = (string)($_POST['hdu_fixother']    ?? '');
+        $p_comment      = (string)($_POST['hduc_comment']    ?? '');
+        // Money fields: keep as raw string so is_numeric() still gates the
+        // "use default vs use posted" branches unchanged.
+        $p_fixcost_raw  = $_POST['hdu_fixcost']  ?? '';
+        $p_drate_raw    = $_POST['hdu_drate']    ?? '';
+        $p_callout_raw  = $_POST['hdu_callout']  ?? '';
+        $p_eqptcost_raw = $_POST['hdu_eqptcost'] ?? '';
+        $p_distance_raw = $_POST['hdu_distance'] ?? '';
+        $p_hours_raw    = $_POST['hdu_hours']    ?? '';
+        $p_hrate_raw    = $_POST['hdu_hrate']    ?? '';
+
+        $this->hdu_new = ($p_new == 1);
+        if ($p_changed == "yes")
         {
             $hdu_sendmail = false;
             $hdu_a_alloctime = 0;
@@ -1003,59 +1046,59 @@ function changed()
             // *****************************************************************
             // * Calculate the financials
             // *****************************************************************
-            if ($this->hduprefs_showfixes && ($_POST['hdu_fixcost'] == 0 || $_POST['hdu_cfix'] != $_POST['hdu_fix']))
+            if ($this->hduprefs_showfixes && ($p_fixcost_raw == 0 || $p_cfix != $p_fix))
             {
-                $hdu_fixcost = $this->hdu_getfixcost($_POST['hdu_fix']);
+                $hdu_fixcost = $this->hdu_getfixcost($p_fix);
             }
             else
             {
-                $hdu_fixcost = $_POST['hdu_fixcost'];
+                $hdu_fixcost = $p_fixcost_raw;
             }
-            if (is_numeric($_POST['hdu_drate']))
+            if (is_numeric($p_drate_raw))
             {
-                $hdu_drate = $_POST['hdu_drate'];
+                $hdu_drate = $p_drate_raw;
             }
             else
             {
                 $hdu_drate = ($this->hduprefs_distancerate > 0?$this->hduprefs_distancerate:0);
             }
 
-            if (is_numeric($_POST['hdu_callout']))
+            if (is_numeric($p_callout_raw))
             {
-                $hdu_callout = $_POST['hdu_callout'];
+                $hdu_callout = $p_callout_raw;
             }
             else
             {
                 $hdu_callout = ($this->hduprefs_callout > 0?$this->hduprefs_callout:0);
             }
-            if (is_numeric($_POST['hdu_eqptcost']))
+            if (is_numeric($p_eqptcost_raw))
             {
-                $hdu_eqptcost = $_POST['hdu_eqptcost'] ;
+                $hdu_eqptcost = $p_eqptcost_raw;
             }
             else
             {
                 $hdu_eqptcost = 0;
             }
-            if (is_numeric($_POST['hdu_distance']))
+            if (is_numeric($p_distance_raw))
             {
-                $hdu_distance = $_POST['hdu_distance'];
+                $hdu_distance = $p_distance_raw;
             }
             else
             {
                 $hdu_distance = 0;
             }
-            if (is_numeric($_POST['hdu_hours']))
+            if (is_numeric($p_hours_raw))
             {
-                $hdu_hours = $_POST['hdu_hours'];
+                $hdu_hours = $p_hours_raw;
             }
             else
             {
                 $hdu_hours = 0;
             }
 
-            if (is_numeric($_POST['hdu_hrate']))
+            if (is_numeric($p_hrate_raw))
             {
-                $hdu_hrate = $_POST['hdu_hrate'];
+                $hdu_hrate = $p_hrate_raw;
             }
             else
             {
@@ -1087,84 +1130,71 @@ function changed()
                 {
                     // if we are auto assigning to helpdesk and no manual selection of assignee
                     // get the help desk associated with this category
-                    if ($this->sql->select("hdu_categories", "hducat_helpdesk", "where hducat_id = '" . intval($_POST['hdu_category']) . "'", "nowhere", false))
+                    if ($this->sql->select("hdu_categories", "hducat_helpdesk", "where hducat_id = " . $p_category, "nowhere", false))
                     {
                         // Get the helpdesk to which this will be assigned if one exists
                         extract($this->sql->fetch());
                         $hdu_a_tech = $hducat_helpdesk;
-                        // else
-                        // {
-                        // if there isnt a helpdesk
-                        // $hdu_a_tech = 0;
-                        // }
                         if (intval($hdu_a_tech) > 0)
                         {
-                            $_POST['hdu_resolution'] = $this->hduprefs_assigned;
-                            $hdu_a_alloctime = time();
+                            $p_resolution     = (int) $this->hduprefs_assigned;
+                            $hdu_a_alloctime  = time();
                         }
                     }
                 }
                 else
                 {
-                    $hdu_a_tech = intval($_POST['hdu_tech']);
+                    $hdu_a_tech = $p_tech;
                 }
-                // $hdu_a_resolution = 0;
-                // $hdu_a_tech = 0;
-            } elseif ($_POST['hdu_ctech'] != $_POST['hdu_tech'] && intval($_POST['hdu_tech']) > 0)
+            } elseif ($p_ctech != $p_tech && $p_tech > 0)
             {
                 // Assignment has changed and not un assigned
-                $hdu_a_tech = $_POST['hdu_tech'];
+                $hdu_a_tech      = $p_tech;
                 $hdu_a_alloctime = time();
-            } elseif (intval($_POST['hdu_tech']) == 0)
+            } elseif ($p_tech == 0)
             {
                 // ticket now unassigned
-                $hdu_a_tech = 0;
+                $hdu_a_tech      = 0;
                 $hdu_a_alloctime = 0;
             }
             else
             {
                 // No change made to assignment
-                $hdu_a_tech = $_POST['hdu_tech'];
-                $hdu_a_alloctime = intval($_POST['hdu_callocated']);
+                $hdu_a_tech      = $p_tech;
+                $hdu_a_alloctime = $p_callocated;
             }
             // *****************************************************************
             // *Work out the resolutions
             // *****************************************************************
             // If no resolution specified then get the default
-            // print "W" . $this->hduprefs_defaultres;
-            if ($this->hduprefs_defaultres > 0 && $this->hdu_new && intval($_POST['hdu_resolution']) == 0)
+            if ($this->hduprefs_defaultres > 0 && $this->hdu_new && $p_resolution == 0)
             {
                 $hdu_a_resolution = $this->hduprefs_defaultres;
             }
             else
             {
                 // otherwise use the resolution specified
-                $hdu_a_resolution = intval($_POST['hdu_resolution']);
+                $hdu_a_resolution = $p_resolution;
             }
             // *****************************************************************
             // * Work out the status
             // *****************************************************************
-            // Work out if the ticket is open or closed
-            // Is this resolution is one that closes the ticket and not already closed then automatically then close the ticket.
-            if ($this->hdu_statcloses($hdu_a_resolution) && intval($_POST['hdu_readyclosed']) == 0)
+            if ($this->hdu_statcloses($hdu_a_resolution) && $p_readyclosed == 0)
             {
-                // print "closed";
                 $hdu_a_closed = time();
             } elseif (!$this->hdu_statcloses($hdu_a_resolution))
             {
-                // print "opened";
                 $hdu_a_closed = 0;
             }
             else
             {
-                $hdu_a_closed = intval($_POST['hdu_readyclosed']);
+                $hdu_a_closed = $p_readyclosed;
             }
             // if a comment has been posted and its by a user and this repoens then set status or if technician or supervisor then reopen
-            if (!empty($_POST['hduc_comment']) && intval($_POST['hdu_readyclosed']) > 0 && ($this->hdu_technician || $this->hdu_super || $this->hduprefs_reopen))
+            if ($p_comment !== '' && $p_readyclosed > 0 && ($this->hdu_technician || $this->hdu_super || $this->hduprefs_reopen))
             {
-                if (intval($_POST['hdu_tech']) == 0)
+                if ($p_tech == 0)
                 {
-                    // if no status assigned set tod default open status
                     $hdu_a_resolution = $this->hduprefs_defaultres;
                 }
                 else
@@ -1179,25 +1209,27 @@ function changed()
             // Set all the parameters for inserting in to the db
             if ($this->hdu_new)
             {
-                if (intval($_POST['hdu_selusers']) > 0)
+                if ($p_selusers > 0)
                 {
                     // Get poster's name and id if it was from a quick entry
-                    $hdu_a_posterid = intval($_POST['hdu_selusers']);
-                    $hdu_a_poster = $this->hdu_getposterdetails($hdu_a_posterid);
-                    $hdu_email = $this->tp->toDB($this->hdu_getuseremail($hdu_a_posterid));
+                    $hdu_a_posterid = $p_selusers;
+                    $hdu_a_poster   = $this->hdu_getposterdetails($hdu_a_posterid);
+                    $hdu_email      = $this->tp->toDB($this->hdu_getuseremail($hdu_a_posterid));
                 }
                 else
                 {
                     // If they are a logged in user then get their username and id
                     $hdu_a_posterid = USERID;
-                    $hdu_a_poster = $hdu_a_poster . USERID . "." . $this->tp->toDB(USERNAME);
-                    $hdu_email = $this->tp->toDB(USEREMAIL);
+                    $hdu_a_poster   = ($hdu_a_poster ?? '') . USERID . "." . $this->tp->toDB(USERNAME);
+                    $hdu_email      = $this->tp->toDB(USEREMAIL);
                 }
                 // Insert the record
                 // check if an existing identical ticket exists
-                if ($this->sql->select("hdu_tickets", "hdu_id", "hdu_category='" . intval($_POST['hdu_category']) . "'
-and hdu_summary='" . $this->tp->toDB($_POST['hdu_summary']) . "' and hdu_description='" . $this->tp->toDB($_POST['hdu_description']) . "' and
-hdu_priority='" . intval($_POST['hdu_priority']) . "'"))
+                if ($this->sql->select("hdu_tickets", "hdu_id",
+                    "hdu_category = " . $p_category
+                    . " and hdu_summary='" . $this->tp->toDB($p_summary) . "'"
+                    . " and hdu_description='" . $this->tp->toDB($p_description) . "'"
+                    . " and hdu_priority = " . $p_priority))
                 {
                     // already exists
                     $hdu_result = -3;
@@ -1209,21 +1241,21 @@ hdu_priority='" . intval($_POST['hdu_priority']) . "'"))
 	" . time() . ",
 	'$hdu_a_poster',
 	'$hdu_a_posterid',
-	'" . intval($_POST['hdu_category']) . "',
-	'" . $this->tp->toDB($_POST['hdu_summary']) . "',
-	'" . $this->tp->toDB($_POST['hdu_description']) . "',
-	'" . intval($_POST['hdu_priority']) . "',
+	'" . $p_category . "',
+	'" . $this->tp->toDB($p_summary) . "',
+	'" . $this->tp->toDB($p_description) . "',
+	'" . $p_priority . "',
 	'" . $hdu_a_resolution . "',
 	'" . $hdu_email . "',
 	'" . $hdu_a_alloctime . "',
 	'$hdu_a_tech',
 	" . time() . ",
 	'" . $hdu_a_closed . "',
-	'" . $this->tp->toDB($_POST['hdu_tagno']) . "',
+	'" . $this->tp->toDB($p_tagno) . "',
 	'0',
 	'0',
-	'" . intval($_POST['hdu_fix']) . "',
-	'" . $this->tp->toDB($hdu_fixother) . "',
+	'" . $p_fix . "',
+	'" . $this->tp->toDB($hdu_fixother ?? '') . "',
 	'" . $this->tp->toDB($hdu_fixcost) . "',
 	'0',
 	'" . $this->tp->toDB($hdu_distance) . "',
@@ -1250,40 +1282,38 @@ hdu_priority='" . intval($_POST['hdu_priority']) . "'"))
             }
             else
             {
-                if ($_POST['hdu_commentonly'] == "no")
+                if ($p_commentonly == "no")
                 {
                     // only save if not just user's comments
                     $this->hdu_new = false;
                     // ***************************************************************
                     // * Save an existing ticket
                     // ***************************************************************
-                    $hdu_email = $_POST['hdu_email'];
-                    $hdu_args .= "hdu_category = '" . intval($_POST['hdu_category']) . "',";
-                    $hdu_args .= "hdu_summary = '" . $this->tp->toDB($_POST['hdu_summary']) . "',";
-                    $hdu_args .= "hdu_description = '" . $this->tp->toDB($_POST['hdu_description']) . "',";
-                    $hdu_args .= "hdu_priority = '" . intval($_POST['hdu_priority']) . "',";
+                    $hdu_email = $p_email;
+                    $hdu_args .= "hdu_category = " . $p_category . ",";
+                    $hdu_args .= "hdu_summary = '" . $this->tp->toDB($p_summary) . "',";
+                    $hdu_args .= "hdu_description = '" . $this->tp->toDB($p_description) . "',";
+                    $hdu_args .= "hdu_priority = " . $p_priority . ",";
                     $hdu_args .= "hdu_resolution = '" . $hdu_a_resolution . "',";
-                    $hdu_args .= "hdu_email = '" . $hdu_email . "',";
+                    $hdu_args .= "hdu_email = '" . $this->tp->toDB($hdu_email) . "',";
                     $hdu_args .= "hdu_allocated = '" . $hdu_a_alloctime . "',";
                     $hdu_args .= "hdu_tech = '" . $hdu_a_tech . "',";
                     $hdu_args .= "hdu_lastchanged = '" . time() . "',";
                     $hdu_args .= "hdu_closed = '" . $hdu_a_closed . "',";
-                    $hdu_args .= "hdu_tagno = '" . $this->tp->toDB($_POST['hdu_tagno']) . "',";
-                    $hdu_args .= "hdu_fix = '" . intval($_POST['hdu_fix']) . "',";
-                    $hdu_args .= "hdu_fixother = '" . $this->tp->toDB($_POST['hdu_fixother']) . "',";
+                    $hdu_args .= "hdu_tagno = '" . $this->tp->toDB($p_tagno) . "',";
+                    $hdu_args .= "hdu_fix = " . $p_fix . ",";
+                    $hdu_args .= "hdu_fixother = '" . $this->tp->toDB($p_fixother) . "',";
                     $hdu_args .= "hdu_fixcost = '" . $this->tp->toDB($hdu_fixcost) . "',";
                     $hdu_args .= "hdu_distance = '" . $this->tp->toDB($hdu_distance) . "',";
                     $hdu_args .= "hdu_drate = '" . $this->tp->toDB($hdu_drate) . "',";
-//                    $hdu_a_dcost = $hdu_a_dcost;  // ????
                     $hdu_args .= "hdu_dcost = '" . $this->tp->toDB($hdu_a_dcost) . "',";
                     $hdu_args .= "hdu_hours = '" . $this->tp->toDB($hdu_hours) . "',";
-//                    $hdu_a_hcost = $hdu_a_hcost;  // ????
                     $hdu_args .= "hdu_hrate = '" . $this->tp->toDB($hdu_hrate) . "',";
                     $hdu_args .= "hdu_hcost = '" . $hdu_a_hcost . "',";
                     $hdu_args .= "hdu_eqptcost = '" . $this->tp->toDB($hdu_eqptcost) . "',";
                     $hdu_args .= "hdu_callout = '" . $this->tp->toDB($hdu_callout) . "',";
                     $hdu_args .= "hdu_totalcost = '" . $hdu_a_totalcost . "'";
-                    $hdu_args .= " where hdu_id = '" . intval($id) . "' " ;
+                    $hdu_args .= " where hdu_id = " . (int) $id ;
                     if ($this->sql->update("hdu_tickets", $hdu_args, false))
                     {
                         $hdu_result = $id;
@@ -1292,7 +1322,7 @@ hdu_priority='" . intval($_POST['hdu_priority']) . "'"))
                     {
                         $hdu_result = -2;
                     }
-                    $hdu_recno = intval($id);
+                    $hdu_recno = (int) $id;
                 }
                 $this->helpdesk_cache_clear();
             }
@@ -1335,9 +1365,6 @@ hdu_priority='" . intval($_POST['hdu_priority']) . "'"))
         }
         return $hdu_result;
     }
-    // **********************************************************************************************
-    // *
-    // *	Function	:	hdu_notify($hdu_notifyid = 0, $hdu_notifyaction)
     // *
     // *	Parameters	:	$hdu_notifyid integer the ticket number
     // *				:	$hdu_notifyaction boolean update or new ticket
