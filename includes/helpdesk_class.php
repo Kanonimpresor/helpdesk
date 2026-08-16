@@ -114,13 +114,6 @@ class helpdesk
 		$this->sql = e107::getDb();
  
         $this->hduprefs_posteronly = ($this->pluginPrefs['hduprefs_posteronly'] == 1);
-/*
-        $this->hduprefs_colours = array("1" => $this->pluginPrefs['hduprefs_p1col'],
-            "2" => $this->pluginPrefs['hduprefs_p2col'],
-            "3" => $this->pluginPrefs['hduprefs_p3col'],
-            "4" => $this->pluginPrefs['hduprefs_p4col'],
-            "5" => $this->pluginPrefs['hduprefs_p5col']);
-            */
         // is this person a technician in any helpdesk
         $this->sql->select("hdu_helpdesk", "hdudesk_id", "where find_in_set(hdudesk_class,'" . USERCLASS_LIST . "')", "nowhere", false);
         while ($hdu_row = $this->sql->fetch())
@@ -129,10 +122,38 @@ class helpdesk
             $this->hdu_memberof .= $hdu_row['hdudesk_id'] . ",";
         } // while
         $this->hdu_technician = (empty($this->hdu_memberof)?false:true);
-        $this->hdu_super = check_class($this->pluginPrefs['hduprefs_supervisorclass']);
-        // all in read class, supervisor or technicians can access
-        $this->hdu_poster = check_class($this->pluginPrefs['hduprefs_postclass']) || $this->hdu_super || $this->hdu_technician;
-        $this->hdu_read = check_class($this->pluginPrefs['hduprefs_userclass']) || $this->hdu_poster;
+
+        // F2.6 SECURITY — fail-closed defaults for userclass prefs.
+        // Prior behaviour: check_class(null) / check_class(0) both return
+        // TRUE in e107 core (0 = e_UC_PUBLIC = everyone including
+        // anonymous). A fresh install where the plugin.xml seed did not
+        // reach the DB, or an admin who cleared the field, therefore
+        // granted the entire site read/post access — including anonymous
+        // visitors editing tickets via URL. Reported live on 2026-08-16.
+        //
+        // Fix:
+        //   * empty / invalid pref  -> e_UC_NOBODY (255) for the critical
+        //     supervisor role, e_UC_MEMBER (253) for the read/post roles.
+        //     Never fall back to PUBLIC on a role gate.
+        //   * hard block anonymous (USERID == 0) regardless of pref.
+        //     Anonymous access to a ticketing system is never desired;
+        //     re-enable via an explicit future pref if a use case appears.
+        $pref_super   = (int) ($this->pluginPrefs['hduprefs_supervisorclass'] ?? 0);
+        $pref_post    = (int) ($this->pluginPrefs['hduprefs_postclass']       ?? 0);
+        $pref_read    = (int) ($this->pluginPrefs['hduprefs_userclass']       ?? 0);
+        if ($pref_super <= 0) { $pref_super = e_UC_NOBODY; }  // 255
+        if ($pref_post  <= 0) { $pref_post  = e_UC_MEMBER; }  // 253
+        if ($pref_read  <= 0) { $pref_read  = e_UC_MEMBER; }  // 253
+
+        $is_logged_in = ((int) USERID) > 0;
+
+        $this->hdu_super      = $is_logged_in && check_class($pref_super);
+        // Technicians must also be logged in — they are inferred from
+        // hdudesk_class membership above; USERCLASS_LIST for anon is
+        // just [PUBLIC, GUEST] which can never match a hdudesk_class.
+        $this->hdu_technician = $is_logged_in && $this->hdu_technician;
+        $this->hdu_poster     = $is_logged_in && (check_class($pref_post) || $this->hdu_super || $this->hdu_technician);
+        $this->hdu_read       = $is_logged_in && (check_class($pref_read) || $this->hdu_poster);
         $this->hduprefs_autoclosedays = $this->pluginPrefs['hduprefs_autoclosedays'];
         $this->hduprefs_autocloseres = $this->pluginPrefs['hduprefs_autocloseres'];
         $this->hduprefs_rows = $this->pluginPrefs['hduprefs_rows'];
@@ -183,7 +204,62 @@ class helpdesk
    
     // **********************************************************************************************
     // *
-    // *	Function	:	auto_close()
+    // *	Function	:	can_view_ticket($ticket_id)
+    // *	Function	:	can_edit_ticket($ticket_id)
+    // *
+    // *	Parameters	:	$ticket_id  integer  the target ticket id
+    // *
+    // *	Returns		:	bool
+    // *
+    // *	Description	:	F2.6 SECURITY — ownership gate. The show/updet
+    // *                    handlers in helpdesk.php previously only checked
+    // *                    $hdu_read/$hdu_poster (whether the *class* is
+    // *                    allowed to touch the plugin at all); they never
+    // *                    checked that the caller actually owned or was
+    // *                    assigned the specific ticket. Result: any
+    // *                    logged-in member could view / edit ANY ticket
+    // *                    by supplying its id in the URL (`?0.show.4`).
+    // *
+    // *                    Rule:
+    // *                      * hdu_super          -> full access.
+    // *                      * hdu_technician     -> full access (staff).
+    // *                      * poster of ticket   -> view + comment (edit
+    // *                                              restricted to
+    // *                                              hduprefs_reopen).
+    // *                      * anyone else        -> denied.
+    // *
+    // *                    hduprefs_allread is intentionally NOT honoured
+    // *                    here — it existed as an escape hatch in the
+    // *                    legacy code; if a site wants "all members see
+    // *                    all tickets" they should promote the readers
+    // *                    to a technician class instead.
+    // *
+    // **********************************************************************************************
+    public function can_view_ticket($ticket_id): bool
+    {
+        $ticket_id = (int) $ticket_id;
+        if ($ticket_id <= 0)                { return false; }
+        if (!$this->hdu_read)               { return false; }
+        if ($this->hdu_super || $this->hdu_technician) { return true; }
+
+        // Owner check — hdu_posterid is an int column.
+        $this->sql->select("hdu_tickets", "hdu_posterid", "hdu_id = " . $ticket_id, "nowhere");
+        $row = $this->sql->fetch();
+        if (empty($row))                    { return false; }
+
+        return ((int) $row['hdu_posterid']) === ((int) USERID);
+    }
+
+    public function can_edit_ticket($ticket_id): bool
+    {
+        // For now edit == view for owners (they can add comments and,
+        // if hduprefs_reopen, reopen). Staff can always edit.
+        // Full split between "reply" and "administrative edit" comes in
+        // the Fase 4 visibility redesign.
+        return $this->can_view_ticket($ticket_id);
+    }
+
+    // **********************************************************************************************
     // *
     // *	Parameters	:
     // *
@@ -195,7 +271,6 @@ class helpdesk
     // **********************************************************************************************
     function auto_close()
     {
-//        global $sql;
         if ($this->hduprefs_autoclosedays > 0)
         {
             // if we do default close then check for last activity and if more than hdu_defclose days ago

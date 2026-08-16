@@ -23,6 +23,16 @@ if (!isset($helpdesk_obj) || !is_object($helpdesk_obj))
 	$helpdesk_obj = new helpdesk;
 }  
 
+// F2.6 SECURITY — hard block anonymous. hdu_read now also enforces this
+// in the class constructor, but this early exit gives a clearer message
+// (send to login) instead of the generic "no permission" one.
+if (((int) USERID) === 0)
+{
+    // Send to login page with a return-to.
+    header('Location: ' . e_HTTP . 'login.php?redir=' . rawurlencode(e_REQUEST_URI));
+    exit();
+}
+
 // Check if the user is allowed to use the helpdesk system.  If not display an error message
 // and exit.  helpdesk technicians, supervisors and admin automatically allowed in.
 if (!$helpdesk_obj->hdu_read)
@@ -200,7 +210,12 @@ switch ($hdu_aaction)
         }
         break;
     case "show":
-        if ($helpdesk_obj->hdu_read)
+        // F2.6 SECURITY — was: `if ($helpdesk_obj->hdu_read)` only. That
+        // gate only checks whether the caller's userclass is allowed to
+        // touch the plugin at all; it did NOT check ticket ownership.
+        // Any logged-in member could therefore open ANY ticket by id
+        // via `?0.show.4`. Reported live on 2026-08-16.
+        if ($helpdesk_obj->can_view_ticket($id))
         {
             $helpdesk_obj->hdu_new = false;
             $hdu_text = $helpdesk_obj->show($id);
@@ -217,6 +232,15 @@ switch ($hdu_aaction)
         }
         break;
     case "print":
+        // F2.6 SECURITY — same ownership rule as `show`. Printing was
+        // an unauthenticated `?0.print.4` reveal path otherwise.
+        if (!$helpdesk_obj->can_view_ticket($id))
+        {
+            $hdu_text = HDU_254;
+            $helpdesk_obj->tablerender($helpdesk_obj->hduprefs_title, $hdu_text);
+            require_once(FOOTERF);
+            exit();
+        }
         // F1.3 — use absolute path via e_PLUGIN; relative include broke when
         // helpdesk.php was reached through an URL rewrite (cwd was not the
         // plugin folder, causing "File Not Found").
@@ -224,6 +248,28 @@ switch ($hdu_aaction)
         exit();
         break;
     case "updet":
+        // F2.6 SECURITY — the updet handler previously called
+        // update_ticket() with NO authorization check at all. Any
+        // logged-in member could POST hdu_aaction=updet with an
+        // arbitrary id and mutate someone else's ticket.
+        //
+        // Rules now enforced up-front:
+        //   * id == 0 (creation)      -> require hdu_poster.
+        //   * id  > 0 (update)        -> require can_edit_ticket(id).
+        // update_ticket() itself still runs the finer-grained business
+        // logic (commentonly split, resolution ownership) once the
+        // gate is passed.
+        $hdu_updet_id = (int) $id;
+        $hdu_updet_ok = ($hdu_updet_id === 0)
+            ? $helpdesk_obj->hdu_poster
+            : $helpdesk_obj->can_edit_ticket($hdu_updet_id);
+        if (!$hdu_updet_ok)
+        {
+            $hdu_text = HDU_254;
+            $helpdesk_obj->tablerender($helpdesk_obj->hduprefs_title, $hdu_text);
+            require_once(FOOTERF);
+            exit();
+        }
         $hdu_result = $helpdesk_obj->update_ticket($id);
         switch ($hdu_result)
         {

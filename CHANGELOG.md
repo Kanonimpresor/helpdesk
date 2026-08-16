@@ -19,6 +19,75 @@ Sin cambios todavía.
 
 ---
 
+## [2.2.1] — 2026-08-16 — Fase 2.6 (authorization hardening — SECURITY)
+
+Hotfix urgente en respuesta a prueba de campo del operador el mismo
+día del release 2.2.0: como visitante anónimo (sin login), abriendo
+directamente `helpdesk.php?0.show.4` en otro navegador, era posible
+**ver y editar cualquier ticket** del sitio.
+
+Tres bugs simultáneos de autorización:
+
+1. **Anónimos podían entrar**. El constructor calculaba `hdu_read` como
+   `check_class($pluginPrefs['hduprefs_userclass']) || $hdu_poster`.
+   En una instalación en la que el seed de `plugin.xml` no había
+   propagado el valor a la BD (o el admin lo había vaciado en el
+   formulario de prefs), `$pluginPrefs['hduprefs_userclass']` volvía
+   como `null` / `""` / `0`, y `check_class(0)` en e107 core equivale
+   a `e_UC_PUBLIC` — TRUE para todo el mundo, incluyendo visitantes
+   no autenticados.
+2. **Ausencia de check por propiedad**. `case "show"` en `helpdesk.php`
+   solo comprobaba `$helpdesk_obj->hdu_read` — es decir, si la clase
+   del usuario tenía permiso para tocar el plugin. Nunca comprobaba
+   que el ticket en cuestión perteneciera al usuario. Con `hdu_read`
+   activo (rebote del bug 1) cualquier ID de ticket era enumerable.
+3. **`case "updet"` sin gate**. El handler que ejecuta
+   `update_ticket()` no comprobaba **nada** antes de mutar la BD.
+
+### Security
+
+- **F2.6 constructor hardening** (`includes/helpdesk_class.php`):
+  - Prefs `hduprefs_supervisorclass`, `hduprefs_postclass`, y
+    `hduprefs_userclass` ahora se leen con `(int)` cast y `??`
+    fallback. Si el valor efectivo es `<= 0` (ausente o `PUBLIC`)
+    se sustituye por un default **fail-closed**:
+    - supervisor  → `e_UC_NOBODY` (255)
+    - poster       → `e_UC_MEMBER` (253)
+    - reader       → `e_UC_MEMBER` (253)
+  - `hdu_super`, `hdu_technician`, `hdu_poster`, `hdu_read` requieren
+    ahora `USERID > 0` incondicionalmente. Anónimos jamás pasan aunque
+    la pref sea PUBLIC.
+- **F2.6 ownership helper** (`includes/helpdesk_class.php`):
+  - Nuevos métodos `can_view_ticket($id)` y `can_edit_ticket($id)`.
+  - Staff (super/technician) pasa siempre; el resto solo pasa si
+    `hdu_posterid` del ticket coincide con `USERID`. Consulta parametrizada.
+- **F2.6 helpdesk.php guards**:
+  - `case "show"`  → `can_view_ticket($id)` en vez de `hdu_read`.
+  - `case "print"` → `can_view_ticket($id)` (mismo leak vía PDF/print).
+  - `case "updet"` → si `id == 0` (creación) exige `hdu_poster`;
+    si `id > 0` (edición) exige `can_edit_ticket($id)`.
+- **F2.6 entry gate** (`helpdesk.php`):
+  - Anónimos (`USERID == 0`) redirigidos a `login.php?redir=…` en el
+    tope del archivo, antes de tocar `hdu_read`. Da un mensaje
+    accionable en vez del genérico "no tiene permiso".
+
+### Migration notes
+
+- **No hay cambio de esquema** ni de datos.
+- Instalaciones existentes donde `hduprefs_userclass` estuviese sin
+  valor (o con `0`) pasarán automáticamente a `MEMBER` — es decir,
+  visitantes anónimos dejarán de ver el helpdesk. Si un sitio
+  **realmente** quiere permitir consulta pública, debe fijar la pref
+  a `0` explícitamente y editar `helpdesk.php` para retirar el guard
+  `USERID == 0` (no recomendado; ver DEV_NOTES §8.1 para el rediseño
+  planificado en Fase 4).
+- El pref `hduprefs_allread` **no** se honra en `can_view_ticket()`.
+  Si el operador lo tenía activado, sus usuarios normales dejarán de
+  ver tickets ajenos. Fase 4 introducirá un modelo de participantes
+  explícito para cubrir ese caso legítimamente.
+
+---
+
 ## [2.2.0] — 2026-08-16 — Fase 2 (seguridad + consistencia de datos)
 
 Cierra `MIGRATION_PLAN.md` Fase 2. Cinco sub-releases mergeados:
