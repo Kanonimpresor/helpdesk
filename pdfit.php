@@ -38,14 +38,14 @@ class HDUPDF extends TCPDF
             $this->Image('./images/logo_hd.png', 10, 8, 33, '', '', $pdir_siteurl);
         }
         // Arial bold 15
-        $this->SetFont('Arial', 'B', 15);
+        $this->SetFont('helvetica', 'B', 15);
         // Move to the right
         $this->Cell(80);
         // Title
         $this->Cell(70, 10, HDU_66, 1, 1, 'C');
         // $this->Ln(10);
         $this->Cell(80);
-        $this->SetFont('Arial', 'B', 8);
+        $this->SetFont('helvetica', 'B', 8);
         $this->Cell(70, 10, $pdir_selection, 0, 0, 'C');
         // Line break
         $this->Line(0, 30, 300, 30);
@@ -57,7 +57,7 @@ class HDUPDF extends TCPDF
         // Position at 1.5 cm from bottom
         $this->SetY(-15);
         // Arial italic 8
-        $this->SetFont('Arial', 'I', 8);
+        $this->SetFont('helvetica', 'I', 8);
         // Page number
         $this->Cell(0, 10, 'Page ' . $this->PageNo() . '/{nb}', 0, 0, 'C');
     }
@@ -148,13 +148,13 @@ $hdu_assto = $tp->toHTML($hdudesk_name);
     // F1.5 — TCPDF handles the {nb} total-pages alias automatically; AliasNbPages()
     // is FPDF/UFPDF-only and throws in TCPDF. Removed.
     $hdu_pdf->AddPage();
-    $hdu_pdf->SetFont('Times', 'bu', 14);
+    $hdu_pdf->SetFont('times', 'BU', 14);
     $hdu_tit = HDU_120 . " " . $hdu_pdf_id;
     $hdu_pdf->Cell(40, 6, $hdu_tit, 0, 1);
-    $hdu_pdf->SetFont('Times', 'b', 12);
+    $hdu_pdf->SetFont('times', 'B', 12);
     $hdu_tit = HDU_121 . e107::getDate()->convert_date(time());
     $hdu_pdf->Cell(40, 6, $hdu_tit, 0, 1);
-    $hdu_pdf->SetFont('Times', '', 10);
+    $hdu_pdf->SetFont('times', '', 10);
     $hdu_pdf->Cell(40, 6, HDU_3, 0, 0);
     $hdu_pdf->MultiCell(140, 6, $hdupostername, 0, 1);
     $hdu_pdf->Cell(40, 6, HDU_36, 0, 0);
@@ -277,9 +277,9 @@ $hdu_assto = $tp->toHTML($hdudesk_name);
             $hdu_pdf_x = $hdu_pdf->GetX();
             $hdu_pdf_y = $hdu_pdf->GetY();
 
-            $hdu_pdf->SetFont('Times', 'b', 12);
+            $hdu_pdf->SetFont('times', 'B', 12);
             $hdu_pdf->Cell(60, 6, HDU_168, 0, 1);
-            $hdu_pdf->SetFont('Times', '', 10);
+            $hdu_pdf->SetFont('times', '', 10);
             $hdu_pdf->Cell(60, 6, HDU_165, 0, 0, "R");
             $hdu_pdf->Cell(20, 6, HDU_166, 0, 0, "R");
             $hdu_pdf->Cell(20, 6, HDU_167, 0, 1, "R");
@@ -324,9 +324,9 @@ $hdu_assto = $tp->toHTML($hdudesk_name);
         {
             $hdu_pdf->AddPage("P");
 
-            $hdu_pdf->SetFont('Times', 'bu', 14);
+            $hdu_pdf->SetFont('times', 'BU', 14);
             $hdu_pdf->Cell(40, 6, HDU_122, 0, 1);
-            $hdu_pdf->SetFont('Times', '', 10);
+            $hdu_pdf->SetFont('times', '', 10);
             $hdu_pdf->Cell(40, 6, HDU_98, 0, 0);
             $hdu_pdf->Cell(40, 6, HDU_99, 0, 0);
             $hdu_pdf->Cell(40, 6, HDU_100, 0, 1);
@@ -344,7 +344,7 @@ $hdu_assto = $tp->toHTML($hdudesk_name);
         }
         else
         {
-            $hdu_pdf->SetFont('Times', '', 10);
+            $hdu_pdf->SetFont('times', '', 10);
             $hdu_pdf->Cell(40, 6, HDU_169, 0, 1);
         }
     }
