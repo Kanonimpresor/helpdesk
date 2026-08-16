@@ -1751,17 +1751,17 @@ hdu_priority='" . intval($_POST['hdu_priority']) . "'"))
     function tablerender($caption, $text, $mode = "default", $return = false)
     {
         global $ns ;
-        // do the mod rewrite steps if installed
-        // $modules = apache_get_modules();
-        if ($this->pluginPrefs['hduprefs_seo'] == 1)
-        {
-            $patterns[0] = '/' . $PLUGINS_DIRECTORY . '\/helpdesk\/helpdesk\.php\?([0-9]+).([a-z]+).([0-9]+).([0-9]+)/';
-            $patterns[1] = '/' . $PLUGINS_DIRECTORY . '\/helpdesk\/helpdesk\.php\?([0-9]+).([a-z]+).([0-9]+)/';
-            $replacements[0] = '/helpdesk/helpdesk-$1-$2-$3-$4.html';
-            $replacements[1] = '/helpdesk/helpdesk-$1-$2-$3.html';
-
-            $text = preg_replace($patterns, $replacements, $text);
-        }
+        // F1.4 — Legacy SEO rewriter DISABLED.
+        // The old code rewrote URLs to /helpdesk/helpdesk-X-Y-Z.html expecting
+        // Apache to map them back via .htaccess rules produced by
+        // regen_htaccess(). Both sides were broken:
+        //   * pattern used undefined legacy global $PLUGINS_DIRECTORY;
+        //   * regen_htaccess() opens '.htaccess' / 'tmp.txt' relative to CWD,
+        //     which changes depending on the entry point.
+        // Result: users saw 404s like /helpdesk/helpdesk-0-newticket-0.html.
+        //
+        // Proper SEO URLs will land in Fase 5 via e_url.php + e107_core/url/.
+        // Until then we ignore hduprefs_seo and always emit ?query URLs.
         $ns->tablerender($caption, $text, $mode , $return);
     }
     function regen_htaccess($onoff)
