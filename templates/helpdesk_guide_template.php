@@ -23,32 +23,32 @@ if (!isset($HELPDESK_GUIDE_TEMPLATE)) { $HELPDESK_GUIDE_TEMPLATE = array(); }
 $HELPDESK_GUIDE_TEMPLATE['main'] = <<<HTML
 <div class="hdu-guide">
 	<ul class="nav nav-tabs" id="hduGuideTabs" role="tablist">
-		<li class="nav-item" role="presentation">
-			<button class="nav-link active" data-bs-toggle="tab" data-bs-target="#hdu-guide-tab0" type="button" role="tab">{HELPDESK_GUIDE_TAB0_TITLE}</button>
+		<li class="nav-item active" role="presentation">
+			<a class="nav-link active" data-toggle="tab" href="#hdu-guide-tab0" role="tab">{HELPDESK_GUIDE_TAB0_TITLE}</a>
 		</li>
 		<li class="nav-item" role="presentation">
-			<button class="nav-link" data-bs-toggle="tab" data-bs-target="#hdu-guide-tab1" type="button" role="tab">{HELPDESK_GUIDE_TAB1_TITLE}</button>
+			<a class="nav-link" data-toggle="tab" href="#hdu-guide-tab1" role="tab">{HELPDESK_GUIDE_TAB1_TITLE}</a>
 		</li>
 		<li class="nav-item" role="presentation">
-			<button class="nav-link" data-bs-toggle="tab" data-bs-target="#hdu-guide-tab2" type="button" role="tab">{HELPDESK_GUIDE_TAB2_TITLE}</button>
+			<a class="nav-link" data-toggle="tab" href="#hdu-guide-tab2" role="tab">{HELPDESK_GUIDE_TAB2_TITLE}</a>
 		</li>
 		<li class="nav-item" role="presentation">
-			<button class="nav-link" data-bs-toggle="tab" data-bs-target="#hdu-guide-tab3" type="button" role="tab">{HELPDESK_GUIDE_TAB3_TITLE}</button>
+			<a class="nav-link" data-toggle="tab" href="#hdu-guide-tab3" role="tab">{HELPDESK_GUIDE_TAB3_TITLE}</a>
 		</li>
 		<li class="nav-item" role="presentation">
-			<button class="nav-link" data-bs-toggle="tab" data-bs-target="#hdu-guide-tab4" type="button" role="tab">{HELPDESK_GUIDE_TAB4_TITLE}</button>
+			<a class="nav-link" data-toggle="tab" href="#hdu-guide-tab4" role="tab">{HELPDESK_GUIDE_TAB4_TITLE}</a>
 		</li>
 		<li class="nav-item" role="presentation">
-			<button class="nav-link" data-bs-toggle="tab" data-bs-target="#hdu-guide-tab5" type="button" role="tab">{HELPDESK_GUIDE_TAB5_TITLE}</button>
+			<a class="nav-link" data-toggle="tab" href="#hdu-guide-tab5" role="tab">{HELPDESK_GUIDE_TAB5_TITLE}</a>
 		</li>
 		<li class="nav-item" role="presentation">
-			<button class="nav-link" data-bs-toggle="tab" data-bs-target="#hdu-guide-tab6" type="button" role="tab">{HELPDESK_GUIDE_TAB6_TITLE}</button>
+			<a class="nav-link" data-toggle="tab" href="#hdu-guide-tab6" role="tab">{HELPDESK_GUIDE_TAB6_TITLE}</a>
 		</li>
 	</ul>
 
-	<div class="tab-content pt-3" id="hduGuideTabsContent">
+	<div class="tab-content" id="hduGuideTabsContent" style="padding-top:1rem;">
 
-		<div class="tab-pane fade show active" id="hdu-guide-tab0" role="tabpanel">
+		<div class="tab-pane fade in active" id="hdu-guide-tab0" role="tabpanel">
 			<h4>{HELPDESK_GUIDE_TAB0_HEADING}</h4>
 			<p class="lead">{HELPDESK_GUIDE_TAB0_LEAD}</p>
 			<p>{HELPDESK_GUIDE_TAB0_BODY}</p>
