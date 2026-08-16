@@ -1,7 +1,8 @@
 <?php
 if (!defined("HDU_PRINT_WIDTH"))
 {
-    define(HDU_PRINT_WIDTH, "width:60%;");
+    // F1.7 — bare constant name in define() is a fatal in PHP 8.
+    define("HDU_PRINT_WIDTH", "width:60%;");
 }
 if (!isset($HDU_PRINTTICKET))
 {
