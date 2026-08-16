@@ -12,12 +12,42 @@ versionado se rige por [SemVer](https://semver.org/spec/v2.0.0.html).
 
 ---
 
-## [Unreleased] — rama de trabajo hacia `2.1.0`
+## [Unreleased] — rama de trabajo hacia `2.2.0`
 
-Ver `MIGRATION_PLAN.md` Fase 1.
+Ver `MIGRATION_PLAN.md` Fase 2 (seguridad + consistencia de datos).
 
 ### Added
-- `plugin.xml`: bump a `2.1.0-dev` como marcador de rama de trabajo Fase 1.
+- **F2.1** — `helpdesk_setup.php` nuevo. Clase `helpdesk_setup` con hook
+  `upgrade_post($var)` (convención e107) que ejecuta un `RENAME TABLE`
+  idempotente de `#hdunit` a `#hdu_tickets` cuando se actualiza desde
+  versiones ≤ 2.1.x. Contrato:
+  - `hdu_tickets` existe → no-op.
+  - `hdunit` existe y `hdu_tickets` no → `RENAME` + mensaje de éxito.
+  - Ninguna existe → no-op (instalación nueva).
+- `plugin.xml` bump a `2.2.0-dev` como marcador de rama Fase 2.
+
+### Changed
+- **F2.1** — Renombrada la tabla `hdunit` → `hdu_tickets` para alinearla
+  con el resto del esquema (`hdu_helpdesk`, `hdu_comments`,
+  `hdu_categories`, `hdu_fixes`, `hdu_resolve`). Sustituidas 30+
+  referencias literales vía `sed` en 9 archivos PHP:
+  `helpdesk.php`, `includes/helpdesk_class.php`, `pdfit.php`,
+  `e_emailprint.php`, `e_latest.php`, `helpdesk_menu.php`,
+  `reports/report0.php`, `reports/report1.php`, `search/search.php`.
+  `helpdesk_sql.php` actualizado para que instalaciones nuevas creen la
+  tabla con el nombre nuevo.
+
+### Migration notes
+- Al actualizar de 2.1.x, e107 invocará `helpdesk_setup::upgrade_post()`
+  desde la página de plugins (Admin → Plugin Manager → Upgrade).
+  Si por algún motivo no se dispara, se puede renombrar manualmente:
+  `RENAME TABLE e107_hdunit TO e107_hdu_tickets;` (ajustar prefijo).
+
+---
+
+## [2.1.0] — 2025-XX-XX — Fase 1 (estabilización PHP 8)
+
+### Added
 - Repo git local + remoto `github.com/Kanonimpresor/helpdesk` (rama `main`).
 
 ### Changed
