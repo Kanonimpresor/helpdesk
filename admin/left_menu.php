@@ -51,17 +51,6 @@ class helpdesk_adminArea extends e_admin_dispatcher
 			'ui' 			=> 'hdu_fixes_form_ui',
 			'uipath' 		=> null
 		),
-		// F3b.1 — user guide + about tabs (patrón 4 capas del
-		// MIGRATION_PLAN §3b). No requieren tabla, sólo un
-		// controller con renderPage().
-		'guide' => array(
-			'controller' 	=> 'helpdesk_guide_ui',
-			'path' 			=> null,
-		),
-		'about' => array(
-			'controller' 	=> 'helpdesk_about_ui',
-			'path' 			=> null,
-		),
 	);
 
 
@@ -81,9 +70,9 @@ class helpdesk_adminArea extends e_admin_dispatcher
 
 		'fix/list'			=> array('caption' => HDU_A44, 'perm' => 'P', 'url' => "admin_fixes.php?mode=fix&action=list"),
 
-		// F3b.1 — Guide + About visibles al final del menú lateral.
-		'guide/render'		=> array('caption' => HDU_A_GUIDE_MENU, 'perm' => 'P', 'url' => "admin_config.php?mode=guide&action=render"),
-		'about/render'		=> array('caption' => HDU_A_ABOUT_MENU, 'perm' => 'P', 'url' => "admin_config.php?mode=about&action=render"),
+		// F3b.1 — Guide + About como acciones del controller `main` (patrón booking).
+		'main/guide'		=> array('caption' => HDU_A_GUIDE_MENU, 'perm' => 'P', 'url' => "admin_config.php?mode=main&action=guide"),
+		'main/about'		=> array('caption' => HDU_A_ABOUT_MENU, 'perm' => 'P', 'url' => "admin_config.php?mode=main&action=about"),
 	);
 
 	protected $adminMenuAliases = array(

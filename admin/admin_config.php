@@ -307,6 +307,33 @@ class helpdesk_prefs_ui extends e_admin_ui
 
 		return array('caption' => $caption, 'text' => $text);
 	}
+
+	/**
+	 * F3b — Action `guide` (URL: admin_config.php?mode=main&action=guide).
+	 * Renders the multi-tab User Guide using the 4-layer pattern:
+	 * template + shortcode batch + LAN file lazy-loaded here.
+	 */
+	public function guidePage()
+	{
+		e107::lan('helpdesk', 'admin_help', true);
+		$tmpl = e107::getTemplate('helpdesk', 'helpdesk_guide');
+		if (empty($tmpl['main'])) { return '<div class="alert alert-warning">Guide template missing.</div>'; }
+		$sc = e107::getScBatch('helpdesk_guide', 'helpdesk');
+		return e107::getParser()->parseTemplate($tmpl['main'], true, $sc);
+	}
+
+	/**
+	 * F3b — Action `about` (URL: admin_config.php?mode=main&action=about).
+	 * Dynamic version/date read from plugin.xml inside the shortcode batch.
+	 */
+	public function aboutPage()
+	{
+		e107::lan('helpdesk', 'admin_about', true);
+		$tmpl = e107::getTemplate('helpdesk', 'helpdesk_about');
+		if (empty($tmpl['main'])) { return '<div class="alert alert-warning">About template missing.</div>'; }
+		$sc = e107::getScBatch('helpdesk_about', 'helpdesk');
+		return e107::getParser()->parseTemplate($tmpl['main'], true, $sc);
+	}
 }
 
 class helpdesk_mail_ui extends e_admin_ui
@@ -579,60 +606,6 @@ class helpdesk_colors_ui extends e_admin_ui
 class hhelpdesk_prefs_form_ui extends e_admin_form_ui
 {
 }
-
-/**
- * F3b — User Guide tab (patrón 4 capas: controller + template + LAN + shortcodes).
- * Sin tabla asociada; usa e_admin_controller (no e_admin_ui).
- */
-class helpdesk_guide_ui extends e_admin_controller
-{
-	public function renderPage()
-	{
-		e107::lan('helpdesk', 'admin_help', true);
-
-		$tmpl = e107::getTemplate('helpdesk', 'helpdesk_guide');
-		if (empty($tmpl) || empty($tmpl['main']))
-		{
-			return HDU_A_GUIDE_MENU;
-		}
-		$sc   = e107::getScBatch('helpdesk_guide', 'helpdesk');
-		$html = e107::getParser()->parseTemplate($tmpl['main'], true, $sc);
-
-		return $html;
-	}
-
-	public function renderHelp()
-	{
-		return array();
-	}
-}
-
-/**
- * F3b — About tab (metadata dinámica desde plugin.xml).
- */
-class helpdesk_about_ui extends e_admin_controller
-{
-	public function renderPage()
-	{
-		e107::lan('helpdesk', 'admin_about', true);
-
-		$tmpl = e107::getTemplate('helpdesk', 'helpdesk_about');
-		if (empty($tmpl) || empty($tmpl['main']))
-		{
-			return HDU_A_ABOUT_MENU;
-		}
-		$sc   = e107::getScBatch('helpdesk_about', 'helpdesk');
-		$html = e107::getParser()->parseTemplate($tmpl['main'], true, $sc);
-
-		return $html;
-	}
-
-	public function renderHelp()
-	{
-		return array();
-	}
-}
-
 
 new helpdesk_adminArea();
 
