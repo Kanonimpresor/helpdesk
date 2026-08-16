@@ -209,3 +209,121 @@ back-office con filtros y batch actions estándar de e107. Rationale:
   `plugin.xml` `version` + `date`, y `DEV_NOTES.md` si cambia una decisión.
 - Antes de commit: `php -l` sobre todos los archivos tocados + smoke test
   manual del flujo alterado.
+
+---
+
+## 8. Backlog de lógica de negocio (a resolver en Fase 4+)
+
+Estas son observaciones del **operador real** durante pruebas de campo
+(2026-08-16). No son bugs de PHP 8 ni de SQL — son **decisiones de
+arquitectura de dominio** que requieren discutir modelo antes de tocar
+código. Documentadas aquí para no perderlas mientras avanzamos Fases 3
+(admin_ui) y 3b (Guide/About).
+
+### 8.1 🔴 CRÍTICO — Fuga de privacidad: visibilidad cruzada de tickets
+
+**Síntoma reportado**: un miembro registrado, desde otro navegador, ve
+**toda** la lista de tickets abiertos del sitio, no solo los propios.
+
+**Diagnóstico preliminar** (`helpdesk.php` L297-306):
+
+```php
+if ($helpdesk_obj->hduprefs_posteronly)
+{
+    $filter = "where hdu_posterid ='" . USERID . "' ";  // filtro correcto
+}
+if (!$helpdesk_obj->hduprefs_posteronly || $helpdesk_obj->hdu_super || $helpdesk_obj->hdu_technician)
+{
+    $filter = "where hdu_id > 0";  // ⚠️ SOBRESCRIBE el filtro anterior
+}
+```
+
+El segundo `if` no es `elseif`, así que **siempre** que `hduprefs_posteronly`
+esté desactivado el usuario ve todo. Y en la instalación por defecto, la
+pref parece venir a `0`.
+
+**Modelo objetivo** (a diseñar en Fase 4):
+
+- Regla por defecto: usuario normal ve **solo sus tickets** (creador o
+  destinatario).
+- Roles con visibilidad ampliada: `hdu_super`, `hdu_technician` (asignados a
+  su mesa), `hdu_userclass` explícito por pref.
+- Añadir columna virtual "participante" que incluya el poster + destinatarios
+  + técnicos asignados.
+- Auditar TODO endpoint que lea tickets (`helpdesk.php`, `helpdesk_menu.php`,
+  `e_latest.php`, `e_dashboard.php`, `search/search.php`, `pdfit.php`,
+  `pdfrep.php`, `e_emailprint.php`) para aplicar la misma regla.
+
+**Priorización**: es privacy leak → **debe entrar antes que Fase 4 UI**.
+Candidato a **Fase 2.5 hotfix** o inicio de Fase 3 con este fix primero.
+
+### 8.2 Perfil de usuario: link + contador de tickets propios
+
+**Requisito**: cada miembro debe tener en su perfil (`user.php?id=X` o
+equivalente e107) un widget que muestre:
+
+- Nº de tickets abiertos por él.
+- Nº de tickets cerrados por él.
+- Link "Ver mis tickets" → filtro `mine`.
+
+**Implementación pendiente**:
+
+- Hook `e_user.php` (extensión de perfil) — patrón e107 estándar.
+- Shortcode `{HELPDESK_USER_TICKETS_COUNT}` reutilizable en templates de
+  perfil de temas.
+- Requiere que 8.1 esté cerrada (la query de "mis tickets" debe respetar la
+  regla de visibilidad).
+
+### 8.3 Integración PM: notificación preconfigurada al miembro
+
+**Síntoma reportado**: al modificar un ticket, el cliente/miembro recibe
+un PM interno con contenido **hard-coded** desde
+`admin/admin_config.php?mode=mail&action=prefs` (prefs de mail).
+
+**Preguntas abiertas**:
+
+- ¿El PM está pensado como *notificación* (sólo aviso "tu ticket cambió")
+  o como *contenido completo* del ticket?
+- ¿Debería el comentario del técnico aparecer **dentro del ticket** (patrón
+  actual: sí, en el bloque `comment_detail`) y el PM ser sólo un enlace?
+- Ver `hdu_notify()` en `includes/helpdesk_class.php` L1372+ — mezcla email
+  + PM del plugin `pm` bajo la misma pref `hduprefs_mailuser`.
+
+**Objetivo (Fase 6)**: reemplazar el envío directo de PM/email por eventos
+`e_notify.php` del core, y que sea el operador quien decida canal
+(email / PM / ambos / ninguno) por evento y por rol. Deja de hardcodearse.
+
+### 8.4 Comentarios visibles en el mismo ticket
+
+**Estado actual**: los comentarios SÍ se muestran dentro de `show()` en el
+bucle L950 (`HDU_SHOWTICKET["comment_detail"]`). El bug F2.2c-fix
+(botón "guardar comentario") probablemente hacía que **nunca llegaran** a
+insertarse en tickets existentes → el operador percibió que "no se ven".
+
+**Verificar en próxima sesión**: crear ticket, añadir comentario desde el
+autor y desde un técnico, confirmar que ambos aparecen en el detalle.
+Si el problema persiste tras F2.2c-fix es un bug del template, no del
+guardado.
+
+### 8.5 Área de tarifa (financials)
+
+**Contexto**: el plugin arrastra un modelo de facturación *(hdu_fixcost,
+hdu_hrate, hdu_drate, hdu_callout, hdu_totalcost)* pensado para talleres
+técnicos que cobran por ticket.
+
+**Decisión pendiente** (Fase 4 o 7):
+
+- **Opción A** — dejarla como pref opcional (`hduprefs_showfinance`) y
+  ocultarla si el sitio no la usa (helpdesk interno corporativo, IT
+  support de una asociación, etc.).
+- **Opción B** — extraerla a un sub-plugin `helpdesk_billing` para separar
+  responsabilidades y mantener el core del ticket limpio.
+- **Opción C** — sustituirla por integración con un plugin de facturación
+  serio si aparece uno en el ecosistema e107.
+
+Coste de mover: los campos `hdu_dcost`, `hdu_hcost`, `hdu_totalcost` están
+duros en `hdu_tickets`; un split requeriría nueva tabla `hdu_ticket_billing`
+1:1 y migración de datos (idempotente en `helpdesk_setup::upgrade_post`).
+
+**Prioridad**: baja. No bloquea nada. Diferir hasta que el modelo de
+visibilidad (8.1) y la integración de notificaciones (8.3) estén estables.
