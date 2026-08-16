@@ -305,23 +305,40 @@ $helpdesk_obj->auto_close();
 // *
 // * Something in the filter
 // *
-// *
-if ($helpdesk_obj->hduprefs_posteronly)
+// F2.5 hotfix (DEV_NOTES §8.1) — CRITICAL privacy leak. Before this fix
+// the two conditions below were TWO separate `if` blocks. The second one
+// unconditionally overwrote $filter to "hdu_id > 0" whenever
+// `hduprefs_posteronly` was off, which is the default. Result: any
+// registered member could see EVERY open ticket in the site.
+//
+// Correct policy:
+//   * hdu_super or hdu_technician → see all tickets (staff view).
+//   * hduprefs_posteronly OR anonymous member → own tickets only.
+//   * everyone else defaults to own tickets (safer default than "all").
+//
+// Full model redesign (participant table, per-desk visibility, profile
+// widget) is Fase 4 / §8.2. This is the minimal correctness fix.
+if ($helpdesk_obj->hdu_super || $helpdesk_obj->hdu_technician)
 {
-    // poster can only see their own tickets
-    $filter = "where hdu_posterid ='" . USERID . "' ";
-}
-if (!$helpdesk_obj->hduprefs_posteronly || $helpdesk_obj->hdu_super || $helpdesk_obj->hdu_technician)
-{
-    // if tickets visible to all or supervisor or a technician
+    // Staff: full visibility.
     $filter = "where hdu_id > 0";
+}
+else
+{
+    // Regular member: only their own tickets. USERID is 0 for anonymous
+    // which happens to filter everything out — desired.
+    $filter = "where hdu_posterid = '" . USERID . "' ";
 }
 // *
 // * Filter records
 switch ($R1)
 {
     case "mine":
-        $filter .= " and hdu_posterid=' " . USERID . "'" ;
+        // F2.5 hotfix — was "hdu_posterid=' " . USERID . "'" (extra space
+        // before USERID broke the match against int column). Now redundant
+        // with the base filter for non-staff, but staff can also filter to
+        // "mine".
+        $filter .= " and hdu_posterid = '" . USERID . "'" ;
         break;
     case "open":
         $filter .= " and hdu_closed ='0' ";
