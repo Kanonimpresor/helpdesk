@@ -1,0 +1,22 @@
+# Runtime — nunca commitear
+pdfout/*.pdf
+pdfout/*.tmp
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Locale artefacts que no forman parte del código
+*.log
+
+# Composer (por si en Fase 7 añadimos deps propias del plugin)
+vendor/
+composer.lock
+
+# Reports generados
+docs/MANUAL_UTILIZADOR_PT.pdf

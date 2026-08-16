@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e107Plugin name="Help Desk" lan="HDU_G001" version="2.1.0-dev" date="2026-08-16" compatibility="2.3" installRequired="true" >
+	<author name="Father Barry" url="http://www.keal.me.uk" />
+	<summary lan="HDU_G002">Helpdesk plugin allows users of your system to post help requests and track their progress.</summary>
+	<description lan="HDU_G003">Helpdesk plugin allows users of your system to post help requests and track their progress.</description>
+	<keywords>
+		<word>admin</word>
+		<word>content</word>
+		<word>helpdesk</word>
+	</keywords>
+	<category>content</category>
+	<copyright></copyright>
+	<adminLinks>
+		<link url="admin/admin_config.php" description="" icon="images/hdu_32.png" iconSmall="images/hdu_32.png" icon128="images/hdu_32.png" primary="true" >LAN_CONFIGURE</link>
+	</adminLinks>
+    <siteLinks>
+		<link url="{e_PLUGIN}helpdesk/helpdesk.php" perm='everyone' lan=''>Helpdesk</link>
+	</siteLinks>
+    <dependencies>
+        <!--
+            bootstrap_colorpicker used to be a hard requirement (priority colour prefs
+            hduprefs_p1col..p5col). Since v2.0.1 the admin form falls back to HTML5
+            <input type="color">, so the plugin is fully optional. Re-enable the line
+            below if you want the richer picker back.
+            <plugin name='bootstrap_colorpicker'/>
+        -->
+        <PHP name='core' min_version='8.0.0' />
+    </dependencies>	
+    <pluginPrefs>
+        <pref name='hduprefs_seo'>0</pref>
+        <pref name='hduprefs_supervisorclass'>255</pref>
+        <pref name='hduprefs_postclass'>253</pref>
+        <pref name='hduprefs_userclass'>253</pref>
+        <pref name='hduprefs_messagetop'>Helpdesk Message</pref>
+        <pref name='hduprefs_messagebottom'>Bottom</pref>
+        <pref name='hduprefs_phone'>0800 123 45678</pref>
+        <pref name='hduprefs_faq'></pref>
+        <pref name='hduprefs_rows'>10</pref>
+        <pref name='hduprefs_menutitle'>Helpdesk</pref>
+        <pref name='hduprefs_title'>Helpdesk</pref>
+        <pref name='hduprefs_hourlyrate'>10</pref>
+        <pref name='hduprefs_distancerate'>0</pref>
+        <pref name='hduprefs_escalatedays'>14</pref>
+        <pref name='hduprefs_escalateon'>0</pref>
+        <pref name='hduprefs_autoclosedays'>28</pref>
+        <pref name='hduprefs_autocloseres'>0</pref>
+        <pref name='hduprefs_defaultres'>0</pref>
+        <pref name='hduprefs_assigned'>0</pref>
+        <pref name='hduprefs_closestat'>0</pref>
+        <pref name='hduprefs_posteronly'>0</pref>
+        <pref name='hduprefs_reopen'>0</pref>
+        <pref name='hduprefs_allread'>0</pref>
+        <pref name='hduprefs_showassettag'>0</pref>
+        <pref name='hduprefs_showfixes'>0</pref>
+        <pref name='hduprefs_showfinance'>0</pref>
+        <pref name='hduprefs_callout'>10</pref>
+        <pref name='hduprefs_autoassign'>0</pref>
+        <pref name='hduprefs_showfinusers'>0</pref>
+        <pref name='hduprefs_mailuser'>0</pref>
+        <pref name='hduprefs_mailhelpdesk'>0</pref>
+        <pref name='hduprefs_mailtechnician'>0</pref>
+        <pref name='hduprefs_pmfrom'>0</pref>
+        <pref name='hduprefs_emailfrom'>Helpdesk for </pref>
+        <pref name='hduprefs_mailpdf'>0</pref>
+        <pref name='hduprefs_usersubject'>Helpdesk Ticket</pref>
+        <pref name='hduprefs_helpdesksubject'>Update Text</pref>
+        <pref name='hduprefs_userupsubject'>Updated Helpdesk Ticket</pref>
+        <pref name='hduprefs_helpupsubject'>Helpdesk Ticket</pref>
+        <pref name='hduprefs_usertext'>Text</pref>
+        <pref name='hduprefs_helpdesktext'>Text</pref>
+        <pref name='hduprefs_updateuser'>Update Text</pref>
+        <pref name='hduprefs_updatehelpdesk'>Update Text</pref>
+        <pref name='hduprefs_p1col'>#00CC00</pref>
+        <pref name='hduprefs_p2col'>#99CC00</pref>
+        <pref name='hduprefs_p3col'>#FFFF33</pref>
+        <pref name='hduprefs_p4col'>#FF9933</pref>
+        <pref name='hduprefs_p5col'>#FF0000</pref>
+    </pluginPrefs>
+</e107Plugin>

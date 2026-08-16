@@ -1,0 +1,3756 @@
+<!DOCTYPE html><html><head>
+      <title>MANUAL_UTILIZADOR_PT</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:///c:\Users\e-sla\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.8.22\crossnote\dependencies\katex\katex.min.css">
+      
+      
+      
+      
+      
+      <style>
+      code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:'Helvetica Neue',Helvetica,'Segoe UI',Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:'\00a0'}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview ul{list-style:disc}.markdown-preview ul ul{list-style:circle}.markdown-preview ul ul ul{list-style:square}.markdown-preview ol{list-style:decimal}.markdown-preview ol ol,.markdown-preview ul ol{list-style-type:lower-roman}.markdown-preview ol ol ol,.markdown-preview ol ul ol,.markdown-preview ul ol ol,.markdown-preview ul ul ol{list-style-type:lower-alpha}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .code-chunk-btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px / 2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+      <script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    // your code here
+  });
+</script>
+    </head>
+    <body for="html-export">
+      <div class="crossnote markdown-preview  ">
+      <div>
+<h1 id="-booking-plugin-para-e107-cms--manual-do-utilizador">📅 Booking Plugin para e107 CMS — Manual do Utilizador </h1>
+<p><strong>Versão:</strong> 2.3.0<br>
+<strong>Data:</strong> Março 2026<br>
+<strong>Autor:</strong> LandingPro — Martin Costa<br>
+<strong>Licença:</strong> GPL v2+<br>
+<strong>Idioma deste documento:</strong> Português (Portugal)</p>
+<hr>
+<h2 id="índice-geral">Índice Geral </h2>
+<table>
+<thead>
+<tr>
+<th>Capítulo</th>
+<th>Secção</th>
+<th>Página</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><a href="#1-introdu%C3%A7%C3%A3o-e-requisitos">Introdução e Requisitos</a></td>
+<td>4</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="#2-instala%C3%A7%C3%A3o-do-plugin">Instalação do Plugin</a></td>
+<td>6</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="#3-vis%C3%A3o-geral-do-painel-de-administra%C3%A7%C3%A3o">Visão Geral do Painel de Administração</a></td>
+<td>8</td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="#4-configura%C3%A7%C3%A3o-geral-base">Configuração Geral (Base)</a></td>
+<td>10</td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="#5-tipos-de-evento">Tipos de Evento</a></td>
+<td>14</td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="#6-anfitri%C3%B5es-hosts">Anfitriões (Hosts)</a></td>
+<td>18</td>
+</tr>
+<tr>
+<td>7</td>
+<td><a href="#7-hor%C3%A1rios-por-dia-day-schedules">Horários por Dia (Day Schedules)</a></td>
+<td>22</td>
+</tr>
+<tr>
+<td>8</td>
+<td><a href="#8-disponibilidade-e-bloqueios">Disponibilidade e Bloqueios</a></td>
+<td>25</td>
+</tr>
+<tr>
+<td>9</td>
+<td><a href="#9-gest%C3%A3o-de-reservas">Gestão de Reservas</a></td>
+<td>28</td>
+</tr>
+<tr>
+<td>10</td>
+<td><a href="#10-pagamentos-online">Pagamentos Online</a></td>
+<td>32</td>
+</tr>
+<tr>
+<td>11</td>
+<td><a href="#11-cup%C3%B5es-de-desconto">Cupões de Desconto</a></td>
+<td>38</td>
+</tr>
+<tr>
+<td>12</td>
+<td><a href="#12-cr%C3%A9ditos-de-sess%C3%A3o">Créditos de Sessão</a></td>
+<td>41</td>
+</tr>
+<tr>
+<td>13</td>
+<td><a href="#13-campos-personalizados">Campos Personalizados</a></td>
+<td>44</td>
+</tr>
+<tr>
+<td>14</td>
+<td><a href="#14-seo-e-dados-estruturados">SEO e Dados Estruturados</a></td>
+<td>47</td>
+</tr>
+<tr>
+<td>15</td>
+<td><a href="#15-avalia%C3%A7%C3%B5es-e-classifica%C3%A7%C3%B5es-reviews">Avaliações e Classificações (Reviews)</a></td>
+<td>51</td>
+</tr>
+<tr>
+<td>16</td>
+<td><a href="#16-integra%C3%A7%C3%A3o-google-calendar--meet">Integração Google Calendar + Meet</a></td>
+<td>54</td>
+</tr>
+<tr>
+<td>17</td>
+<td><a href="#17-integra%C3%A7%C3%A3o-zoom-meetings">Integração Zoom Meetings</a></td>
+<td>59</td>
+</tr>
+<tr>
+<td>18</td>
+<td><a href="#18-notifica%C3%A7%C3%B5es-sms">Notificações SMS</a></td>
+<td>63</td>
+</tr>
+<tr>
+<td>19</td>
+<td><a href="#19-notifica%C3%A7%C3%B5es-whatsapp">Notificações WhatsApp</a></td>
+<td>67</td>
+</tr>
+<tr>
+<td>20</td>
+<td><a href="#20-lembretes-autom%C3%A1ticos-reminders">Lembretes Automáticos (Reminders)</a></td>
+<td>71</td>
+</tr>
+<tr>
+<td>21</td>
+<td><a href="#21-widget-embeb%C3%ADvel-embed">Widget Embebível (Embed)</a></td>
+<td>73</td>
+</tr>
+<tr>
+<td>22</td>
+<td><a href="#22-webhooks">Webhooks</a></td>
+<td>76</td>
+</tr>
+<tr>
+<td>23</td>
+<td><a href="#23-api-rest">API REST</a></td>
+<td>79</td>
+</tr>
+<tr>
+<td>24</td>
+<td><a href="#24-dashboard-e-estat%C3%ADsticas">Dashboard e Estatísticas</a></td>
+<td>83</td>
+</tr>
+<tr>
+<td>25</td>
+<td><a href="#25-exporta%C3%A7%C3%A3o-pdf--excel">Exportação PDF / Excel</a></td>
+<td>86</td>
+</tr>
+<tr>
+<td>26</td>
+<td><a href="#26-modo-escuro-dark-mode">Modo Escuro (Dark Mode)</a></td>
+<td>88</td>
+</tr>
+<tr>
+<td>27</td>
+<td><a href="#27-suporte-multi-idioma">Suporte Multi-Idioma</a></td>
+<td>89</td>
+</tr>
+<tr>
+<td>28</td>
+<td><a href="#28-guia-do-utilizador-integrado">Guia do Utilizador Integrado</a></td>
+<td>91</td>
+</tr>
+<tr>
+<td>29</td>
+<td><a href="#29-resolu%C3%A7%C3%A3o-de-problemas-troubleshooting">Resolução de Problemas (Troubleshooting)</a></td>
+<td>92</td>
+</tr>
+<tr>
+<td>30</td>
+<td><a href="#30-plano-de-implementa%C3%A7%C3%A3o-recomendado">Plano de Implementação Recomendado</a></td>
+<td>95</td>
+</tr>
+<tr>
+<td>A</td>
+<td><a href="#ap%C3%AAndice-a--refer%C3%AAncia-r%C3%A1pida--todas-as-funcionalidades">Referência Rápida — Todas as Funcionalidades</a></td>
+<td>98</td>
+</tr>
+<tr>
+<td>B</td>
+<td><a href="#ap%C3%AAndice-b--mapa-de-prioridades">Mapa de Prioridades</a></td>
+<td>101</td>
+</tr>
+<tr>
+<td>C</td>
+<td><a href="#ap%C3%AAndice-c--checklist-de-testes-finais">Checklist de Testes Finais</a></td>
+<td>103</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<div style="page-break-after: always;"></div>
+<h1 id="1-introdução-e-requisitos">1. Introdução e Requisitos </h1>
+<h2 id="11-o-que-é-o-booking-plugin">1.1 O que é o Booking Plugin? </h2>
+<p>O <strong>Booking</strong> é um plugin profissional de agendamento e reservas para o CMS <strong>e107 v2.3.x</strong>. Permite que os visitantes do seu website marquem consultas, sessões, aulas ou reuniões diretamente a partir do site — sem depender de serviços externos como Calendly ou Acuity.</p>
+<h3 id="para-quem-é-indicado">Para quem é indicado? </h3>
+<table>
+<thead>
+<tr>
+<th>Setor</th>
+<th>Exemplos de uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🏥 Saúde</td>
+<td>Psicólogos, terapeutas, nutricionistas</td>
+</tr>
+<tr>
+<td>🎓 Educação</td>
+<td>Explicadores, academias, escolas de línguas</td>
+</tr>
+<tr>
+<td>💼 Consultoria</td>
+<td>Consultores, advogados, contabilistas</td>
+</tr>
+<tr>
+<td>💇 Beleza</td>
+<td>Salões de cabeleireiro, spas, estética</td>
+</tr>
+<tr>
+<td>🏋️ Fitness</td>
+<td>Ginásios, personal trainers, yoga</td>
+</tr>
+<tr>
+<td>💻 Tecnologia</td>
+<td>Demos de produto, suporte técnico agendado</td>
+</tr>
+<tr>
+<td>🎵 Artes</td>
+<td>Professores de música, workshops</td>
+</tr>
+</tbody>
+</table>
+<h3 id="principais-vantagens">Principais vantagens </h3>
+<ul>
+<li>✅ <strong>Dados no seu servidor</strong> — sem dependência de terceiros</li>
+<li>✅ <strong>Totalmente integrado</strong> com o e107 (utilizadores, temas, menus)</li>
+<li>✅ <strong>3 idiomas incluídos</strong> — Inglês, Espanhol, Português</li>
+<li>✅ <strong>Pagamentos</strong> — PayPal, Stripe, Eupago (MBWay, Multibanco, Cartão)</li>
+<li>✅ <strong>Videoconferência</strong> — Google Meet e Zoom automáticos</li>
+<li>✅ <strong>Notificações</strong> — Email, SMS, WhatsApp</li>
+<li>✅ <strong>SEO</strong> — <a href="http://Schema.org">Schema.org</a> JSON-LD para motores de busca</li>
+<li>✅ <strong>100% responsivo</strong> — Bootstrap 5</li>
+</ul>
+<h2 id="12-requisitos-do-sistema">1.2 Requisitos do Sistema </h2>
+<table>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Versão mínima</th>
+<th>Recomendado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>e107 CMS</td>
+<td>2.3.1</td>
+<td>2.3.x mais recente</td>
+</tr>
+<tr>
+<td>PHP</td>
+<td>8.0</td>
+<td>8.2+</td>
+</tr>
+<tr>
+<td>MySQL / MariaDB</td>
+<td>5.7 / 10.3</td>
+<td>8.0+ / 10.6+</td>
+</tr>
+<tr>
+<td>Motor de tabelas</td>
+<td>InnoDB</td>
+<td>InnoDB</td>
+</tr>
+<tr>
+<td>Tema Bootstrap</td>
+<td>5.x</td>
+<td>5.3+</td>
+</tr>
+<tr>
+<td>Extensões PHP</td>
+<td><code>pdo_mysql</code>, <code>json</code>, <code>mbstring</code>, <code>curl</code></td>
+<td>Todas ativas</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Nota:</strong> Para utilizar pagamentos online, é necessário um certificado SSL (https).</p>
+</blockquote>
+<blockquote>
+<p><img src="#" alt="Requisitos do Sistema"><br>
+<em>Figura 1.1 — Verificação dos requisitos do sistema no e107 Admin.</em></p>
+</blockquote>
+<div style="page-break-after: always;"></div>
+<h1 id="2-instalação-do-plugin">2. Instalação do Plugin </h1>
+<h2 id="21-método-1--via-painel-de-administração-recomendado">2.1 Método 1 — Via Painel de Administração (Recomendado) </h2>
+<ol>
+<li>
+<p>Descarregue o ficheiro <code>.zip</code> do plugin a partir do repositório GitHub:<br>
+<code>https://github.com/Kanonimpresor/booking/releases</code></p>
+</li>
+<li>
+<p>No e107, aceda a <strong>Admin → Plugin Manager</strong></p>
+</li>
+<li>
+<p>Clique em <strong>Upload Plugin</strong> e selecione o ficheiro <code>.zip</code></p>
+</li>
+<li>
+<p>Após o carregamento, localize <strong>Booking</strong> na lista de plugins</p>
+</li>
+<li>
+<p>Clique em <strong>Install</strong></p>
+</li>
+<li>
+<p>O plugin cria automaticamente <strong>11 tabelas</strong> na base de dados</p>
+</li>
+</ol>
+<blockquote>
+<p><img src="#" alt="Plugin Manager"><br>
+<em>Figura 2.1 — Plugin Manager do e107 com o Booking pronto para instalar.</em></p>
+</blockquote>
+<h2 id="22-método-2--via-ftp--upload-manual">2.2 Método 2 — Via FTP / Upload Manual </h2>
+<ol>
+<li>
+<p>Extraia o conteúdo do <code>.zip</code></p>
+</li>
+<li>
+<p>Carregue a pasta <code>booking/</code> para:</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>e107_plugins/booking/
+</code></pre></li>
+<li>
+<p>No e107, aceda a <strong>Admin → Plugin Manager</strong></p>
+</li>
+<li>
+<p>Clique em <strong>Scan for new plugins</strong> (se necessário)</p>
+</li>
+<li>
+<p>Localize <strong>Booking</strong> e clique em <strong>Install</strong></p>
+</li>
+</ol>
+<h2 id="23-verificação-da-instalação">2.3 Verificação da Instalação </h2>
+<p>Após a instalação, verifique:</p>
+<ul>
+<li>✅ O menu <strong>Booking</strong> aparece no painel de administração</li>
+<li>✅ Existem 11 tabelas com o prefixo <code>e107_booking_*</code> na base de dados</li>
+<li>✅ A página frontend <code>/booking/</code> está acessível</li>
+</ul>
+<h3 id="tabelas-criadas">Tabelas criadas </h3>
+<table>
+<thead>
+<tr>
+<th>Tabela</th>
+<th>Finalidade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>booking_config</code></td>
+<td>Configurações chave/valor</td>
+</tr>
+<tr>
+<td><code>booking_reservations</code></td>
+<td>Reservas dos visitantes</td>
+</tr>
+<tr>
+<td><code>booking_blocked</code></td>
+<td>Datas/horários bloqueados</td>
+</tr>
+<tr>
+<td><code>booking_hosts</code></td>
+<td>Anfitriões/profissionais</td>
+</tr>
+<tr>
+<td><code>booking_event_types</code></td>
+<td>Tipos de evento/serviço</td>
+</tr>
+<tr>
+<td><code>booking_day_schedules</code></td>
+<td>Horários por dia da semana</td>
+</tr>
+<tr>
+<td><code>booking_coupons</code></td>
+<td>Cupões de desconto</td>
+</tr>
+<tr>
+<td><code>booking_webhooks</code></td>
+<td>Configurações de webhooks</td>
+</tr>
+<tr>
+<td><code>booking_custom_fields</code></td>
+<td>Campos personalizados do formulário</td>
+</tr>
+<tr>
+<td><code>booking_credits</code></td>
+<td>Créditos de sessão pré-pagos</td>
+</tr>
+<tr>
+<td><code>booking_reviews</code></td>
+<td>Avaliações e classificações</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><img src="#" alt="Tabelas da Base de Dados"><br>
+<em>Figura 2.2 — 11 tabelas criadas automaticamente na base de dados.</em></p>
+</blockquote>
+<div style="page-break-after: always;"></div>
+<h1 id="3-visão-geral-do-painel-de-administração">3. Visão Geral do Painel de Administração </h1>
+<p>O painel de administração do Booking está organizado num menu lateral com as seguintes secções:</p>
+<table>
+<thead>
+<tr>
+<th>Ícone</th>
+<th>Secção</th>
+<th>Função</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>📊</td>
+<td><strong>Dashboard</strong></td>
+<td>Estatísticas visuais com gráficos Chart.js</td>
+</tr>
+<tr>
+<td>📅</td>
+<td><strong>Reservas</strong></td>
+<td>Lista, filtro, edição e gestão de todas as reservas</td>
+</tr>
+<tr>
+<td>➕</td>
+<td><strong>Criar</strong></td>
+<td>Formulário rápido para criar uma reserva manual</td>
+</tr>
+<tr>
+<td>⚙️</td>
+<td><strong>Configuração</strong></td>
+<td>Definições gerais, pagamentos, SEO, integrações</td>
+</tr>
+<tr>
+<td>🚫</td>
+<td><strong>Disponibilidade</strong></td>
+<td>Bloquear datas e horários específicos</td>
+</tr>
+<tr>
+<td>🕐</td>
+<td><strong>Horários por Dia</strong></td>
+<td>Configurar horários diferentes por dia da semana</td>
+</tr>
+<tr>
+<td>👥</td>
+<td><strong>Anfitriões</strong></td>
+<td>Gerir profissionais/membros da equipa</td>
+</tr>
+<tr>
+<td>🏷️</td>
+<td><strong>Tipos de Evento</strong></td>
+<td>Configurar serviços com duração, preço e cor</td>
+</tr>
+<tr>
+<td>🎫</td>
+<td><strong>Cupões</strong></td>
+<td>Gerir códigos de desconto</td>
+</tr>
+<tr>
+<td>🪙</td>
+<td><strong>Créditos</strong></td>
+<td>Pacotes de sessões pré-pagos</td>
+</tr>
+<tr>
+<td>⭐</td>
+<td><strong>Avaliações</strong></td>
+<td>Gerir classificações dos clientes</td>
+</tr>
+<tr>
+<td>🔌</td>
+<td><strong>Webhooks</strong></td>
+<td>Configurar callbacks HTTP</td>
+</tr>
+<tr>
+<td>🔗</td>
+<td><strong>API</strong></td>
+<td>Chave de API e documentação REST</td>
+</tr>
+<tr>
+<td>🪟</td>
+<td><strong>Embed</strong></td>
+<td>Widget embebível para sites externos</td>
+</tr>
+<tr>
+<td>📝</td>
+<td><strong>Campos Personalizados</strong></td>
+<td>Perguntas adicionais no formulário</td>
+</tr>
+<tr>
+<td>📖</td>
+<td><strong>Guia</strong></td>
+<td>Manual do utilizador integrado</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><img src="#" alt="Painel de Administração"><br>
+<em>Figura 3.1 — Menu lateral do Booking no painel de administração do e107.</em></p>
+</blockquote>
+<h3 id="fluxo-de-trabalho-recomendado-primeira-configuração">Fluxo de trabalho recomendado (primeira configuração) </h3>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>Configuração Geral → Tipos de Evento → Anfitriões → Horários → Disponibilidade → Testar Frontend
+</code></pre><div style="page-break-after: always;"></div>
+<h1 id="4-configuração-geral-base">4. Configuração Geral (Base) </h1>
+<p><strong>Caminho:</strong> Admin → Booking → Configuração → Separador "Base"</p>
+<p>Este é o primeiro separador de configuração e contém as opções fundamentais do plugin.</p>
+<h2 id="41-informações-do-evento">4.1 Informações do Evento </h2>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Descrição</th>
+<th>Exemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Título do Evento</strong></td>
+<td>Nome exibido no calendário e nos emails</td>
+<td><code>Sessão de Admissão</code></td>
+</tr>
+<tr>
+<td><strong>Descrição do Evento</strong></td>
+<td>Texto descritivo mostrado no frontend</td>
+<td><code>Sessão gratuita de 30 minutos...</code></td>
+</tr>
+<tr>
+<td><strong>Duração</strong></td>
+<td>Texto informativo da duração</td>
+<td><code>30 minutos</code></td>
+</tr>
+<tr>
+<td><strong>Plataforma</strong></td>
+<td>Onde decorre a sessão</td>
+<td><code>Zoom</code>, <code>Presencial</code>, <code>Google Meet</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><img src="#" alt="Configuração Base — Evento"><br>
+<em>Figura 4.1 — Configuração das informações do evento.</em></p>
+</blockquote>
+<h2 id="42-disponibilidade-e-horários">4.2 Disponibilidade e Horários </h2>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Descrição</th>
+<th>Valor por defeito</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Dias Disponíveis</strong></td>
+<td>Dias da semana em que aceita reservas</td>
+<td><code>Seg, Ter, Qua, Qui</code></td>
+</tr>
+<tr>
+<td><strong>Hora de Início</strong></td>
+<td>Início do período de marcações</td>
+<td><code>09:00</code></td>
+</tr>
+<tr>
+<td><strong>Hora de Fim</strong></td>
+<td>Fim do período de marcações</td>
+<td><code>18:00</code></td>
+</tr>
+<tr>
+<td><strong>Duração do Slot</strong></td>
+<td>Comprimento de cada faixa horária (minutos)</td>
+<td><code>30</code></td>
+</tr>
+<tr>
+<td><strong>Antecedência mínima</strong></td>
+<td>Horas de antecedência para marcar</td>
+<td><code>2</code></td>
+</tr>
+<tr>
+<td><strong>Máximo por slot</strong></td>
+<td>Número máximo de reservas por horário</td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td><strong>Buffer entre marcações</strong></td>
+<td>Minutos de intervalo entre sessões</td>
+<td><code>0</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Dica:</strong> Se define <code>buffer_minutes = 10</code> e slots de 30 min, o calendário cria automaticamente um intervalo de 10 minutos entre cada sessão.</p>
+</blockquote>
+<blockquote>
+<p><img src="#" alt="Configuração Base — Disponibilidade"><br>
+<em>Figura 4.2 — Configuração de disponibilidade e horários.</em></p>
+</blockquote>
+<h2 id="43-funcionalidades-avançadas-ativação">4.3 Funcionalidades Avançadas (Ativação) </h2>
+<p>Estas opções estão desativadas por defeito. Ative-as conforme necessário:</p>
+<table>
+<thead>
+<tr>
+<th>Opção</th>
+<th>Descrição</th>
+<th>Quando ativar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Múltiplos anfitriões</strong></td>
+<td>Permite que o visitante escolha um profissional</td>
+<td>Se tem mais de 1 profissional</td>
+</tr>
+<tr>
+<td><strong>Múltiplos tipos de evento</strong></td>
+<td>Oferece vários serviços para escolha</td>
+<td>Se oferece mais de 1 serviço</td>
+</tr>
+<tr>
+<td><strong>Horários por dia</strong></td>
+<td>Horário diferente por dia da semana</td>
+<td>Se os horários variam (ex.: 2ª das 9h-14h, 4ª das 16h-20h)</td>
+</tr>
+<tr>
+<td><strong>Campos personalizados</strong></td>
+<td>Adiciona perguntas extra ao formulário</td>
+<td>Se precisa de informação adicional dos clientes</td>
+</tr>
+<tr>
+<td><strong>Créditos de sessão</strong></td>
+<td>Permite pacotes pré-pagos</td>
+<td>Se vende pacotes de sessões</td>
+</tr>
+<tr>
+<td><strong>Modo escuro</strong></td>
+<td><code>auto</code> / <code>on</code> / <code>off</code></td>
+<td>Para utilizadores com preferência escura</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><img src="#" alt="Funcionalidades Avançadas"><br>
+<em>Figura 4.3 — Toggles para ativar funcionalidades avançadas.</em></p>
+</blockquote>
+<h2 id="44-notificações-por-email">4.4 Notificações por Email </h2>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Email de confirmação</strong></td>
+<td>Ativar/desativar email ao cliente quando reserva</td>
+</tr>
+<tr>
+<td><strong>Email de notificação</strong></td>
+<td>Ativar/desativar email ao admin quando recebe reserva</td>
+</tr>
+<tr>
+<td><strong>Assunto do email</strong></td>
+<td>Assunto do email de confirmação</td>
+</tr>
+<tr>
+<td><strong>Email do remetente</strong></td>
+<td>Endereço "De:" dos emails (deixar vazio = email do site)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><img src="#" alt="Configuração de Email"><br>
+<em>Figura 4.4 — Configuração de notificações por email.</em></p>
+</blockquote>
+<h3 id="-verificação--passo-4-concluído">✅ Verificação — Passo 4 concluído </h3>
+<p>Após preencher a configuração base:</p>
+<ol>
+<li>Aceda ao frontend (<code>/booking/</code>)</li>
+<li>O calendário deve aparecer com os dias disponíveis</li>
+<li>Clique num dia e verifique os slots de horário</li>
+<li>Faça uma reserva de teste</li>
+<li>Verifique se recebe os emails (cliente + admin)</li>
+</ol>
+<div style="page-break-after: always;"></div>
+<h1 id="5-tipos-de-evento">5. Tipos de Evento </h1>
+<p><strong>Caminho:</strong> Admin → Booking → Tipos de Evento</p>
+<p>Os tipos de evento permitem oferecer vários serviços aos visitantes, cada um com a sua própria duração, preço e cor.</p>
+<h2 id="51-quando-utilizar">5.1 Quando utilizar? </h2>
+<table>
+<thead>
+<tr>
+<th>Cenário</th>
+<th>Recomendação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ofereço <strong>apenas 1 serviço</strong></td>
+<td>❌ Não ativar — usar a configuração geral</td>
+</tr>
+<tr>
+<td>Ofereço <strong>2+ serviços</strong> com durações/preços diferentes</td>
+<td>✅ Ativar em Configuração → "Múltiplos tipos de evento"</td>
+</tr>
+</tbody>
+</table>
+<h2 id="52-criar-um-tipo-de-evento">5.2 Criar um Tipo de Evento </h2>
+<ol>
+<li>Aceda a <strong>Tipos de Evento → Adicionar Tipo de Evento</strong></li>
+<li>Preencha os campos:</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Descrição</th>
+<th>Exemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Título</strong></td>
+<td>Nome do serviço</td>
+<td><code>Consulta de Avaliação</code></td>
+</tr>
+<tr>
+<td><strong>Descrição</strong></td>
+<td>Texto descritivo</td>
+<td><code>Primeira consulta gratuita de 45 minutos</code></td>
+</tr>
+<tr>
+<td><strong>Duração</strong> (minutos)</td>
+<td>Tempo da sessão</td>
+<td><code>45</code></td>
+</tr>
+<tr>
+<td><strong>Preço</strong></td>
+<td>Valor a cobrar (0 = gratuito)</td>
+<td><code>25.00</code></td>
+</tr>
+<tr>
+<td><strong>Moeda</strong></td>
+<td>Moeda do preço</td>
+<td><code>EUR</code></td>
+</tr>
+<tr>
+<td><strong>Cor</strong></td>
+<td>Cor identificadora no calendário</td>
+<td><code>#0e5ef5</code></td>
+</tr>
+<tr>
+<td><strong>Classe de utilizador</strong></td>
+<td>Restringir acesso a um userclass e107</td>
+<td><code>0</code> (todos)</td>
+</tr>
+<tr>
+<td><strong>Ordem</strong></td>
+<td>Posição na lista</td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td><strong>Ativo</strong></td>
+<td>Visível no frontend</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><img src="#" alt="Criar Tipo de Evento"><br>
+<em>Figura 5.1 — Formulário de criação de um tipo de evento.</em></p>
+</blockquote>
+<h2 id="53-exemplos-práticos">5.3 Exemplos práticos </h2>
+<h3 id="psicólogo">Psicólogo </h3>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Duração</th>
+<th>Preço</th>
+<th>Cor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sessão Individual</td>
+<td>50 min</td>
+<td>60€</td>
+<td>🔵 <code>#337ab7</code></td>
+</tr>
+<tr>
+<td>Sessão de Casal</td>
+<td>80 min</td>
+<td>90€</td>
+<td>🟢 <code>#28a745</code></td>
+</tr>
+<tr>
+<td>Primeira Consulta</td>
+<td>30 min</td>
+<td>Grátis</td>
+<td>🟡 <code>#ffc107</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="academia-de-línguas">Academia de Línguas </h3>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Duração</th>
+<th>Preço</th>
+<th>Cor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Aula de Inglês</td>
+<td>60 min</td>
+<td>20€</td>
+<td>🔴 <code>#dc3545</code></td>
+</tr>
+<tr>
+<td>Aula de Português</td>
+<td>45 min</td>
+<td>18€</td>
+<td>🟢 <code>#28a745</code></td>
+</tr>
+<tr>
+<td>Conversação Livre</td>
+<td>30 min</td>
+<td>Grátis</td>
+<td>🔵 <code>#17a2b8</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><img src="#" alt="Lista de Tipos de Evento"><br>
+<em>Figura 5.2 — Lista de tipos de evento configurados no painel.</em></p>
+</blockquote>
+<h2 id="54-como-aparece-no-frontend">5.4 Como aparece no frontend </h2>
+<p>Quando ativado, o visitante vê um passo adicional no fluxo de reserva:</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>Escolher Serviço → Escolher Data → Escolher Horário → Preencher Dados → Confirmar
+</code></pre><p>Cada tipo de evento aparece como um <strong>cartão colorido</strong> com título, descrição, duração e preço.</p>
+<blockquote>
+<p><img src="#" alt="Frontend — Tipos de Evento"><br>
+<em>Figura 5.3 — Seleção de tipo de evento no frontend.</em></p>
+</blockquote>
+<div style="page-break-after: always;"></div>
+<h1 id="6-anfitriões-hosts">6. Anfitriões (Hosts) </h1>
+<p><strong>Caminho:</strong> Admin → Booking → Anfitriões</p>
+<p>Os anfitriões representam os profissionais ou membros da equipa que recebem as reservas.</p>
+<h2 id="61-quando-utilizar">6.1 Quando utilizar? </h2>
+<table>
+<thead>
+<tr>
+<th>Cenário</th>
+<th>Recomendação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Uma pessoa</strong> recebe todas as reservas</td>
+<td>❌ Não ativar</td>
+</tr>
+<tr>
+<td><strong>Vários profissionais</strong> com agendas separadas</td>
+<td>✅ Ativar em Configuração → "Múltiplos anfitriões"</td>
+</tr>
+</tbody>
+</table>
+<h2 id="62-criar-um-anfitrião">6.2 Criar um Anfitrião </h2>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Descrição</th>
+<th>Exemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Nome</strong></td>
+<td>Nome completo do profissional</td>
+<td><code>Dr. Ana Silva</code></td>
+</tr>
+<tr>
+<td><strong>Email</strong></td>
+<td>Email de contacto (recebe notificações)</td>
+<td><code>ana@clinica.pt</code></td>
+</tr>
+<tr>
+<td><strong>Telefone</strong></td>
+<td>Contacto telefónico</td>
+<td><code>+351 912 345 678</code></td>
+</tr>
+<tr>
+<td><strong>Bio</strong></td>
+<td>Descrição curta do profissional</td>
+<td><code>Especialista em terapia cognitiva...</code></td>
+</tr>
+<tr>
+<td><strong>Cor</strong></td>
+<td>Cor identificadora</td>
+<td><code>#e91e63</code></td>
+</tr>
+<tr>
+<td><strong>Utilizador e107</strong></td>
+<td>Associar a uma conta e107 existente</td>
+<td>Selecionar da lista</td>
+</tr>
+<tr>
+<td><strong>Ordem</strong></td>
+<td>Posição na lista</td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td><strong>Ativo</strong></td>
+<td>Visível no frontend</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><img src="#" alt="Criar Anfitrião"><br>
+<em>Figura 6.1 — Formulário de criação de anfitrião.</em></p>
+</blockquote>
+<h2 id="63-associação-com-tipos-de-evento">6.3 Associação com Tipos de Evento </h2>
+<p>Cada anfitrião pode estar associado a tipos de evento específicos. Isto permite:</p>
+<ul>
+<li>O <strong>Dr. João</strong> atende apenas <code>Sessões Individuais</code></li>
+<li>A <strong>Dra. Maria</strong> atende <code>Sessões de Casal</code> e <code>Avaliações</code></li>
+</ul>
+<h2 id="64-fluxo-no-frontend">6.4 Fluxo no Frontend </h2>
+<p>Quando ativado, o visitante pode escolher:</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>Escolher Serviço → Escolher Profissional → Escolher Data → Escolher Horário → Confirmar
+</code></pre><blockquote>
+<p><img src="#" alt="Frontend — Anfitriões"><br>
+<em>Figura 6.2 — Seleção de anfitrião no frontend.</em></p>
+</blockquote>
+<div style="page-break-after: always;"></div>
+<h1 id="7-horários-por-dia-day-schedules">7. Horários por Dia (Day Schedules) </h1>
+<p><strong>Caminho:</strong> Admin → Booking → Horários por Dia</p>
+<p>Permite definir horários de disponibilidade <strong>diferentes para cada dia da semana</strong>, substituindo o horário global definido na configuração geral.</p>
+<h2 id="71-quando-utilizar">7.1 Quando utilizar? </h2>
+<table>
+<thead>
+<tr>
+<th>Cenário</th>
+<th>Recomendação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Horário <strong>igual</strong> todos os dias (ex.: 9h-18h)</td>
+<td>❌ Não ativar — usar configuração geral</td>
+</tr>
+<tr>
+<td>Horário <strong>variável</strong> por dia (ex.: 2ª 9h-14h, 4ª 16h-20h)</td>
+<td>✅ Ativar em Configuração → "Horários por dia"</td>
+</tr>
+</tbody>
+</table>
+<h2 id="72-configurar-horários">7.2 Configurar Horários </h2>
+<ol>
+<li>Ative a opção em <strong>Configuração → Base → Horários por dia</strong></li>
+<li>Aceda a <strong>Horários por Dia</strong> no menu</li>
+<li>Para cada dia da semana que tem disponibilidade:</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Descrição</th>
+<th>Exemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Dia</strong></td>
+<td>Dia da semana (0=Domingo ... 6=Sábado)</td>
+<td><code>1</code> (Segunda-feira)</td>
+</tr>
+<tr>
+<td><strong>Início</strong></td>
+<td>Hora de início</td>
+<td><code>09:00</code></td>
+</tr>
+<tr>
+<td><strong>Fim</strong></td>
+<td>Hora de fim</td>
+<td><code>14:00</code></td>
+</tr>
+<tr>
+<td><strong>Anfitrião</strong></td>
+<td>Associar a um anfitrião específico (opcional)</td>
+<td><code>Dr. Ana Silva</code></td>
+</tr>
+<tr>
+<td><strong>Ativo</strong></td>
+<td>Horário ativo</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<h3 id="exemplo-completo">Exemplo completo </h3>
+<table>
+<thead>
+<tr>
+<th>Dia</th>
+<th>Horário</th>
+<th>Anfitrião</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Segunda</td>
+<td>09:00 – 14:00</td>
+<td>Dr. João</td>
+</tr>
+<tr>
+<td>Terça</td>
+<td>09:00 – 18:00</td>
+<td>Dr. João</td>
+</tr>
+<tr>
+<td>Quarta</td>
+<td>14:00 – 20:00</td>
+<td>Dra. Maria</td>
+</tr>
+<tr>
+<td>Quinta</td>
+<td>09:00 – 18:00</td>
+<td>Todos</td>
+</tr>
+<tr>
+<td>Sexta</td>
+<td>09:00 – 13:00</td>
+<td>Dr. João</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><img src="#" alt="Horários por Dia"><br>
+<em>Figura 7.1 — Configuração de horários variáveis por dia da semana.</em></p>
+</blockquote>
+<blockquote>
+<p><strong>Dica:</strong> Pode criar múltiplas entradas para o mesmo dia se diferentes anfitriões têm horários diferentes.</p>
+</blockquote>
+<div style="page-break-after: always;"></div>
+<h1 id="8-disponibilidade-e-bloqueios">8. Disponibilidade e Bloqueios </h1>
+<p><strong>Caminho:</strong> Admin → Booking → Disponibilidade</p>
+<p>Esta secção permite bloquear datas completas ou horários específicos, impedindo reservas nesse período.</p>
+<h2 id="81-casos-de-uso">8.1 Casos de uso </h2>
+<ul>
+<li>🏖️ Férias ou feriados</li>
+<li>🏥 Ausência por doença</li>
+<li>📅 Compromissos pessoais</li>
+<li>🎄 Encerramento sazonal</li>
+</ul>
+<h2 id="82-bloquear-um-dia-completo">8.2 Bloquear um dia completo </h2>
+<ol>
+<li>Aceda a <strong>Disponibilidade</strong></li>
+<li>Selecione a <strong>data</strong></li>
+<li><strong>Não preencha</strong> o campo de hora</li>
+<li>Adicione uma razão (ex.: "Feriado Nacional")</li>
+<li>Guarde</li>
+</ol>
+<blockquote>
+<p>Resultado: todos os slots desse dia ficam indisponíveis no calendário frontend.</p>
+</blockquote>
+<h2 id="83-bloquear-um-horário-específico">8.3 Bloquear um horário específico </h2>
+<ol>
+<li>Selecione a <strong>data</strong></li>
+<li>Selecione a <strong>hora</strong> específica (ex.: <code>14:00</code>)</li>
+<li>Adicione uma razão (ex.: "Reunião interna")</li>
+<li>Guarde</li>
+</ol>
+<blockquote>
+<p>Resultado: apenas esse slot fica indisponível; os restantes horários do dia mantêm-se.</p>
+</blockquote>
+<blockquote>
+<p><img src="#" alt="Disponibilidade e Bloqueios"><br>
+<em>Figura 8.1 — Gestão de bloqueios de disponibilidade.</em></p>
+</blockquote>
+<h2 id="84-notas-importantes">8.4 Notas importantes </h2>
+<p>⚠️ <strong>Atenção:</strong></p>
+<ul>
+<li>Os bloqueios <strong>não cancelam</strong> reservas existentes automaticamente</li>
+<li>Se precisa de cancelar uma reserva existente num dia que vai bloquear, faça-o manualmente na secção de Reservas</li>
+<li>Os bloqueios são <strong>imediatos</strong> — o slot desaparece do frontend assim que guarda</li>
+</ul>
+<blockquote>
+<p><img src="#" alt="Frontend — Dias Bloqueados"><br>
+<em>Figura 8.2 — Calendário frontend com dias bloqueados visíveis.</em></p>
+</blockquote>
+<div style="page-break-after: always;"></div>
+<h1 id="9-gestão-de-reservas">9. Gestão de Reservas </h1>
+<p><strong>Caminho:</strong> Admin → Booking → Reservas</p>
+<h2 id="91-lista-de-reservas">9.1 Lista de Reservas </h2>
+<p>A lista principal mostra todas as reservas com:</p>
+<table>
+<thead>
+<tr>
+<th>Coluna</th>
+<th>Informação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Data</strong></td>
+<td>Data da sessão</td>
+</tr>
+<tr>
+<td><strong>Hora</strong></td>
+<td>Horário da sessão</td>
+</tr>
+<tr>
+<td><strong>Nome</strong></td>
+<td>Nome e apelido do cliente</td>
+</tr>
+<tr>
+<td><strong>Email</strong></td>
+<td>Email de contacto</td>
+</tr>
+<tr>
+<td><strong>Telefone</strong></td>
+<td>Número de telefone</td>
+</tr>
+<tr>
+<td><strong>Estado</strong></td>
+<td>Pendente / Confirmado / Cancelado</td>
+</tr>
+<tr>
+<td><strong>Pagamento</strong></td>
+<td>Estado do pagamento (se aplicável)</td>
+</tr>
+<tr>
+<td><strong>Ações</strong></td>
+<td>Editar, eliminar</td>
+</tr>
+</tbody>
+</table>
+<h3 id="estados-da-reserva">Estados da reserva </h3>
+<table>
+<thead>
+<tr>
+<th>Estado</th>
+<th>Badge</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Pendente</strong></td>
+<td>🟡 <code>Pending</code></td>
+<td>Nova reserva a aguardar revisão</td>
+</tr>
+<tr>
+<td><strong>Confirmado</strong></td>
+<td>🟢 <code>Confirmed</code></td>
+<td>Sessão aceite, email de confirmação enviado</td>
+</tr>
+<tr>
+<td><strong>Cancelado</strong></td>
+<td>🔴 <code>Cancelled</code></td>
+<td>Sessão cancelada, email de cancelamento enviado</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><img src="#" alt="Lista de Reservas"><br>
+<em>Figura 9.1 — Lista de reservas com filtros por estado.</em></p>
+</blockquote>
+<h2 id="92-confirmar--cancelar-uma-reserva">9.2 Confirmar / Cancelar uma Reserva </h2>
+<ol>
+<li>Na lista de reservas, clique em <strong>Editar</strong> na reserva pretendida</li>
+<li>Altere o campo <strong>Estado</strong> para <code>Confirmado</code> ou <code>Cancelado</code></li>
+<li>Guarde</li>
+</ol>
+<blockquote>
+<p>O cliente recebe automaticamente um email com o novo estado, incluindo ligações de calendário (se confirmado).</p>
+</blockquote>
+<h2 id="93-criar-uma-reserva-manual">9.3 Criar uma Reserva Manual </h2>
+<p><strong>Caminho:</strong> Admin → Booking → Criar</p>
+<p>Útil para reservas feitas por telefone ou presencialmente:</p>
+<ol>
+<li>Selecione <strong>Data</strong> e <strong>Hora</strong></li>
+<li>Preencha nome, email, telefone</li>
+<li>Opcionalmente associe um anfitrião e tipo de evento</li>
+<li>Guarde</li>
+</ol>
+<h2 id="94-cancelamento-self-service">9.4 Cancelamento Self-Service </h2>
+<p>Os clientes podem cancelar as suas reservas sem intervenção do admin:</p>
+<ul>
+<li>Cada reserva tem um <strong>token único</strong> (<code>res_token</code>)</li>
+<li>O email de confirmação inclui um link de cancelamento</li>
+<li>O link direciona para <code>booking_cancel.php?token=XXXX</code></li>
+<li>O cliente confirma o cancelamento</li>
+</ul>
+<blockquote>
+<p><img src="#" alt="Editar Reserva"><br>
+<em>Figura 9.2 — Formulário de edição de reserva com detalhes completos.</em></p>
+</blockquote>
+<h2 id="95-histórico-do-cliente">9.5 Histórico do Cliente </h2>
+<p><strong>Caminho:</strong> Admin → Booking → Reservas → Clique no email de um cliente</p>
+<p>Mostra o histórico completo de reservas de um cliente específico, incluindo:</p>
+<ul>
+<li>Total de reservas</li>
+<li>Taxa de cancelamento</li>
+<li>Última reserva</li>
+<li>Valor total pago</li>
+</ul>
+<div style="page-break-after: always;"></div>
+<h1 id="10-pagamentos-online">10. Pagamentos Online </h1>
+<p><strong>Caminho:</strong> Admin → Booking → Configuração → Separador "Pagamentos"</p>
+<h2 id="101-visão-geral">10.1 Visão Geral </h2>
+<p>O plugin suporta 3 gateways de pagamento:</p>
+<table>
+<thead>
+<tr>
+<th>Gateway</th>
+<th>Métodos</th>
+<th>Melhor para</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Stripe</strong></td>
+<td>Cartão Visa/Mastercard, Apple Pay, Google Pay</td>
+<td>Internacional</td>
+</tr>
+<tr>
+<td><strong>PayPal</strong></td>
+<td>PayPal, cartões</td>
+<td>Internacional</td>
+</tr>
+<tr>
+<td><strong>Eupago</strong></td>
+<td>MBWay, Multibanco, Cartão</td>
+<td>🇵🇹 Portugal</td>
+</tr>
+</tbody>
+</table>
+<h2 id="102-configuração-geral-de-pagamentos">10.2 Configuração Geral de Pagamentos </h2>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Pagamentos ativados</strong></td>
+<td>Ativar/desativar cobrança</td>
+</tr>
+<tr>
+<td><strong>Gateway</strong></td>
+<td>Selecionar o gateway (Stripe, PayPal, Eupago, Nenhum)</td>
+</tr>
+<tr>
+<td><strong>Modo</strong></td>
+<td><code>test</code> (sandbox) ou <code>live</code> (produção)</td>
+</tr>
+<tr>
+<td><strong>Moeda</strong></td>
+<td><code>EUR</code>, <code>USD</code>, <code>GBP</code>, etc.</td>
+</tr>
+<tr>
+<td><strong>Preço base</strong></td>
+<td>Valor cobrado por reserva (se não usar tipos de evento com preço)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><img src="#" alt="Configuração de Pagamentos"><br>
+<em>Figura 10.1 — Configuração geral de pagamentos.</em></p>
+</blockquote>
+<h2 id="103-configurar-stripe">10.3 Configurar Stripe </h2>
+<h3 id="passo-a-passo">Passo a passo </h3>
+<ol>
+<li>Crie uma conta em <a href="https://stripe.com">stripe.com</a></li>
+<li>No Stripe Dashboard, copie as chaves:
+<ul>
+<li><strong>Chave Pública</strong> (começa com <code>pk_test_</code> ou <code>pk_live_</code>)</li>
+<li><strong>Chave Secreta</strong> (começa com <code>sk_test_</code> ou <code>sk_live_</code>)</li>
+</ul>
+</li>
+<li>No Booking → Configuração → Pagamentos:
+<ul>
+<li>Selecione <strong>Stripe</strong> como gateway</li>
+<li>Cole a Chave Pública e a Chave Secreta</li>
+<li>Defina o modo como <strong>test</strong> para testar</li>
+</ul>
+</li>
+</ol>
+<h3 id="testar-com-cartões-de-teste">Testar com cartões de teste </h3>
+<table>
+<thead>
+<tr>
+<th>Número do cartão</th>
+<th>Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>4242 4242 4242 4242</code></td>
+<td>✅ Pagamento com sucesso</td>
+</tr>
+<tr>
+<td><code>4000 0000 0000 0002</code></td>
+<td>❌ Cartão recusado</td>
+</tr>
+<tr>
+<td><code>4000 0025 0000 3155</code></td>
+<td>🔒 Requer 3D Secure</td>
+</tr>
+<tr>
+<td><code>4000 0000 0000 9995</code></td>
+<td>❌ Fundos insuficientes</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Use qualquer data de validade futura e qualquer CVC de 3 dígitos.</p>
+</blockquote>
+<blockquote>
+<p><img src="#" alt="Configuração Stripe"><br>
+<em>Figura 10.2 — Configuração do gateway Stripe.</em></p>
+</blockquote>
+<h2 id="104-configurar-paypal">10.4 Configurar PayPal </h2>
+<h3 id="passo-a-passo-1">Passo a passo </h3>
+<ol>
+<li>Crie uma conta de desenvolvedor em <a href="https://developer.paypal.com">developer.paypal.com</a></li>
+<li>Crie uma app e copie:
+<ul>
+<li><strong>Client ID</strong></li>
+<li><strong>Secret</strong></li>
+</ul>
+</li>
+<li>No Booking → Configuração → Pagamentos:
+<ul>
+<li>Selecione <strong>PayPal</strong> como gateway</li>
+<li>Cole o Client ID e o Secret</li>
+<li>Defina o modo como <strong>test</strong> (sandbox)</li>
+</ul>
+</li>
+<li>Para testar, utilize a conta sandbox <strong>buyer</strong> que criou no PayPal Developer</li>
+</ol>
+<blockquote>
+<p><img src="#" alt="Configuração PayPal"><br>
+<em>Figura 10.3 — Configuração do gateway PayPal.</em></p>
+</blockquote>
+<h2 id="105-configurar-eupago--portugal">10.5 Configurar Eupago (🇵🇹 Portugal) </h2>
+<h3 id="passo-a-passo-2">Passo a passo </h3>
+<ol>
+<li>Crie uma conta em <a href="https://www.eupago.pt">eupago.pt</a></li>
+<li>Obtenha a sua <strong>API Key</strong> no backoffice Eupago</li>
+<li>No Booking → Configuração → Pagamentos:
+<ul>
+<li>Selecione <strong>Eupago</strong> como gateway</li>
+<li>Cole a API Key</li>
+<li>Escolha o método: <strong>MBWay</strong>, <strong>Multibanco</strong> ou <strong>Cartão</strong></li>
+</ul>
+</li>
+</ol>
+<h3 id="métodos-disponíveis">Métodos disponíveis </h3>
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>MBWay</strong></td>
+<td>O cliente recebe um push no telemóvel para autorizar</td>
+</tr>
+<tr>
+<td><strong>Multibanco</strong></td>
+<td>Gera uma referência para pagamento em ATM/homebanking</td>
+</tr>
+<tr>
+<td><strong>Cartão</strong></td>
+<td>Pagamento direto com cartão Visa/Mastercard</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><img src="#" alt="Configuração Eupago"><br>
+<em>Figura 10.4 — Configuração do gateway Eupago para Portugal.</em></p>
+</blockquote>
+<h2 id="106-fluxo-de-pagamento-frontend">10.6 Fluxo de Pagamento (Frontend) </h2>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>Visitante marca → Preenche dados → Redireccionado para pagamento → 
+Pagamento confirmado → Reserva criada → Email enviado
+</code></pre><blockquote>
+<p><strong>Importante:</strong> Se o pagamento falhar, a reserva <strong>não é criada</strong>.</p>
+</blockquote>
+<div style="page-break-after: always;"></div>
+<h1 id="11-cupões-de-desconto">11. Cupões de Desconto </h1>
+<p><strong>Caminho:</strong> Admin → Booking → Cupões</p>
+<h2 id="111-quando-utilizar">11.1 Quando utilizar? </h2>
+<ul>
+<li>🎁 Promoções sazonais</li>
+<li>👋 Desconto para novos clientes</li>
+<li>📢 Campanhas de marketing</li>
+<li>🤝 Parcerias com empresas</li>
+</ul>
+<h2 id="112-pré-requisito">11.2 Pré-requisito </h2>
+<p>Ative a opção <strong>Cupões ativados</strong> em Configuração → Base antes de criar cupões.</p>
+<h2 id="113-criar-um-cupão">11.3 Criar um Cupão </h2>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Descrição</th>
+<th>Exemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Código</strong></td>
+<td>Código que o cliente introduz</td>
+<td><code>VERAO2026</code></td>
+</tr>
+<tr>
+<td><strong>Tipo de desconto</strong></td>
+<td>Percentagem ou valor fixo</td>
+<td><code>percent</code></td>
+</tr>
+<tr>
+<td><strong>Valor</strong></td>
+<td>Percentagem ou montante</td>
+<td><code>20</code> (= 20%)</td>
+</tr>
+<tr>
+<td><strong>Limite de utilizações</strong></td>
+<td>Quantas vezes pode ser usado (0 = ilimitado)</td>
+<td><code>50</code></td>
+</tr>
+<tr>
+<td><strong>Data de expiração</strong></td>
+<td>Quando o cupão expira</td>
+<td><code>2026-09-30</code></td>
+</tr>
+<tr>
+<td><strong>Ativo</strong></td>
+<td>Cupão ativo</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><img src="#" alt="Criar Cupão"><br>
+<em>Figura 11.1 — Formulário de criação de cupão de desconto.</em></p>
+</blockquote>
+<h2 id="114-como-funciona-no-frontend">11.4 Como funciona no frontend </h2>
+<ol>
+<li>O visitante seleciona data e hora</li>
+<li>No formulário de dados, aparece o campo <strong>"Código de desconto"</strong></li>
+<li>Introduz o código (ex.: <code>VERAO2026</code>)</li>
+<li>O sistema valida automaticamente:
+<ul>
+<li>✅ Código existe e está ativo</li>
+<li>✅ Não expirou</li>
+<li>✅ Não atingiu o limite de utilizações</li>
+</ul>
+</li>
+<li>O preço é atualizado com o desconto aplicado</li>
+</ol>
+<blockquote>
+<p><img src="#" alt="Frontend — Cupão Aplicado"><br>
+<em>Figura 11.2 — Cupão aplicado no formulário de reserva.</em></p>
+</blockquote>
+<div style="page-break-after: always;"></div>
+<h1 id="12-créditos-de-sessão">12. Créditos de Sessão </h1>
+<p><strong>Caminho:</strong> Admin → Booking → Créditos</p>
+<h2 id="121-o-que-são">12.1 O que são? </h2>
+<p>Os créditos permitem que os clientes comprem <strong>pacotes de sessões pré-pagos</strong>. Em vez de pagar por sessão, o cliente adquire um pack (ex.: 10 sessões) e usa os créditos ao longo do tempo.</p>
+<h2 id="122-quando-utilizar">12.2 Quando utilizar? </h2>
+<table>
+<thead>
+<tr>
+<th>Cenário</th>
+<th>Recomendação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sessões avulsas</td>
+<td>❌ Não necessário</td>
+</tr>
+<tr>
+<td>Pacotes de sessões (ex.: pack de 10)</td>
+<td>✅ Ativar</td>
+</tr>
+<tr>
+<td>Planos mensais com X sessões incluídas</td>
+<td>✅ Ativar</td>
+</tr>
+</tbody>
+</table>
+<h2 id="123-pré-requisito">12.3 Pré-requisito </h2>
+<p>Ative <strong>Créditos de sessão</strong> em Configuração → Base.</p>
+<h2 id="124-criar-um-pacote-de-créditos">12.4 Criar um Pacote de Créditos </h2>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Descrição</th>
+<th>Exemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Utilizador</strong></td>
+<td>Conta e107 do cliente</td>
+<td><code>João Silva</code></td>
+</tr>
+<tr>
+<td><strong>Tipo de evento</strong></td>
+<td>Para qual serviço (0 = todos)</td>
+<td><code>Aula de Inglês</code></td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td>Número de créditos</td>
+<td><code>10</code></td>
+</tr>
+<tr>
+<td><strong>Usados</strong></td>
+<td>Créditos já consumidos</td>
+<td><code>0</code></td>
+</tr>
+<tr>
+<td><strong>Expira</strong></td>
+<td>Data de validade (opcional)</td>
+<td><code>2026-12-31</code></td>
+</tr>
+<tr>
+<td><strong>Nota</strong></td>
+<td>Observações internas</td>
+<td><code>Pack Natal 2026</code></td>
+</tr>
+<tr>
+<td><strong>Ativo</strong></td>
+<td>Pack ativo</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><img src="#" alt="Criar Créditos"><br>
+<em>Figura 12.1 — Criação de um pacote de 10 créditos de sessão.</em></p>
+</blockquote>
+<h2 id="125-como-funciona">12.5 Como funciona </h2>
+<ol>
+<li>O admin cria o pack de créditos para um utilizador</li>
+<li>Quando o utilizador faz uma reserva, o sistema verifica se tem créditos disponíveis</li>
+<li>Se tem créditos, a reserva é criada e <strong>1 crédito é deduzido</strong></li>
+<li>O pagamento é saltado (o crédito substitui o pagamento)</li>
+<li>O admin pode acompanhar o saldo na lista de créditos</li>
+</ol>
+<div style="page-break-after: always;"></div>
+<h1 id="13-campos-personalizados">13. Campos Personalizados </h1>
+<p><strong>Caminho:</strong> Admin → Booking → Campos Personalizados</p>
+<h2 id="131-o-que-são">13.1 O que são? </h2>
+<p>Perguntas ou campos adicionais que aparecem no formulário de reserva do frontend, além dos campos padrão (nome, email, telefone, notas).</p>
+<h2 id="132-quando-utilizar">13.2 Quando utilizar? </h2>
+<table>
+<thead>
+<tr>
+<th>Cenário</th>
+<th>Exemplo de campo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Clínica</td>
+<td>"Tem alguma condição médica?" (textarea)</td>
+</tr>
+<tr>
+<td>Escola</td>
+<td>"Nível de experiência" (dropdown: Iniciante/Intermédio/Avançado)</td>
+</tr>
+<tr>
+<td>Salão</td>
+<td>"Preferência de profissional" (dropdown)</td>
+</tr>
+<tr>
+<td>Consultoria</td>
+<td>"Website da sua empresa" (text)</td>
+</tr>
+<tr>
+<td>Fitness</td>
+<td>"Objetivos" (checkbox: Perder peso, Ganhar massa, Flexibilidade)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="133-pré-requisito">13.3 Pré-requisito </h2>
+<p>Ative <strong>Campos personalizados</strong> em Configuração → Base.</p>
+<h2 id="134-criar-um-campo">13.4 Criar um Campo </h2>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Descrição</th>
+<th>Exemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Rótulo</strong></td>
+<td>Texto exibido ao utilizador</td>
+<td><code>Nível de experiência</code></td>
+</tr>
+<tr>
+<td><strong>Tipo</strong></td>
+<td><code>text</code>, <code>textarea</code>, <code>dropdown</code>, <code>checkbox</code>, <code>radio</code></td>
+<td><code>dropdown</code></td>
+</tr>
+<tr>
+<td><strong>Obrigatório</strong></td>
+<td>O cliente tem de preencher</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>Opções</strong></td>
+<td>Opções para dropdown/checkbox/radio (separadas por <code>|</code>)</td>
+<td><code>Iniciante|Intermédio|Avançado</code></td>
+</tr>
+<tr>
+<td><strong>Ordem</strong></td>
+<td>Posição no formulário</td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td><strong>Ativo</strong></td>
+<td>Campo visível</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><img src="#" alt="Criar Campo Personalizado"><br>
+<em>Figura 13.1 — Criação de um campo personalizado tipo dropdown.</em></p>
+</blockquote>
+<h2 id="135-como-aparece-no-frontend">13.5 Como aparece no frontend </h2>
+<p>Os campos personalizados aparecem no formulário de dados do visitante, entre os campos padrão e o botão de submissão.</p>
+<blockquote>
+<p><img src="#" alt="Frontend — Campos Personalizados"><br>
+<em>Figura 13.2 — Campos personalizados no formulário de reserva.</em></p>
+</blockquote>
+<h2 id="136-onde-ver-as-respostas">13.6 Onde ver as respostas? </h2>
+<p>As respostas ficam guardadas no campo <code>res_custom_data</code> de cada reserva (formato JSON). São visíveis ao editar a reserva no admin.</p>
+<div style="page-break-after: always;"></div>
+<h1 id="14-seo-e-dados-estruturados">14. SEO e Dados Estruturados </h1>
+<p><strong>Caminho:</strong> Admin → Booking → Configuração → Separador "SEO"</p>
+<h2 id="141-o-que-é-e-porquê">14.1 O que é e porquê? </h2>
+<p>O plugin gera automaticamente <strong>dados estruturados JSON-LD</strong> (<a href="http://Schema.org">Schema.org</a>) que ajudam os motores de busca (Google, Bing) a compreender o conteúdo da sua página de reservas. Isto pode resultar em:</p>
+<ul>
+<li>⭐ Rich snippets nos resultados de pesquisa</li>
+<li>📍 Informação do negócio no Google Maps</li>
+<li>⭐ Classificação por estrelas visível nos resultados</li>
+<li>📅 Eventos próximos indexados</li>
+</ul>
+<h2 id="142-configurar-dados-do-negócio">14.2 Configurar Dados do Negócio </h2>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Descrição</th>
+<th>Exemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SEO ativado</strong></td>
+<td>Ativar dados estruturados</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>Tipo de negócio</strong></td>
+<td><a href="http://Schema.org">Schema.org</a> type</td>
+<td><code>MedicalBusiness</code>, <code>HealthAndBeautyBusiness</code></td>
+</tr>
+<tr>
+<td><strong>Nome do negócio</strong></td>
+<td>Nome oficial</td>
+<td><code>Clínica Psicologia Lda.</code></td>
+</tr>
+<tr>
+<td><strong>Telefone</strong></td>
+<td>Contacto principal</td>
+<td><code>+351 21 123 4567</code></td>
+</tr>
+<tr>
+<td><strong>Email</strong></td>
+<td>Email do negócio</td>
+<td><code>info@clinica.pt</code></td>
+</tr>
+<tr>
+<td><strong>Morada</strong></td>
+<td>Endereço</td>
+<td><code>Av. da Liberdade 100</code></td>
+</tr>
+<tr>
+<td><strong>Cidade</strong></td>
+<td>Cidade</td>
+<td><code>Lisboa</code></td>
+</tr>
+<tr>
+<td><strong>Região</strong></td>
+<td>Distrito/Estado</td>
+<td><code>Lisboa</code></td>
+</tr>
+<tr>
+<td><strong>Código postal</strong></td>
+<td>Código postal</td>
+<td><code>1250-096</code></td>
+</tr>
+<tr>
+<td><strong>País</strong></td>
+<td>Código ISO</td>
+<td><code>PT</code></td>
+</tr>
+<tr>
+<td><strong>Logótipo</strong></td>
+<td>URL do logótipo</td>
+<td><code>https://site.pt/logo.png</code></td>
+</tr>
+<tr>
+<td><strong>Moeda</strong></td>
+<td>Moeda dos preços</td>
+<td><code>EUR</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><img src="#" alt="Configuração SEO"><br>
+<em>Figura 14.1 — Configuração de dados estruturados do negócio.</em></p>
+</blockquote>
+<h2 id="143-meta-tags">14.3 Meta Tags </h2>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Meta Title</strong></td>
+<td>Título personalizado para a página de reservas</td>
+</tr>
+<tr>
+<td><strong>Meta Description</strong></td>
+<td>Descrição para resultados de pesquisa (max 160 caract.)</td>
+</tr>
+<tr>
+<td><strong>OG Image</strong></td>
+<td>Imagem para partilhas nas redes sociais</td>
+</tr>
+</tbody>
+</table>
+<h2 id="144-schema-de-avaliações-aggregaterating">14.4 Schema de Avaliações (AggregateRating) </h2>
+<p>Se tem avaliações de clientes ativadas (ver Capítulo 15), o plugin gera automaticamente o schema <code>AggregateRating</code>:</p>
+<pre data-role="codeBlock" data-info="json" class="language-json json"><code><span class="token punctuation">{</span>
+  <span class="token property">"@type"</span><span class="token operator">:</span> <span class="token string">"AggregateRating"</span><span class="token punctuation">,</span>
+  <span class="token property">"ratingValue"</span><span class="token operator">:</span> <span class="token string">"4.8"</span><span class="token punctuation">,</span>
+  <span class="token property">"reviewCount"</span><span class="token operator">:</span> <span class="token string">"23"</span><span class="token punctuation">,</span>
+  <span class="token property">"bestRating"</span><span class="token operator">:</span> <span class="token string">"5"</span>
+<span class="token punctuation">}</span>
+</code></pre><blockquote>
+<p>Isto pode gerar <strong>estrelas nos resultados do Google</strong> ⭐⭐⭐⭐⭐</p>
+</blockquote>
+<h2 id="145-schema-de-eventos">14.5 Schema de Eventos </h2>
+<p>Quando ativado, o plugin gera automaticamente schema <code>Event</code> para os próximos slots disponíveis:</p>
+<table>
+<thead>
+<tr>
+<th>Opção</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Event Schema</strong></td>
+<td>Ativar/desativar</td>
+</tr>
+<tr>
+<td><strong>Máximo de eventos</strong></td>
+<td>Quantos eventos incluir no schema (ex.: 10)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><img src="#" alt="JSON-LD Gerado"><br>
+<em>Figura 14.2 — Dados estruturados JSON-LD gerados automaticamente.</em></p>
+</blockquote>
+<div style="page-break-after: always;"></div>
+<h1 id="15-avaliações-e-classificações-reviews">15. Avaliações e Classificações (Reviews) </h1>
+<p><strong>Caminho:</strong> Admin → Booking → Avaliações</p>
+<h2 id="151-o-que-são">15.1 O que são? </h2>
+<p>Sistema que permite aos clientes deixar uma avaliação com classificação por estrelas (1-5) após uma sessão concluída.</p>
+<h2 id="152-pré-requisito">15.2 Pré-requisito </h2>
+<p>Ative <strong>Avaliações SEO</strong> em Configuração → SEO → <code>seo_reviews_enabled</code>.</p>
+<h2 id="153-gerir-avaliações">15.3 Gerir Avaliações </h2>
+<p>No painel admin, pode:</p>
+<table>
+<thead>
+<tr>
+<th>Ação</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Ver</strong></td>
+<td>Lista de todas as avaliações com estrelas e texto</td>
+</tr>
+<tr>
+<td><strong>Aprovar</strong></td>
+<td>Ativar/desativar a visibilidade de cada avaliação</td>
+</tr>
+<tr>
+<td><strong>Eliminar</strong></td>
+<td>Remover avaliações inapropriadas</td>
+</tr>
+<tr>
+<td><strong>Criar</strong></td>
+<td>Adicionar uma avaliação manualmente</td>
+</tr>
+</tbody>
+</table>
+<h3 id="campos-de-uma-avaliação">Campos de uma avaliação </h3>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Reserva</strong></td>
+<td>Reserva associada</td>
+</tr>
+<tr>
+<td><strong>Utilizador</strong></td>
+<td>Utilizador e107 (se registado)</td>
+</tr>
+<tr>
+<td><strong>Classificação</strong></td>
+<td>1 a 5 estrelas</td>
+</tr>
+<tr>
+<td><strong>Texto</strong></td>
+<td>Comentário do cliente</td>
+</tr>
+<tr>
+<td><strong>Ativo</strong></td>
+<td>Visível no frontend e no schema</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><img src="#" alt="Gestão de Avaliações"><br>
+<em>Figura 15.1 — Lista de avaliações com classificações por estrelas.</em></p>
+</blockquote>
+<h2 id="154-impacto-no-seo">15.4 Impacto no SEO </h2>
+<p>Cada avaliação ativa contribui para o schema <code>AggregateRating</code>. Os motores de busca podem exibir:</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>Clínica Psicologia — ⭐⭐⭐⭐⭐ 4.8 (23 avaliações)
+</code></pre><div style="page-break-after: always;"></div>
+<h1 id="16-integração-google-calendar--meet">16. Integração Google Calendar + Meet </h1>
+<p><strong>Caminho:</strong> Admin → Booking → Configuração → Separador "Integrações"</p>
+<h2 id="161-o-que-faz">16.1 O que faz? </h2>
+<ul>
+<li>✅ Cria automaticamente um <strong>evento no Google Calendar</strong> quando uma reserva é confirmada</li>
+<li>✅ Opcionalmente, gera um <strong>link Google Meet</strong> anexado ao evento</li>
+<li>✅ O link é enviado ao cliente no email de confirmação</li>
+</ul>
+<h2 id="162-pré-requisitos">16.2 Pré-requisitos </h2>
+<ul>
+<li>Conta Google (preferencialmente Google Workspace)</li>
+<li>Projeto no Google Cloud Console</li>
+<li>API do Google Calendar ativada</li>
+</ul>
+<h2 id="163-configuração-passo-a-passo">16.3 Configuração Passo a Passo </h2>
+<h3 id="passo-1--criar-projeto-no-google-cloud-console">Passo 1 — Criar projeto no Google Cloud Console </h3>
+<ol>
+<li>Aceda a <a href="https://console.cloud.google.com/">console.cloud.google.com</a></li>
+<li>Clique em <strong>"Novo Projeto"</strong> (ou select project → New)</li>
+<li>Dê um nome (ex.: <code>Booking Plugin</code>)</li>
+<li>Clique em <strong>Criar</strong></li>
+</ol>
+<blockquote>
+<p><img src="#" alt="Google Cloud — Novo Projeto"><br>
+<em>Figura 16.1 — Criação de projeto no Google Cloud Console.</em></p>
+</blockquote>
+<h3 id="passo-2--ativar-a-api-do-google-calendar">Passo 2 — Ativar a API do Google Calendar </h3>
+<ol>
+<li>No projeto criado, aceda a <strong>APIs &amp; Services → Library</strong></li>
+<li>Pesquise por <strong>"Google Calendar API"</strong></li>
+<li>Clique em <strong>Enable</strong></li>
+</ol>
+<blockquote>
+<p><img src="#" alt="Google Calendar API"><br>
+<em>Figura 16.2 — Ativação da Google Calendar API.</em></p>
+</blockquote>
+<h3 id="passo-3--criar-conta-de-serviço">Passo 3 — Criar Conta de Serviço </h3>
+<ol>
+<li>Aceda a <strong>APIs &amp; Services → Credentials</strong></li>
+<li>Clique em <strong>"Create Credentials" → "Service Account"</strong></li>
+<li>Dê um nome (ex.: <code>booking-service</code>)</li>
+<li>Clique em <strong>Create and Continue</strong> → <strong>Done</strong></li>
+<li>Na lista de Service Accounts, clique no email criado</li>
+<li>Vá ao separador <strong>Keys</strong> → <strong>Add Key</strong> → <strong>Create new key</strong> → <strong>JSON</strong></li>
+<li>O browser descarrega um ficheiro <code>.json</code> — <strong>guarde-o em segurança</strong></li>
+</ol>
+<blockquote>
+<p><img src="#" alt="Criar Chave JSON"><br>
+<em>Figura 16.3 — Criação de chave JSON para a conta de serviço.</em></p>
+</blockquote>
+<h3 id="passo-4--partilhar-o-calendário">Passo 4 — Partilhar o calendário </h3>
+<ol>
+<li>Abra <a href="https://calendar.google.com">calendar.google.com</a></li>
+<li>Na coluna esquerda, passe o rato sobre o calendário desejado</li>
+<li>Clique nos <strong>3 pontos</strong> → <strong>Settings and sharing</strong></li>
+<li>Em <strong>"Share with specific people"</strong>, clique em <strong>"Add people and groups"</strong></li>
+<li>Cole o email da conta de serviço (ex.: <code>booking-service@projeto.iam.gserviceaccount.com</code>)</li>
+<li>Permissão: <strong>"Make changes to events"</strong></li>
+<li>Clique em <strong>Send</strong></li>
+</ol>
+<blockquote>
+<p><img src="#" alt="Partilhar Calendário"><br>
+<em>Figura 16.4 — Partilha do Google Calendar com a conta de serviço.</em></p>
+</blockquote>
+<h3 id="passo-5--configurar-no-booking">Passo 5 — Configurar no Booking </h3>
+<ol>
+<li>No e107, aceda a <strong>Booking → Configuração → Integrações</strong></li>
+<li>Ative <strong>Google Calendar</strong></li>
+<li>Cole o conteúdo do ficheiro JSON no campo <strong>Chave JSON</strong></li>
+<li>Introduza o <strong>Calendar ID</strong> (geralmente o seu email Gmail, ou encontre-o em Settings do calendário)</li>
+<li>Opcionalmente, ative <strong>Google Meet</strong> para gerar links de videoconferência</li>
+</ol>
+<blockquote>
+<p><img src="#" alt="Configuração Google Calendar no Booking"><br>
+<em>Figura 16.5 — Google Calendar e Meet configurados no separador Integrações.</em></p>
+</blockquote>
+<h3 id="passo-6--testar">Passo 6 — Testar </h3>
+<ol>
+<li>Crie uma reserva de teste no frontend</li>
+<li>Confirme a reserva no admin</li>
+<li>Verifique:
+<ul>
+<li>✅ Um evento aparece no Google Calendar</li>
+<li>✅ O campo <code>res_gcal_event_id</code> da reserva foi preenchido</li>
+<li>✅ Se Meet está ativo, o campo <code>res_gcal_meet_link</code> tem um URL</li>
+</ul>
+</li>
+</ol>
+<h2 id="164-google-meet--notas">16.4 Google Meet — Notas </h2>
+<table>
+<thead>
+<tr>
+<th>Requisito</th>
+<th>Detalhe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Conta Google Workspace</td>
+<td>Recomendado para Meet funcionar automaticamente</td>
+</tr>
+<tr>
+<td>Conta pessoal</td>
+<td>Meet pode funcionar se o utilizador tem Meet ativado</td>
+</tr>
+<tr>
+<td>Link gerado</td>
+<td>Formato: <code>https://meet.google.com/xxx-yyyy-zzz</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>O link de Meet é incluído no email de confirmação e no evento do calendário.</p>
+</blockquote>
+<div style="page-break-after: always;"></div>
+<h1 id="17-integração-zoom-meetings">17. Integração Zoom Meetings </h1>
+<p><strong>Caminho:</strong> Admin → Booking → Configuração → Separador "Integrações"</p>
+<h2 id="171-o-que-faz">17.1 O que faz? </h2>
+<ul>
+<li>✅ Cria automaticamente uma <strong>reunião Zoom</strong> quando uma reserva é confirmada</li>
+<li>✅ O <strong>Join URL</strong> é enviado ao cliente no email de confirmação</li>
+<li>✅ Suporta sala de espera, gravação automática e outras opções</li>
+</ul>
+<h2 id="172-pré-requisitos">17.2 Pré-requisitos </h2>
+<ul>
+<li>Conta Zoom (gratuita ou Pro)</li>
+<li>App Server-to-Server OAuth no Zoom Marketplace</li>
+</ul>
+<h2 id="173-configuração-passo-a-passo">17.3 Configuração Passo a Passo </h2>
+<h3 id="passo-1--criar-app-no-zoom-marketplace">Passo 1 — Criar App no Zoom Marketplace </h3>
+<ol>
+<li>Aceda a <a href="https://marketplace.zoom.us/">marketplace.zoom.us</a></li>
+<li>Faça login com a sua conta Zoom</li>
+<li>Clique em <strong>Develop → Build App</strong></li>
+<li>Selecione <strong>"Server-to-Server OAuth"</strong></li>
+<li>Dê um nome (ex.: <code>Booking Plugin</code>)</li>
+</ol>
+<blockquote>
+<p><img src="#" alt="Zoom — Criar App"><br>
+<em>Figura 17.1 — Criação de app Server-to-Server OAuth no Zoom.</em></p>
+</blockquote>
+<h3 id="passo-2--obter-credenciais">Passo 2 — Obter Credenciais </h3>
+<p>Na página da app, anote:</p>
+<table>
+<thead>
+<tr>
+<th>Credencial</th>
+<th>Onde encontrar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Account ID</strong></td>
+<td>Separador "App Credentials"</td>
+</tr>
+<tr>
+<td><strong>Client ID</strong></td>
+<td>Separador "App Credentials"</td>
+</tr>
+<tr>
+<td><strong>Client Secret</strong></td>
+<td>Separador "App Credentials"</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><img src="#" alt="Zoom — Credenciais"><br>
+<em>Figura 17.2 — Credenciais da app Server-to-Server OAuth.</em></p>
+</blockquote>
+<h3 id="passo-3--adicionar-scopes">Passo 3 — Adicionar Scopes </h3>
+<ol>
+<li>Vá ao separador <strong>Scopes</strong></li>
+<li>Clique em <strong>"Add Scopes"</strong></li>
+<li>Pesquise e adicione: <code>meeting:write:admin</code> (ou <code>meeting:write</code>)</li>
+<li>Guarde</li>
+</ol>
+<h3 id="passo-4--ativar-a-app">Passo 4 — Ativar a App </h3>
+<ol>
+<li>Vá ao separador <strong>Activation</strong></li>
+<li>Clique em <strong>"Activate your app"</strong></li>
+</ol>
+<h3 id="passo-5--configurar-no-booking-1">Passo 5 — Configurar no Booking </h3>
+<ol>
+<li>No e107, aceda a <strong>Booking → Configuração → Integrações</strong></li>
+<li>Ative <strong>Zoom</strong></li>
+<li>Preencha:
+<ul>
+<li><strong>Account ID</strong></li>
+<li><strong>Client ID</strong></li>
+<li><strong>Client Secret</strong></li>
+<li><strong>Email do utilizador Zoom</strong> (email da conta que aloja as reuniões)</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><img src="#" alt="Configuração Zoom no Booking"><br>
+<em>Figura 17.3 — Zoom configurado no separador Integrações.</em></p>
+</blockquote>
+<h3 id="passo-6--opções-adicionais">Passo 6 — Opções adicionais </h3>
+<table>
+<thead>
+<tr>
+<th>Opção</th>
+<th>Descrição</th>
+<th>Valor por defeito</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sala de espera</strong></td>
+<td>Participantes aguardam até o anfitrião admitir</td>
+<td>✅ Ativada</td>
+</tr>
+<tr>
+<td><strong>Gravação automática</strong></td>
+<td><code>none</code>, <code>local</code>, <code>cloud</code></td>
+<td><code>none</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="passo-7--testar">Passo 7 — Testar </h3>
+<ol>
+<li>Crie e confirme uma reserva de teste</li>
+<li>Verifique:
+<ul>
+<li>✅ <code>res_zoom_meeting_id</code> está preenchido</li>
+<li>✅ <code>res_zoom_join_url</code> contém um URL Zoom válido</li>
+<li>✅ A reunião aparece na sua conta Zoom → Meetings</li>
+</ul>
+</li>
+</ol>
+<div style="page-break-after: always;"></div>
+<h1 id="18-notificações-sms">18. Notificações SMS </h1>
+<p><strong>Caminho:</strong> Admin → Booking → Configuração → Separador "Integrações"</p>
+<h2 id="181-o-que-faz">18.1 O que faz? </h2>
+<p>Envia mensagens SMS ao cliente em momentos-chave:</p>
+<table>
+<thead>
+<tr>
+<th>Evento</th>
+<th>SMS enviado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reserva confirmada</td>
+<td>✅ Confirmação com data e hora</td>
+</tr>
+<tr>
+<td>Lembrete (se ativo)</td>
+<td>✅ Lembrete X horas antes da sessão</td>
+</tr>
+</tbody>
+</table>
+<h2 id="182-provedores-suportados">18.2 Provedores suportados </h2>
+<table>
+<thead>
+<tr>
+<th>Provedor</th>
+<th>Cobertura</th>
+<th>Registo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Twilio</strong></td>
+<td>🌍 Global (200+ países)</td>
+<td><a href="https://www.twilio.com/try-twilio">twilio.com</a></td>
+</tr>
+<tr>
+<td><strong><a href="http://seven.io">seven.io</a></strong></td>
+<td>🇪🇺 Europa (foco DACH)</td>
+<td><a href="https://www.seven.io/">seven.io</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="183-configurar-twilio">18.3 Configurar Twilio </h2>
+<h3 id="passo-a-passo-3">Passo a passo </h3>
+<ol>
+<li>Crie uma conta em <a href="https://www.twilio.com/try-twilio">twilio.com</a></li>
+<li>No Twilio Console, obtenha:
+<ul>
+<li><strong>Account SID</strong> (começa com <code>AC...</code>)</li>
+<li><strong>Auth Token</strong></li>
+</ul>
+</li>
+<li>Adquira um <strong>número de telefone</strong> com capacidade SMS</li>
+<li>No Booking → Configuração → Integrações:
+<ul>
+<li>Ative <strong>SMS</strong></li>
+<li>Selecione <strong>Twilio</strong> como provedor</li>
+<li>Preencha Account SID, Auth Token e número de telefone</li>
+</ul>
+</li>
+<li>Defina o <strong>prefixo por defeito</strong> (ex.: <code>+351</code> para Portugal)</li>
+</ol>
+<blockquote>
+<p><img src="#" alt="Configuração SMS — Twilio"><br>
+<em>Figura 18.1 — Configuração do Twilio para SMS no Booking.</em></p>
+</blockquote>
+<h3 id="testar-twilio">Testar Twilio </h3>
+<p>Em modo de teste (trial), o Twilio só envia SMS para números verificados:</p>
+<ol>
+<li>No Twilio Console, aceda a <strong>Verified Caller IDs</strong></li>
+<li>Adicione o seu número pessoal</li>
+<li>Faça uma reserva de teste com esse número</li>
+<li>Verifique se recebeu o SMS</li>
+</ol>
+<h2 id="184-configurar-sevenio">18.4 Configurar <a href="http://seven.io">seven.io</a> </h2>
+<h3 id="passo-a-passo-4">Passo a passo </h3>
+<ol>
+<li>Registe-se em <a href="https://www.seven.io/">seven.io</a></li>
+<li>No dashboard, copie a sua <strong>API Key</strong></li>
+<li>No Booking → Configuração → Integrações:
+<ul>
+<li>Selecione <strong><a href="http://seven.io">seven.io</a></strong> como provedor SMS</li>
+<li>Preencha a API Key</li>
+<li>Defina o nome do remetente (ex.: <code>Booking</code>)</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><img src="#" alt="Configuração SMS — seven.io"><br>
+<em>Figura 18.2 — Configuração do <a href="http://seven.io">seven.io</a> para SMS.</em></p>
+</blockquote>
+<h2 id="185-formato-do-número-de-telefone">18.5 Formato do número de telefone </h2>
+<blockquote>
+<p>⚠️ <strong>Importante:</strong> Os números devem estar no formato <strong>E.164</strong>: <code>+[código país][número]</code></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>País</th>
+<th>Formato</th>
+<th>Exemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🇵🇹 Portugal</td>
+<td><code>+351XXXXXXXXX</code></td>
+<td><code>+351912345678</code></td>
+</tr>
+<tr>
+<td>🇧🇷 Brasil</td>
+<td><code>+55XXXXXXXXXXX</code></td>
+<td><code>+5511912345678</code></td>
+</tr>
+<tr>
+<td>🇪🇸 Espanha</td>
+<td><code>+34XXXXXXXXX</code></td>
+<td><code>+34612345678</code></td>
+</tr>
+</tbody>
+</table>
+<p>O campo de prefixo por defeito (<code>sms_default_prefix</code>) é adicionado automaticamente se o visitante não incluir o código do país.</p>
+<div style="page-break-after: always;"></div>
+<h1 id="19-notificações-whatsapp">19. Notificações WhatsApp </h1>
+<p><strong>Caminho:</strong> Admin → Booking → Configuração → Separador "Integrações"</p>
+<h2 id="191-o-que-faz">19.1 O que faz? </h2>
+<p>Envia mensagens WhatsApp ao cliente quando a reserva é confirmada.</p>
+<h2 id="192-provedores-suportados">19.2 Provedores suportados </h2>
+<table>
+<thead>
+<tr>
+<th>Provedor</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Twilio WhatsApp</strong></td>
+<td>Usa a infraestrutura Twilio para enviar via WhatsApp</td>
+</tr>
+<tr>
+<td><strong>Meta Cloud API</strong></td>
+<td>API oficial do WhatsApp Business da Meta</td>
+</tr>
+</tbody>
+</table>
+<h2 id="193-configurar-twilio-whatsapp">19.3 Configurar Twilio WhatsApp </h2>
+<h3 id="pré-requisito">Pré-requisito </h3>
+<p>Ter o Twilio já configurado para SMS (Account SID + Auth Token).</p>
+<h3 id="passo-a-passo-5">Passo a passo </h3>
+<ol>
+<li>No Twilio Console, aceda a <strong>Messaging → WhatsApp Senders</strong></li>
+<li>Ative um número para WhatsApp (ou use o sandbox para testes)</li>
+<li>No Booking → Configuração → Integrações:
+<ul>
+<li>Ative <strong>WhatsApp</strong></li>
+<li>Selecione <strong>Twilio</strong> como provedor</li>
+<li>Preencha o número WhatsApp Twilio (formato: <code>whatsapp:+1234567890</code>)</li>
+</ul>
+</li>
+</ol>
+<h3 id="testar-com-sandbox">Testar com Sandbox </h3>
+<ol>
+<li>No Twilio Console, aceda a <strong>WhatsApp Sandbox</strong></li>
+<li>Envie a mensagem <code>join [código]</code> do seu WhatsApp para o número do sandbox</li>
+<li>Após a adesão, faça uma reserva de teste</li>
+<li>Verifique se recebe a mensagem WhatsApp</li>
+</ol>
+<blockquote>
+<p><img src="#" alt="Configuração WhatsApp — Twilio"><br>
+<em>Figura 19.1 — Configuração de WhatsApp via Twilio.</em></p>
+</blockquote>
+<h2 id="194-configurar-meta-cloud-api">19.4 Configurar Meta Cloud API </h2>
+<h3 id="passo-a-passo-6">Passo a passo </h3>
+<ol>
+<li>Aceda a <a href="https://developers.facebook.com/">developers.facebook.com</a></li>
+<li>Crie uma app <strong>Business</strong></li>
+<li>Adicione o produto <strong>WhatsApp</strong></li>
+<li>Obtenha:
+<ul>
+<li><strong>Phone Number ID</strong> — ID do número de telefone</li>
+<li><strong>Access Token</strong> — Token de acesso permanente (ou temporário para testes)</li>
+</ul>
+</li>
+<li>No Booking → Configuração → Integrações:
+<ul>
+<li>Selecione <strong>Meta</strong> como provedor WhatsApp</li>
+<li>Preencha Phone Number ID e Access Token</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><img src="#" alt="Configuração WhatsApp — Meta"><br>
+<em>Figura 19.2 — Configuração de WhatsApp via Meta Cloud API.</em></p>
+</blockquote>
+<h3 id="notas-sobre-templates">Notas sobre templates </h3>
+<blockquote>
+<p>⚠️ Para mensagens iniciadas pela empresa (business-initiated), o WhatsApp Business API requer <strong>templates pré-aprovados</strong>. Crie um template no Meta Business Manager antes de enviar mensagens em produção.</p>
+</blockquote>
+<div style="page-break-after: always;"></div>
+<h1 id="20-lembretes-automáticos-reminders">20. Lembretes Automáticos (Reminders) </h1>
+<p><strong>Caminho:</strong> Admin → Booking → Configuração → Base</p>
+<h2 id="201-o-que-são">20.1 O que são? </h2>
+<p>Mensagens automáticas enviadas ao cliente X horas antes da sessão, para reduzir faltas.</p>
+<h2 id="202-configuração">20.2 Configuração </h2>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Descrição</th>
+<th>Valor por defeito</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Lembretes ativados</strong></td>
+<td>Ativar o sistema de lembretes</td>
+<td>❌ Desativado</td>
+</tr>
+<tr>
+<td><strong>Horas antes</strong></td>
+<td>Quantas horas antes da sessão enviar o lembrete</td>
+<td><code>24</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="203-canais-de-envio">20.3 Canais de envio </h2>
+<p>O lembrete é enviado através dos canais ativos:</p>
+<table>
+<thead>
+<tr>
+<th>Canal</th>
+<th>Condição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>📧 <strong>Email</strong></td>
+<td>Sempre (se email de confirmação ativo)</td>
+</tr>
+<tr>
+<td>📱 <strong>SMS</strong></td>
+<td>Se SMS ativo e cliente tem telefone</td>
+</tr>
+<tr>
+<td>💬 <strong>WhatsApp</strong></td>
+<td>Se WhatsApp ativo e cliente tem telefone</td>
+</tr>
+</tbody>
+</table>
+<h2 id="204-funcionamento-técnico">20.4 Funcionamento técnico </h2>
+<p>O plugin usa o sistema <strong>e_cron.php</strong> do e107:</p>
+<ol>
+<li>Configure o cron do e107 em <strong>Admin → Scheduled Tasks</strong></li>
+<li>O cron verifica reservas confirmadas nas próximas X horas</li>
+<li>Envia o lembrete e marca <code>res_reminder_sent = 1</code></li>
+<li>Não envia duplicados</li>
+</ol>
+<blockquote>
+<p><img src="#" alt="Lembretes Automáticos"><br>
+<em>Figura 20.1 — Configuração de lembretes automáticos.</em></p>
+</blockquote>
+<blockquote>
+<p><strong>Dica:</strong> Configure o cron do servidor para executar a cada hora:<br>
+<code>*/60 * * * * php /path/to/e107/cron.php</code></p>
+</blockquote>
+<div style="page-break-after: always;"></div>
+<h1 id="21-widget-embebível-embed">21. Widget Embebível (Embed) </h1>
+<p><strong>Caminho:</strong> Admin → Booking → Embed</p>
+<h2 id="211-o-que-é">21.1 O que é? </h2>
+<p>Um widget que permite incorporar o formulário de reserva em <strong>qualquer website externo</strong> através de um <code>&lt;iframe&gt;</code>.</p>
+<h2 id="212-quando-utilizar">21.2 Quando utilizar? </h2>
+<ul>
+<li>🌐 Tem outro website (WordPress, HTML estático, etc.) e quer incluir reservas</li>
+<li>📱 Quer disponibilizar o formulário numa landing page externa</li>
+<li>🏢 O site do e107 é o "motor" de reservas para vários sites</li>
+</ul>
+<h2 id="213-configuração">21.3 Configuração </h2>
+<ol>
+<li>Aceda a <strong>Booking → Embed</strong></li>
+<li>Ative o <strong>Widget Embebível</strong> na Configuração → Base</li>
+<li>Copie o código HTML gerado:</li>
+</ol>
+<pre data-role="codeBlock" data-info="html" class="language-html html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>iframe</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://seusite.pt/e107_plugins/booking/booking_embed.php<span class="token punctuation">"</span></span>
+        <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>100%<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>700<span class="token punctuation">"</span></span> <span class="token attr-name">frameborder</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>0<span class="token punctuation">"</span></span>
+        <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">border</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span> <span class="token property">border-radius</span><span class="token punctuation">:</span> <span class="token number">8</span><span class="token unit">px</span><span class="token punctuation">;</span></span><span class="token punctuation">"</span></span></span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>iframe</span><span class="token punctuation">&gt;</span></span>
+</code></pre><ol start="4">
+<li>Cole no HTML do site externo</li>
+</ol>
+<blockquote>
+<p><img src="#" alt="Widget Embebível"><br>
+<em>Figura 21.1 — Código do widget embebível e pré-visualização.</em></p>
+</blockquote>
+<h2 id="214-personalização">21.4 Personalização </h2>
+<p>O widget adapta-se ao tema escuro/claro e à largura do contentor. Para personalizar:</p>
+<ul>
+<li>Altere <code>width</code> e <code>height</code> do iframe</li>
+<li>O estilo CSS do widget segue o tema do e107</li>
+</ul>
+<div style="page-break-after: always;"></div>
+<h1 id="22-webhooks">22. Webhooks </h1>
+<p><strong>Caminho:</strong> Admin → Booking → Webhooks</p>
+<h2 id="221-o-que-são">22.1 O que são? </h2>
+<p>Webhooks são <strong>notificações HTTP automáticas</strong> enviadas para um URL externo quando um evento ocorre no Booking.</p>
+<h2 id="222-quando-utilizar">22.2 Quando utilizar? </h2>
+<table>
+<thead>
+<tr>
+<th>Cenário</th>
+<th>Exemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Zapier/n8n</strong></td>
+<td>Automatizar ações quando recebe uma reserva</td>
+</tr>
+<tr>
+<td><strong>CRM</strong></td>
+<td>Atualizar o contacto no CRM quando há nova reserva</td>
+</tr>
+<tr>
+<td><strong>Slack/Teams</strong></td>
+<td>Enviar notificação de nova reserva para um canal</td>
+</tr>
+<tr>
+<td><strong>Sistema interno</strong></td>
+<td>Sincronizar dados com outro sistema</td>
+</tr>
+</tbody>
+</table>
+<h2 id="223-pré-requisito">22.3 Pré-requisito </h2>
+<p>Ative <strong>Webhooks</strong> em Configuração → Base.</p>
+<h2 id="224-criar-um-webhook">22.4 Criar um Webhook </h2>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Descrição</th>
+<th>Exemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>URL</strong></td>
+<td>Endpoint que recebe o POST</td>
+<td><code>https://hooks.zapier.com/hooks/catch/...</code></td>
+</tr>
+<tr>
+<td><strong>Eventos</strong></td>
+<td>Que eventos disparam o webhook</td>
+<td><code>booking.created, booking.confirmed, booking.cancelled</code></td>
+</tr>
+<tr>
+<td><strong>Secret</strong></td>
+<td>Chave HMAC para verificar autenticidade</td>
+<td><code>meu-secret-seguro</code></td>
+</tr>
+<tr>
+<td><strong>Ativo</strong></td>
+<td>Webhook ativo</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<h3 id="eventos-disponíveis">Eventos disponíveis </h3>
+<table>
+<thead>
+<tr>
+<th>Evento</th>
+<th>Quando é disparado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>booking.created</code></td>
+<td>Nova reserva criada</td>
+</tr>
+<tr>
+<td><code>booking.confirmed</code></td>
+<td>Reserva confirmada</td>
+</tr>
+<tr>
+<td><code>booking.cancelled</code></td>
+<td>Reserva cancelada</td>
+</tr>
+<tr>
+<td><code>booking.deleted</code></td>
+<td>Reserva eliminada</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><img src="#" alt="Criar Webhook"><br>
+<em>Figura 22.1 — Formulário de criação de webhook.</em></p>
+</blockquote>
+<h2 id="225-payload-enviado">22.5 Payload enviado </h2>
+<p>O webhook envia um <strong>POST JSON</strong> com os dados da reserva:</p>
+<pre data-role="codeBlock" data-info="json" class="language-json json"><code><span class="token punctuation">{</span>
+  <span class="token property">"event"</span><span class="token operator">:</span> <span class="token string">"booking.confirmed"</span><span class="token punctuation">,</span>
+  <span class="token property">"timestamp"</span><span class="token operator">:</span> <span class="token number">1774560000</span><span class="token punctuation">,</span>
+  <span class="token property">"data"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"res_id"</span><span class="token operator">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+    <span class="token property">"res_date"</span><span class="token operator">:</span> <span class="token string">"2026-04-15"</span><span class="token punctuation">,</span>
+    <span class="token property">"res_time"</span><span class="token operator">:</span> <span class="token string">"10:00:00"</span><span class="token punctuation">,</span>
+    <span class="token property">"res_name"</span><span class="token operator">:</span> <span class="token string">"Maria"</span><span class="token punctuation">,</span>
+    <span class="token property">"res_lastname"</span><span class="token operator">:</span> <span class="token string">"Silva"</span><span class="token punctuation">,</span>
+    <span class="token property">"res_email"</span><span class="token operator">:</span> <span class="token string">"maria@email.pt"</span><span class="token punctuation">,</span>
+    <span class="token property">"res_status"</span><span class="token operator">:</span> <span class="token number">1</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><h2 id="226-verificação-hmac">22.6 Verificação HMAC </h2>
+<p>Se definiu um <strong>secret</strong>, o pedido inclui o header:<br>
+<code>X-Booking-Signature: sha256=HASH</code></p>
+<p>O destinatário pode verificar a assinatura para garantir autenticidade.</p>
+<div style="page-break-after: always;"></div>
+<h1 id="23-api-rest">23. API REST </h1>
+<p><strong>Caminho:</strong> Admin → Booking → API</p>
+<h2 id="231-o-que-é">23.1 O que é? </h2>
+<p>Uma API REST que permite a sistemas externos consultar e criar reservas no Booking.</p>
+<h2 id="232-quando-utilizar">23.2 Quando utilizar? </h2>
+<table>
+<thead>
+<tr>
+<th>Cenário</th>
+<th>Exemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>App mobile</strong></td>
+<td>App que consulta horários disponíveis</td>
+</tr>
+<tr>
+<td><strong>Integração</strong></td>
+<td>Sistema externo que cria reservas</td>
+</tr>
+<tr>
+<td><strong>Dashboard</strong></td>
+<td>Painel customizado com dados do Booking</td>
+</tr>
+</tbody>
+</table>
+<h2 id="233-configuração">23.3 Configuração </h2>
+<ol>
+<li>Ative <strong>API REST</strong> em Configuração → Base</li>
+<li>Aceda a <strong>Booking → API</strong></li>
+<li>Copie ou gere uma <strong>API Key</strong></li>
+</ol>
+<h3 id="autenticação">Autenticação </h3>
+<p>Todas as chamadas à API devem incluir o header:</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>X-Booking-API-Key: SUA-CHAVE-AQUI
+</code></pre><h2 id="234-endpoints-principais">23.4 Endpoints principais </h2>
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>Endpoint</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td><code>/e107_plugins/booking/api.php?action=slots&amp;date=2026-04-15</code></td>
+<td>Horários disponíveis</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/e107_plugins/booking/api.php?action=reservations</code></td>
+<td>Listar reservas</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/e107_plugins/booking/api.php?action=create</code></td>
+<td>Criar reserva</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/e107_plugins/booking/api.php?action=event_types</code></td>
+<td>Listar tipos de evento</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/e107_plugins/booking/api.php?action=hosts</code></td>
+<td>Listar anfitriões</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><img src="#" alt="API REST"><br>
+<em>Figura 23.1 — Página de configuração da API com documentação.</em></p>
+</blockquote>
+<h2 id="235-exemplo-de-chamada-curl">23.5 Exemplo de chamada (cURL) </h2>
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code><span class="token function">curl</span> <span class="token parameter variable">-X</span> GET <span class="token punctuation">\</span>
+  <span class="token string">"https://seusite.pt/e107_plugins/booking/api.php?action=slots&amp;date=2026-04-15"</span> <span class="token punctuation">\</span>
+  <span class="token parameter variable">-H</span> <span class="token string">"X-Booking-API-Key: SUA-CHAVE-AQUI"</span>
+</code></pre><div style="page-break-after: always;"></div>
+<h1 id="24-dashboard-e-estatísticas">24. Dashboard e Estatísticas </h1>
+<p><strong>Caminho:</strong> Admin → Booking → Dashboard</p>
+<h2 id="241-o-que-mostra">24.1 O que mostra? </h2>
+<p>O dashboard oferece uma <strong>visão visual completa</strong> das métricas do Booking:</p>
+<h3 id="kpis-indicadores-chave">KPIs (Indicadores Chave) </h3>
+<table>
+<thead>
+<tr>
+<th>KPI</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>📅 <strong>Total</strong></td>
+<td>Total de reservas (todas)</td>
+</tr>
+<tr>
+<td>🟡 <strong>Pendentes</strong></td>
+<td>Reservas a aguardar confirmação</td>
+</tr>
+<tr>
+<td>🟢 <strong>Confirmadas</strong></td>
+<td>Reservas confirmadas</td>
+</tr>
+<tr>
+<td>🔴 <strong>Canceladas</strong></td>
+<td>Reservas canceladas</td>
+</tr>
+<tr>
+<td>📆 <strong>Hoje</strong></td>
+<td>Reservas para o dia de hoje</td>
+</tr>
+<tr>
+<td>📊 <strong>Taxa de cancelamento</strong></td>
+<td>Percentagem de cancelamentos</td>
+</tr>
+<tr>
+<td>💰 <strong>Receita</strong></td>
+<td>Total de pagamentos recebidos</td>
+</tr>
+</tbody>
+</table>
+<h3 id="gráficos-chartjs">Gráficos (Chart.js) </h3>
+<table>
+<thead>
+<tr>
+<th>Gráfico</th>
+<th>Tipo</th>
+<th>Dados</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Reservas por mês</strong></td>
+<td>Barras</td>
+<td>Últimos 12 meses</td>
+</tr>
+<tr>
+<td><strong>Por estado</strong></td>
+<td>Donut</td>
+<td>Pendentes vs. Confirmadas vs. Canceladas</td>
+</tr>
+<tr>
+<td><strong>Horas populares</strong></td>
+<td>Barras horizontais</td>
+<td>Top 10 horários mais reservados</td>
+</tr>
+<tr>
+<td><strong>Top tipos de evento</strong></td>
+<td>Barras</td>
+<td>6 tipos mais populares</td>
+</tr>
+</tbody>
+</table>
+<h3 id="tabelas">Tabelas </h3>
+<table>
+<thead>
+<tr>
+<th>Tabela</th>
+<th>Conteúdo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Últimas reservas</strong></td>
+<td>10 reservas mais recentes com estado</td>
+</tr>
+<tr>
+<td><strong>Top clientes</strong></td>
+<td>5 clientes com mais reservas</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><img src="#" alt="Dashboard"><br>
+<em>Figura 24.1 — Dashboard com KPIs, gráficos e tabelas.</em></p>
+</blockquote>
+<blockquote>
+<p><img src="#" alt="Dashboard — Gráficos"><br>
+<em>Figura 24.2 — Gráficos de reservas por mês e por estado.</em></p>
+</blockquote>
+<div style="page-break-after: always;"></div>
+<h1 id="25-exportação-pdf--excel">25. Exportação PDF / Excel </h1>
+<p><strong>Caminho:</strong> Admin → Booking → Reservas → Botões de exportação</p>
+<h2 id="251-o-que-faz">25.1 O que faz? </h2>
+<p>Permite exportar a lista de reservas nos formatos:</p>
+<table>
+<thead>
+<tr>
+<th>Formato</th>
+<th>Utilização</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>📄 <strong>PDF</strong></td>
+<td>Relatórios para impressão ou arquivo</td>
+</tr>
+<tr>
+<td>📊 <strong>Excel</strong> (.xlsx)</td>
+<td>Análise em folha de cálculo, filtros avançados</td>
+</tr>
+</tbody>
+</table>
+<h2 id="252-como-exportar">25.2 Como exportar </h2>
+<ol>
+<li>Aceda a <strong>Reservas</strong></li>
+<li>Aplique os filtros desejados (data, estado, etc.)</li>
+<li>Clique em:
+<ul>
+<li>📄 <strong>Export PDF</strong> — descarrega um PDF com a tabela de reservas</li>
+<li>📊 <strong>Export Excel</strong> — descarrega um ficheiro .xlsx</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><img src="#" alt="Exportação PDF/Excel"><br>
+<em>Figura 25.1 — Botões de exportação na lista de reservas.</em></p>
+</blockquote>
+<h2 id="253-conteúdo-exportado">25.3 Conteúdo exportado </h2>
+<table>
+<thead>
+<tr>
+<th>Coluna</th>
+<th>Incluída</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Hora</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Nome completo</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Email</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Telefone</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Estado</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Tipo de evento</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Anfitrião</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Valor pago</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+<h1 id="26-modo-escuro-dark-mode">26. Modo Escuro (Dark Mode) </h1>
+<p><strong>Caminho:</strong> Admin → Booking → Configuração → Base → <code>dark_mode</code></p>
+<h2 id="261-opções">26.1 Opções </h2>
+<table>
+<thead>
+<tr>
+<th>Valor</th>
+<th>Comportamento</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>auto</code></td>
+<td>Segue a preferência do sistema operativo do visitante</td>
+</tr>
+<tr>
+<td><code>on</code></td>
+<td>Sempre modo escuro</td>
+</tr>
+<tr>
+<td><code>off</code></td>
+<td>Sempre modo claro</td>
+</tr>
+</tbody>
+</table>
+<p>O modo escuro afeta o formulário de reserva no frontend (calendário, formulário, confirmação).</p>
+<blockquote>
+<p><img src="#" alt="Modo Escuro vs. Claro"><br>
+<em>Figura 26.1 — Comparação do formulário de reserva em modo escuro e claro.</em></p>
+</blockquote>
+<div style="page-break-after: always;"></div>
+<h1 id="27-suporte-multi-idioma">27. Suporte Multi-Idioma </h1>
+<h2 id="271-idiomas-incluídos">27.1 Idiomas incluídos </h2>
+<table>
+<thead>
+<tr>
+<th>Idioma</th>
+<th>Ficheiros</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🇬🇧 <strong>English</strong></td>
+<td><code>languages/English/English_admin.php</code> + <code>English_front.php</code></td>
+</tr>
+<tr>
+<td>🇪🇸 <strong>Español</strong></td>
+<td><code>languages/Spanish/Spanish_admin.php</code> + <code>Spanish_front.php</code></td>
+</tr>
+<tr>
+<td>🇵🇹 <strong>Português</strong></td>
+<td><code>languages/Portuguese/Portuguese_admin.php</code> + <code>Portuguese_front.php</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="272-como-funciona">27.2 Como funciona </h2>
+<p>O e107 deteta automaticamente o idioma do site e carrega o ficheiro de idioma correspondente. Todas as strings da interface usam constantes <code>LAN_BOOKING_*</code>.</p>
+<h2 id="273-adicionar-um-novo-idioma">27.3 Adicionar um novo idioma </h2>
+<ol>
+<li>Copie a pasta <code>languages/English/</code></li>
+<li>Renomeie para o idioma desejado (ex.: <code>French/</code>)</li>
+<li>Renomeie os ficheiros (ex.: <code>French_admin.php</code>, <code>French_front.php</code>)</li>
+<li>Traduza todas as constantes dentro dos ficheiros</li>
+<li>O e107 deteta automaticamente o novo idioma</li>
+</ol>
+<div style="page-break-after: always;"></div>
+<h1 id="28-guia-do-utilizador-integrado">28. Guia do Utilizador Integrado </h1>
+<p><strong>Caminho:</strong> Admin → Booking → Guia</p>
+<p>O plugin inclui um guia completo integrado no painel de administração, com 7 separadores:</p>
+<table>
+<thead>
+<tr>
+<th>Separador</th>
+<th>Conteúdo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>📋 <strong>Visão Geral</strong></td>
+<td>Funcionalidades, casos de uso, áreas do admin</td>
+</tr>
+<tr>
+<td>⚙️ <strong>Configuração</strong></td>
+<td>Opções de configuração e testes de pagamento</td>
+</tr>
+<tr>
+<td>📅 <strong>Reservas</strong></td>
+<td>Gestão de estados e fluxo</td>
+</tr>
+<tr>
+<td>🚫 <strong>Disponibilidade</strong></td>
+<td>Bloqueio de datas e horários</td>
+</tr>
+<tr>
+<td>📆 <strong>Calendário / iCal</strong></td>
+<td>Integração com calendários externos</td>
+</tr>
+<tr>
+<td>🔌 <strong>Integrações</strong></td>
+<td>Google Calendar, Zoom, SMS, WhatsApp</td>
+</tr>
+<tr>
+<td>🔧 <strong>Resolução de Problemas</strong></td>
+<td>FAQ e soluções</td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+<h1 id="29-resolução-de-problemas-troubleshooting">29. Resolução de Problemas (Troubleshooting) </h1>
+<h2 id="291-problemas-comuns">29.1 Problemas comuns </h2>
+<h3 id="-os-emails-não-são-enviados">❌ Os emails não são enviados </h3>
+<p><strong>Causas possíveis:</strong></p>
+<ul>
+<li>A função <code>mail()</code> do PHP não está configurada no servidor</li>
+<li>O email do remetente está vazio ou inválido</li>
+<li>O servidor bloqueia emails de <code>localhost</code></li>
+</ul>
+<p><strong>Soluções:</strong></p>
+<ol>
+<li>Verifique <strong>e107 Admin → Preferências → Email</strong> — configure SMTP se necessário</li>
+<li>Preencha o campo <strong>Email do remetente</strong> na Configuração do Booking</li>
+<li>Teste com um serviço SMTP externo (Gmail, SendGrid, etc.)</li>
+</ol>
+<h3 id="-nenhum-slot-de-horário-aparece">❌ Nenhum slot de horário aparece </h3>
+<p><strong>Causas possíveis:</strong></p>
+<ul>
+<li>O dia selecionado não está na lista de dias disponíveis</li>
+<li>O dia está totalmente bloqueado</li>
+<li>A hora atual já passou de todos os slots (com antecedência mínima)</li>
+</ul>
+<p><strong>Soluções:</strong></p>
+<ol>
+<li>Verifique os <strong>Dias Disponíveis</strong> na Configuração</li>
+<li>Verifique a secção <strong>Disponibilidade</strong> para bloqueios</li>
+<li>Verifique o campo <strong>Antecedência mínima</strong> (se muito alto, slots de hoje/amanhã podem não aparecer)</li>
+</ol>
+<h3 id="-os-links-de-calendário-mostram-hora-errada">❌ Os links de calendário mostram hora errada </h3>
+<p><strong>Solução:</strong> Verifique o campo <strong>Timezone</strong> na Configuração. Deve corresponder ao seu fuso horário real (ex.: <code>Europe/Lisbon</code>).</p>
+<h3 id="-a-página-de-reservas-mostra-ecrã-em-branco">❌ A página de reservas mostra ecrã em branco </h3>
+<p><strong>Soluções:</strong></p>
+<ol>
+<li>Verifique o log de erros do PHP</li>
+<li>Confirme que o PHP é ≥ 8.0</li>
+<li>Reinstale o plugin se as tabelas estiverem em falta</li>
+<li>Verifique a consola do browser para erros JavaScript</li>
+</ol>
+<h3 id="-o-pagamento-stripe-falha">❌ O pagamento Stripe falha </h3>
+<p><strong>Soluções:</strong></p>
+<ol>
+<li>Verifique se as chaves são do modo correto (<code>pk_test_</code>/<code>sk_test_</code> para testes)</li>
+<li>Certifique-se de que o site usa <strong>HTTPS</strong></li>
+<li>Verifique os logs do Stripe Dashboard</li>
+</ol>
+<h3 id="-o-google-calendar-não-cria-eventos">❌ O Google Calendar não cria eventos </h3>
+<p><strong>Soluções:</strong></p>
+<ol>
+<li>Verifique se o calendário está partilhado com o email da conta de serviço</li>
+<li>Confirme que a permissão é "Make changes to events"</li>
+<li>Verifique se o conteúdo JSON está correto (sem espaços extra)</li>
+<li>Confirme que a Google Calendar API está ativada no projeto</li>
+</ol>
+<h3 id="-o-sms-não-é-enviado">❌ O SMS não é enviado </h3>
+<p><strong>Soluções:</strong></p>
+<ol>
+<li>Em modo trial do Twilio, apenas números verificados recebem SMS</li>
+<li>Verifique se o número está no formato E.164</li>
+<li>Confirme o Account SID e Auth Token</li>
+<li>Verifique o saldo da conta Twilio</li>
+</ol>
+<div style="page-break-after: always;"></div>
+<h1 id="30-plano-de-implementação-recomendado">30. Plano de Implementação Recomendado </h1>
+<h2 id="301-ordem-de-configuração-sugerida">30.1 Ordem de configuração sugerida </h2>
+<p>Siga esta ordem para uma instalação progressiva e testável:</p>
+<h3 id="-fase-1--essencial-dia-1">🟢 Fase 1 — Essencial (Dia 1) </h3>
+<table>
+<thead>
+<tr>
+<th>Passo</th>
+<th>Ação</th>
+<th>Testar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Instalar o plugin</td>
+<td>✅ Menu aparece no admin</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Configuração Geral (título, horários, slots)</td>
+<td>✅ Calendário aparece no frontend</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Fazer reserva de teste</td>
+<td>✅ Reserva aparece na lista</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Verificar emails</td>
+<td>✅ Emails recebidos (cliente + admin)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-fase-2--profissional-dia-2-3">🟡 Fase 2 — Profissional (Dia 2-3) </h3>
+<table>
+<thead>
+<tr>
+<th>Passo</th>
+<th>Ação</th>
+<th>Testar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5</td>
+<td>Criar Tipos de Evento</td>
+<td>✅ Cartões aparecem no frontend</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Criar Anfitriões</td>
+<td>✅ Seleção de profissional funciona</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Configurar Horários por Dia</td>
+<td>✅ Horários diferentes por dia</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Bloquear datas de teste</td>
+<td>✅ Datas ficam indisponíveis</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-fase-3--pagamentos-dia-4-5">🔵 Fase 3 — Pagamentos (Dia 4-5) </h3>
+<table>
+<thead>
+<tr>
+<th>Passo</th>
+<th>Ação</th>
+<th>Testar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>9</td>
+<td>Configurar gateway (Stripe/PayPal/Eupago)</td>
+<td>✅ Fluxo de pagamento funciona</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Criar cupões de teste</td>
+<td>✅ Desconto aplica-se corretamente</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Testar com cartões de teste</td>
+<td>✅ Pagamento capturado/recusado</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-fase-4--integrações-dia-6-7">🟣 Fase 4 — Integrações (Dia 6-7) </h3>
+<table>
+<thead>
+<tr>
+<th>Passo</th>
+<th>Ação</th>
+<th>Testar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>12</td>
+<td>Configurar Google Calendar + Meet</td>
+<td>✅ Evento criado no GCal</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Configurar Zoom (se aplicável)</td>
+<td>✅ Reunião criada no Zoom</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Configurar SMS (Twilio/seven.io)</td>
+<td>✅ SMS recebido</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Configurar WhatsApp (se aplicável)</td>
+<td>✅ Mensagem recebida</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-fase-5--avançado-dia-8-10">🔴 Fase 5 — Avançado (Dia 8-10) </h3>
+<table>
+<thead>
+<tr>
+<th>Passo</th>
+<th>Ação</th>
+<th>Testar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>16</td>
+<td>Configurar SEO e Dados Estruturados</td>
+<td>✅ JSON-LD no código-fonte</td>
+</tr>
+<tr>
+<td>17</td>
+<td>Ativar Avaliações</td>
+<td>✅ Avaliação criada e visível</td>
+</tr>
+<tr>
+<td>18</td>
+<td>Configurar Campos Personalizados</td>
+<td>✅ Campos visíveis no formulário</td>
+</tr>
+<tr>
+<td>19</td>
+<td>Configurar Créditos (se aplicável)</td>
+<td>✅ Crédito deduzido</td>
+</tr>
+<tr>
+<td>20</td>
+<td>Configurar Webhooks</td>
+<td>✅ POST recebido no endpoint</td>
+</tr>
+<tr>
+<td>21</td>
+<td>Configurar API REST</td>
+<td>✅ Endpoint responde com dados</td>
+</tr>
+<tr>
+<td>22</td>
+<td>Configurar Widget Embed</td>
+<td>✅ Widget funciona em site externo</td>
+</tr>
+<tr>
+<td>23</td>
+<td>Ativar Lembretes</td>
+<td>✅ Lembrete enviado</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-fase-6--produção">⚫ Fase 6 — Produção </h3>
+<table>
+<thead>
+<tr>
+<th>Passo</th>
+<th>Ação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>24</td>
+<td>Alterar gateways de pagamento para modo <strong>live</strong></td>
+</tr>
+<tr>
+<td>25</td>
+<td>Verificar todos os emails com o domínio real</td>
+</tr>
+<tr>
+<td>26</td>
+<td>Fazer backup completo da base de dados</td>
+</tr>
+<tr>
+<td>27</td>
+<td>Publicar o site e anunciar o sistema de reservas</td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+<h1 id="apêndice-a--referência-rápida--todas-as-funcionalidades">Apêndice A — Referência Rápida — Todas as Funcionalidades </h1>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Funcionalidade</th>
+<th>Versão</th>
+<th>Prioridade</th>
+<th>Separador Config</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Calendário interativo mensal</td>
+<td>v1.0</td>
+<td>🟢 Essencial</td>
+<td>Base</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Formulário de reserva multi-passo</td>
+<td>v1.0</td>
+<td>🟢 Essencial</td>
+<td>Base</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Emails automáticos (confirmação + notificação)</td>
+<td>v1.0</td>
+<td>🟢 Essencial</td>
+<td>Base</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Validação frontend (JS) + backend (PHP)</td>
+<td>v1.0</td>
+<td>🟢 Essencial</td>
+<td>—</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Exportação iCal (.ics)</td>
+<td>v1.1</td>
+<td>🟡 Recomendado</td>
+<td>—</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Links de calendário nos emails</td>
+<td>v1.1</td>
+<td>🟡 Recomendado</td>
+<td>—</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Guia do Utilizador integrado</td>
+<td>v1.1</td>
+<td>🟡 Recomendado</td>
+<td>—</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Múltiplos Anfitriões</td>
+<td>v1.2</td>
+<td>🟡 Recomendado</td>
+<td>Base</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Múltiplos Tipos de Evento</td>
+<td>v1.2</td>
+<td>🟡 Recomendado</td>
+<td>Base</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Horários por Dia</td>
+<td>v1.2</td>
+<td>🟡 Recomendado</td>
+<td>Base</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Buffer entre marcações</td>
+<td>v1.2</td>
+<td>🟢 Essencial</td>
+<td>Base</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Pagamentos Stripe</td>
+<td>v1.3</td>
+<td>🔵 Opcional</td>
+<td>Pagamentos</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Pagamentos PayPal</td>
+<td>v1.3</td>
+<td>🔵 Opcional</td>
+<td>Pagamentos</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Pagamentos Eupago (PT)</td>
+<td>v1.3</td>
+<td>🔵 Opcional</td>
+<td>Pagamentos</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Cupões de desconto</td>
+<td>v1.3</td>
+<td>🔵 Opcional</td>
+<td>Base</td>
+</tr>
+<tr>
+<td>16</td>
+<td>SEO — <a href="http://Schema.org">Schema.org</a> JSON-LD</td>
+<td>v1.4</td>
+<td>🟡 Recomendado</td>
+<td>SEO</td>
+</tr>
+<tr>
+<td>17</td>
+<td>Meta tags (title, description, OG)</td>
+<td>v1.4</td>
+<td>🟡 Recomendado</td>
+<td>SEO</td>
+</tr>
+<tr>
+<td>18</td>
+<td>URL amigável <code>/booking/</code></td>
+<td>v1.4</td>
+<td>🟢 Essencial</td>
+<td>—</td>
+</tr>
+<tr>
+<td>19</td>
+<td>Dashboard com gráficos</td>
+<td>v2.0</td>
+<td>🟡 Recomendado</td>
+<td>—</td>
+</tr>
+<tr>
+<td>20</td>
+<td>Exportação PDF / Excel</td>
+<td>v2.0</td>
+<td>🟡 Recomendado</td>
+<td>—</td>
+</tr>
+<tr>
+<td>21</td>
+<td>API REST</td>
+<td>v2.0</td>
+<td>🔵 Opcional</td>
+<td>Base</td>
+</tr>
+<tr>
+<td>22</td>
+<td>Webhooks</td>
+<td>v2.0</td>
+<td>🔵 Opcional</td>
+<td>Base</td>
+</tr>
+<tr>
+<td>23</td>
+<td>Cancelamento self-service</td>
+<td>v2.0</td>
+<td>🟡 Recomendado</td>
+<td>—</td>
+</tr>
+<tr>
+<td>24</td>
+<td>Lembretes por email/cron</td>
+<td>v2.0</td>
+<td>🟡 Recomendado</td>
+<td>Base</td>
+</tr>
+<tr>
+<td>25</td>
+<td>Integração utilizadores e107</td>
+<td>v2.1</td>
+<td>🟡 Recomendado</td>
+<td>—</td>
+</tr>
+<tr>
+<td>26</td>
+<td>Restrições userclass</td>
+<td>v2.1</td>
+<td>🔵 Opcional</td>
+<td>—</td>
+</tr>
+<tr>
+<td>27</td>
+<td>Créditos de sessão</td>
+<td>v2.1</td>
+<td>🔵 Opcional</td>
+<td>Base</td>
+</tr>
+<tr>
+<td>28</td>
+<td>Notificações nativas e107</td>
+<td>v2.1</td>
+<td>🟡 Recomendado</td>
+<td>—</td>
+</tr>
+<tr>
+<td>29</td>
+<td>Modo escuro</td>
+<td>v2.2</td>
+<td>🟡 Recomendado</td>
+<td>Base</td>
+</tr>
+<tr>
+<td>30</td>
+<td>Widget embebível</td>
+<td>v2.2</td>
+<td>🔵 Opcional</td>
+<td>Base</td>
+</tr>
+<tr>
+<td>31</td>
+<td>Campos personalizados</td>
+<td>v2.2</td>
+<td>🔵 Opcional</td>
+<td>Base</td>
+</tr>
+<tr>
+<td>32</td>
+<td>Formulário multi-idioma</td>
+<td>v2.2</td>
+<td>🟡 Recomendado</td>
+<td>—</td>
+</tr>
+<tr>
+<td>33</td>
+<td>Google Calendar</td>
+<td>v2.3</td>
+<td>🔵 Opcional</td>
+<td>Integrações</td>
+</tr>
+<tr>
+<td>34</td>
+<td>Google Meet</td>
+<td>v2.3</td>
+<td>🔵 Opcional</td>
+<td>Integrações</td>
+</tr>
+<tr>
+<td>35</td>
+<td>Zoom Meetings</td>
+<td>v2.3</td>
+<td>🔵 Opcional</td>
+<td>Integrações</td>
+</tr>
+<tr>
+<td>36</td>
+<td>SMS (Twilio / <a href="http://seven.io">seven.io</a>)</td>
+<td>v2.3</td>
+<td>🔵 Opcional</td>
+<td>Integrações</td>
+</tr>
+<tr>
+<td>37</td>
+<td>WhatsApp (Twilio / Meta)</td>
+<td>v2.3</td>
+<td>🔵 Opcional</td>
+<td>Integrações</td>
+</tr>
+<tr>
+<td>38</td>
+<td>Avaliações e classificações</td>
+<td>v2.3</td>
+<td>🔵 Opcional</td>
+<td>SEO</td>
+</tr>
+<tr>
+<td>39</td>
+<td>Schema AggregateRating + Review</td>
+<td>v2.3</td>
+<td>🔵 Opcional</td>
+<td>SEO</td>
+</tr>
+<tr>
+<td>40</td>
+<td>Schema Event para próximos slots</td>
+<td>v2.3</td>
+<td>🔵 Opcional</td>
+<td>SEO</td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+<h1 id="apêndice-b--mapa-de-prioridades">Apêndice B — Mapa de Prioridades </h1>
+<h2 id="por-caso-de-uso--o-que-ativar">Por caso de uso — o que ativar </h2>
+<h3 id="-psicólogo--terapeuta">🏥 Psicólogo / Terapeuta </h3>
+<table>
+<thead>
+<tr>
+<th>Funcionalidade</th>
+<th>Ativar?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calendário + formulário</td>
+<td>✅ Obrigatório</td>
+</tr>
+<tr>
+<td>Emails</td>
+<td>✅ Obrigatório</td>
+</tr>
+<tr>
+<td>Tipos de evento</td>
+<td>⚪ Opcional (se tem vários tipos de sessão)</td>
+</tr>
+<tr>
+<td>Anfitriões</td>
+<td>❌ Não necessário (1 profissional)</td>
+</tr>
+<tr>
+<td>Pagamentos</td>
+<td>✅ Recomendado</td>
+</tr>
+<tr>
+<td>Google Calendar</td>
+<td>✅ Recomendado</td>
+</tr>
+<tr>
+<td>Google Meet / Zoom</td>
+<td>✅ Se faz sessões online</td>
+</tr>
+<tr>
+<td>SMS / WhatsApp</td>
+<td>✅ Recomendado (reduz faltas)</td>
+</tr>
+<tr>
+<td>SEO</td>
+<td>✅ Recomendado</td>
+</tr>
+<tr>
+<td>Avaliações</td>
+<td>⚪ Opcional</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-academia--escola">🎓 Academia / Escola </h3>
+<table>
+<thead>
+<tr>
+<th>Funcionalidade</th>
+<th>Ativar?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tipos de evento</td>
+<td>✅ Obrigatório (várias disciplinas)</td>
+</tr>
+<tr>
+<td>Anfitriões</td>
+<td>✅ Obrigatório (vários professores)</td>
+</tr>
+<tr>
+<td>Horários por dia</td>
+<td>✅ Recomendado</td>
+</tr>
+<tr>
+<td>Pagamentos</td>
+<td>✅ Recomendado</td>
+</tr>
+<tr>
+<td>Créditos</td>
+<td>✅ Recomendado (pacotes de aulas)</td>
+</tr>
+<tr>
+<td>Cupões</td>
+<td>⚪ Opcional (promoções)</td>
+</tr>
+<tr>
+<td>Campos personalizados</td>
+<td>✅ "Nível de experiência"</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-salão-de-beleza">💇 Salão de Beleza </h3>
+<table>
+<thead>
+<tr>
+<th>Funcionalidade</th>
+<th>Ativar?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tipos de evento</td>
+<td>✅ Obrigatório (corte, manicure, etc.)</td>
+</tr>
+<tr>
+<td>Anfitriões</td>
+<td>✅ Obrigatório (vários profissionais)</td>
+</tr>
+<tr>
+<td>Pagamentos</td>
+<td>⚪ Opcional</td>
+</tr>
+<tr>
+<td>Cupões</td>
+<td>✅ Recomendado</td>
+</tr>
+<tr>
+<td>SMS</td>
+<td>✅ Recomendado</td>
+</tr>
+<tr>
+<td>Avaliações</td>
+<td>✅ Recomendado</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-consultor--freelancer">💼 Consultor / Freelancer </h3>
+<table>
+<thead>
+<tr>
+<th>Funcionalidade</th>
+<th>Ativar?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tipos de evento</td>
+<td>✅ (Discovery call vs. Sessão completa)</td>
+</tr>
+<tr>
+<td>Pagamentos</td>
+<td>✅ Obrigatório</td>
+</tr>
+<tr>
+<td>Google Calendar</td>
+<td>✅ Obrigatório</td>
+</tr>
+<tr>
+<td>Zoom</td>
+<td>✅ Recomendado</td>
+</tr>
+<tr>
+<td>SEO</td>
+<td>✅ Recomendado</td>
+</tr>
+<tr>
+<td>API / Webhook</td>
+<td>⚪ Se integra com CRM</td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+<h1 id="apêndice-c--checklist-de-testes-finais">Apêndice C — Checklist de Testes Finais </h1>
+<p>Use esta checklist para validar cada funcionalidade antes de colocar o sistema em produção.</p>
+<h2 id="teste-geral">Teste geral </h2>
+<ul>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Plugin instala sem erros</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> 11 tabelas criadas na base de dados</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Calendário aparece no frontend (<code>/booking/</code>)</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Dias disponíveis estão corretos</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Slots de horário aparecem ao clicar num dia</li>
+</ul>
+<h2 id="reservas">Reservas </h2>
+<ul>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Criar reserva via frontend — dados guardam corretamente</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Email de confirmação recebido pelo cliente</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Email de notificação recebido pelo admin</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Alterar estado para "Confirmado" — email enviado</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Alterar estado para "Cancelado" — email enviado</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Cancelamento self-service via link funciona</li>
+</ul>
+<h2 id="tipos-de-evento">Tipos de evento </h2>
+<ul>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Cartões de tipos aparecem no frontend (se ativado)</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Duração e preço corretos</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Cores visíveis</li>
+</ul>
+<h2 id="anfitriões">Anfitriões </h2>
+<ul>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Lista de anfitriões aparece no frontend (se ativado)</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Reserva associada ao anfitrião correto</li>
+</ul>
+<h2 id="horários-por-dia">Horários por dia </h2>
+<ul>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Horários diferentes por dia da semana (se ativado)</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Slots respeitam o horário configurado</li>
+</ul>
+<h2 id="disponibilidade">Disponibilidade </h2>
+<ul>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Dia bloqueado não mostra slots</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Slot bloqueado não aparece, restantes sim</li>
+</ul>
+<h2 id="pagamentos">Pagamentos </h2>
+<ul>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Stripe em modo teste — pagamento com sucesso</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Stripe — cartão recusado funciona</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> PayPal sandbox — fluxo completo</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Eupago (se configurado) — referência gerada</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Cupão aplicado corretamente</li>
+</ul>
+<h2 id="integrações">Integrações </h2>
+<ul>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Google Calendar — evento criado ao confirmar</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Google Meet — link gerado (se ativo)</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Zoom — reunião criada ao confirmar</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> SMS — mensagem recebida</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> WhatsApp — mensagem recebida</li>
+</ul>
+<h2 id="avançado">Avançado </h2>
+<ul>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> SEO — JSON-LD presente no código-fonte</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Avaliações — criar e visualizar</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Campos personalizados — visíveis e guardam dados</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Créditos — crédito deduzido ao reservar</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Webhooks — POST recebido no endpoint de teste</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> API — endpoint responde com dados válidos</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Widget Embed — funciona em página externa</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Lembretes — lembrete enviado (simular com cron)</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Modo escuro — alterna corretamente</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Exportação PDF — ficheiro descarregado</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Exportação Excel — ficheiro descarregado</li>
+</ul>
+<h2 id="produção">Produção </h2>
+<ul>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Gateways alterados para modo <strong>live</strong></li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Chaves de API de produção configuradas</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> SSL (HTTPS) ativo</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Backup da base de dados realizado</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Cron do e107 configurado para lembretes</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Testado em dispositivos móveis (responsivo)</li>
+</ul>
+<hr>
+<h2 id="-suporte">📞 Suporte </h2>
+<p>Para questões, bugs ou sugestões:</p>
+<ul>
+<li><strong>GitHub:</strong> <a href="https://github.com/Kanonimpresor/booking">github.com/Kanonimpresor/booking</a></li>
+<li><strong>Email:</strong> <a href="mailto:info@landingpro.pt">info@landingpro.pt</a></li>
+<li><strong>Website:</strong> <a href="https://landingpro.pt">landingpro.pt</a></li>
+</ul>
+<hr>
+<p><em>Este manual foi criado para a versão 2.3.0 do Booking Plugin. Todas as funcionalidades descritas estão implementadas e testadas.</em></p>
+<p>© 2026 LandingPro / Martin Costa — GPL v2+</p>
+</div>
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
