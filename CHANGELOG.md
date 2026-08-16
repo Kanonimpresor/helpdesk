@@ -14,8 +14,90 @@ versionado se rige por [SemVer](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
-Rama de trabajo hacia `2.3.0` (Fase 3b — Guide + About + Spanish locale).
-Sin cambios todavía.
+Rama de trabajo hacia `2.4.x`. Sin cambios todavía.
+
+---
+
+## [2.3.0] — 2026-08-17 — Fase 3b (User Guide + About + Spanish locale)
+
+Cierre de la Fase 3 del `MIGRATION_PLAN.md`: la Fase 3.1–3.3 (migración
+CRUD a `e_admin_ui`) ya estaba entregada por el mantenedor anterior;
+esta versión completa el paquete añadiendo dos pestañas nuevas al
+área de administración y el locale español.
+
+### Added
+
+- **Nueva pestaña “User Guide”** en el menú lateral del área de
+  administración del plugin. Contenido estructurado en 7 secciones
+  navegables (Overview, Roles &amp; permissions, Ticket lifecycle,
+  Categorías, Resoluciones, Notificaciones, FAQ) implementado con
+  el patrón e107 de 4 capas (§12 de `GUIA_DESARROLLO_PLUGINS_E107.md`):
+  - **Controller** `helpdesk_guide_ui extends e_admin_controller` en
+    `admin/admin_config.php` (sin tabla asociada).
+  - **Template** `templates/helpdesk_guide_template.php` con
+    Bootstrap 5 nav-tabs, sólo HTML + tokens `{HELPDESK_GUIDE_*}`.
+  - **Shortcodes** `shortcodes/batch/helpdesk_guide_shortcodes.php`
+    con `__call()` mágico que proxya `sc_helpdesk_guide_foo` a
+    `LAN_PLUGIN_HELPDESK_GUIDE_FOO` — evita definir ~50 métodos
+    boilerplate.
+  - **LAN files** `English_admin_help.php`, `Spanish_admin_help.php`,
+    `Portuguese_admin_help.php` con ~55 constantes cada uno,
+    cargados lazy vía `e107::lan('helpdesk','admin_help',true)`.
+- **Nueva pestaña “About”** con layout de 2 columnas (info +
+  tarjetas de versión y enlaces). Mismo patrón de 4 capas:
+  - Controller `helpdesk_about_ui`.
+  - Template `templates/helpdesk_about_template.php`.
+  - Shortcodes `helpdesk_about_shortcodes.php` con métodos reales
+    para valores dinámicos (`sc_helpdesk_about_version` /
+    `sc_helpdesk_about_date` leen `plugin.xml` vía
+    `e107::getXml()->loadXMLfile()` con caché por request;
+    `sc_helpdesk_about_link_repo/issues/e107` devuelven anchors)
+    y `__call()` como fallback para las etiquetas estáticas.
+  - LAN files `English_admin_about.php`, `Spanish_admin_about.php`,
+    `Portuguese_admin_about.php`.
+- **Locale español (`languages/Spanish/`)** creado por primera vez.
+  Legacy strings (`Spanish_admin.php`, `Spanish_front.php`,
+  `Spanish_global.php`) copiados desde el locale inglés como
+  fallback funcional; sólo se han traducido a español las cadenas
+  nuevas de Fase 3b (Guide + About + captions del menú
+  `HDU_A_GUIDE_MENU` / `HDU_A_ABOUT_MENU`). Traducción completa
+  del resto queda como tarea de fondo — el sitio no romperá
+  mientras tanto.
+
+### Changed
+
+- `admin/left_menu.php`: dos entradas nuevas en `$modes` (`guide`,
+  `about`) y en `$adminMenu` (`guide/render`, `about/render`,
+  ambos con `perm=P`).
+- `languages/English/English_admin.php` y
+  `languages/Portuguese/Portuguese_admin.php`: añadidas las
+  constantes `HDU_A_GUIDE_MENU` y `HDU_A_ABOUT_MENU` para las
+  captions del menú lateral.
+- `plugin.xml`: bump a `version="2.3.0"` / `date="2026-08-17"`.
+
+### Migration notes
+
+- Sin cambios de esquema. No hay `upgrade_post()` que ejecutar.
+- Tras copiar los archivos nuevos, refrescar caché de e107
+  (Herramientas → Caché → Limpiar todo) para que el dispatcher
+  del plugin recoja las dos nuevas rutas.
+- El acceso a las dos pestañas requiere `getperms("P")` (permiso
+  de administración del plugin), que es el mismo que ya se aplica
+  al resto del área.
+
+### Backlog documentado tras esta versión
+
+Registrado en `DEV_NOTES.md` §8.1 y `MIGRATION_PLAN.md`:
+
+1. Auditar por qué los miembros regulares aún ven tickets ajenos en
+   listados secundarios (`helpdesk_menu.php`, `e_latest.php`,
+   `e_dashboard.php`, search) pese al hotfix 2.2.1 en el flujo
+   directo `?N.show.X`.
+2. **Mover la lista de tickets al área de administración** como
+   nueva pestaña (`admin_config.php?mode=tickets`, `e_admin_ui`
+   sobre `hdu_tickets`), retirando el listado global del front.
+3. Añadir un **widget de tickets del miembro** en el perfil vía
+   `e_user.php` (bloque con los últimos N tickets propios).
 
 ---
 

@@ -222,8 +222,30 @@ código. Documentadas aquí para no perderlas mientras avanzamos Fases 3
 
 ### 8.1 🔴 CRÍTICO — Fuga de privacidad: visibilidad cruzada de tickets
 
-**Síntoma reportado**: un miembro registrado, desde otro navegador, ve
-**toda** la lista de tickets abiertos del sitio, no solo los propios.
+**Estado 2026-08-17**: F2.5 + F2.6 mitigan el acceso directo a
+`?0.show.X` de tickets ajenos (`can_view_ticket()` valida propiedad), y
+el filtro base en `helpdesk.php` L~314 solo muestra al miembro sus
+propios tickets. **Pero el operador reporta que un miembro sigue viendo
+todos los tickets en la lista** — probablemente vía otro endpoint que
+no pasa por ese filtro (`helpdesk_menu.php`, `e_latest.php`,
+`e_dashboard.php`, `search/search.php` o el widget del menu).
+
+**Plan post-Fase 3b** (nueva prioridad acordada 2026-08-17):
+
+- **Auditoría**: `grep -rn "hdu_tickets\|hdu_id" e107_plugins/helpdesk`
+  buscando queries que NO restringen por `hdu_posterid` cuando el
+  caller no es staff.
+- **Refactor**: mover la lista de tickets del área pública a
+  **`admin_config.php` → mode `tickets`** (nuevo `e_admin_ui` sobre
+  `hdu_tickets`), solo accesible a staff (`getperms('P')` o
+  supervisor/technician).
+- **Perfil de miembro**: widget en `e_user.php` con conteo + link a
+  `helpdesk.php?filter=mine` para que el miembro solo vea los propios
+  desde su perfil.
+- El endpoint `helpdesk.php` público se reduce a: (a) crear ticket, (b)
+  ver propios, (c) comentar propios.
+
+Ver §8.2 para el widget de perfil (mismo bloque de trabajo).
 
 **Diagnóstico preliminar** (`helpdesk.php` L297-306):
 

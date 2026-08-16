@@ -328,6 +328,6 @@ define("HDU_A504", "Use SEO URLs");
 define("HDU_A505", "This is experimental. It produces an htaccess file in the helpdesk directory and will reform urls to a more seo friendly format. If it fails to work, delete the htaccess file in this folder and turn it off.");
 define("HDU_A506", "Notify the supervisor class when tickets are created or updated");
 
-// Fase 3b — left-menu captions for Guide + About tabs (see admin/left_menu.php).
-define("HDU_A_GUIDE_MENU", "User Guide");
-define("HDU_A_ABOUT_MENU", "About");
+// Fase 3b — leyendas del menú izquierdo para las pestañas Guía + Acerca de.
+define("HDU_A_GUIDE_MENU", "Guía de usuario");
+define("HDU_A_ABOUT_MENU", "Acerca de");

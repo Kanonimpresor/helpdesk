@@ -327,3 +327,7 @@ define("HDU_A503", "Ver Ajuda");
 define("HDU_A504", "Usar URLs SEO");
 define("HDU_A505", "Esta é uma funcionalidade experimental. Ela gera um ficheiro htaccess no diretório do helpdesk e reformata os URLs para um formato mais amigável para SEO. Se falhar, elimine o arquivo htaccess desta pasta e desative a opção.");
 define("HDU_A506", "Notificar a classe de supervisores quando tickets forem criados ou atualizados");
+
+// Fase 3b — legendas do menu esquerdo para separadores Guia + Sobre.
+define("HDU_A_GUIDE_MENU", "Guia do utilizador");
+define("HDU_A_ABOUT_MENU", "Sobre");
