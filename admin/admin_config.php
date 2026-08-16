@@ -318,8 +318,7 @@ class helpdesk_prefs_ui extends e_admin_ui
 		e107::lan('helpdesk', 'admin_help', true);
 		$tmpl = e107::getTemplate('helpdesk', 'helpdesk_guide');
 		if (empty($tmpl['main'])) { return '<div class="alert alert-warning">Guide template missing.</div>'; }
-		$sc = e107::getScBatch('helpdesk_guide', 'helpdesk');
-		return e107::getParser()->parseTemplate($tmpl['main'], true, $sc);
+		return $this->hdu_expandTokens($tmpl['main']);
 	}
 
 	/**
@@ -331,8 +330,64 @@ class helpdesk_prefs_ui extends e_admin_ui
 		e107::lan('helpdesk', 'admin_about', true);
 		$tmpl = e107::getTemplate('helpdesk', 'helpdesk_about');
 		if (empty($tmpl['main'])) { return '<div class="alert alert-warning">About template missing.</div>'; }
-		$sc = e107::getScBatch('helpdesk_about', 'helpdesk');
-		return e107::getParser()->parseTemplate($tmpl['main'], true, $sc);
+		return $this->hdu_expandTokens($tmpl['main'], $this->hdu_aboutDynamic());
+	}
+
+	/**
+	 * Token expander for admin static pages (Guide/About).
+	 *
+	 * e107's shortcode dispatcher uses method_exists() and therefore
+	 * cannot see PHP __call() magic. For static localised pages the
+	 * shortcode round-trip is overkill: we resolve every {HELPDESK_*}
+	 * token in one pass here — first checking the $dynamic map for
+	 * runtime values (version, date, links), then falling back to the
+	 * matching LAN_PLUGIN_* constant.
+	 *
+	 * @param string $tmpl HTML template with {HELPDESK_*} tokens.
+	 * @param array  $dynamic Optional token => value overrides.
+	 * @return string
+	 */
+	private function hdu_expandTokens($tmpl, array $dynamic = array())
+	{
+		return preg_replace_callback('/\{(HELPDESK_[A-Z0-9_]+)\}/', function($m) use ($dynamic) {
+			$key = $m[1];
+			if (array_key_exists($key, $dynamic)) { return $dynamic[$key]; }
+			$const = 'LAN_PLUGIN_' . $key;
+			return defined($const) ? constant($const) : '';
+		}, $tmpl);
+	}
+
+	/**
+	 * Dynamic values for the About page (version/date come from
+	 * plugin.xml so the About tab never lies about the running build).
+	 */
+	private function hdu_aboutDynamic()
+	{
+		$version = '';
+		$date    = '';
+		$xml     = e_PLUGIN . HELPDESK_FOLDER . '/plugin.xml';
+		if (is_readable($xml))
+		{
+			$data = e107::getXml()->loadXMLfile($xml, true);
+			if (!empty($data['@attributes']))
+			{
+				$version = (string) ($data['@attributes']['version'] ?? '');
+				$date    = (string) ($data['@attributes']['date']    ?? '');
+			}
+		}
+		$repo   = 'https://github.com/Kanonimpresor/helpdesk';
+		$issues = $repo . '/issues';
+		$issuesTxt = defined('LAN_PLUGIN_HELPDESK_ABOUT_LINK_ISSUES_TEXT') ? LAN_PLUGIN_HELPDESK_ABOUT_LINK_ISSUES_TEXT : 'Report an issue';
+
+		return array(
+			'HELPDESK_ABOUT_VERSION'     => $version !== '' ? $version : 'dev',
+			'HELPDESK_ABOUT_DATE'        => $date    !== '' ? $date    : '—',
+			'HELPDESK_ABOUT_PHP_MIN'     => '8.0',
+			'HELPDESK_ABOUT_E107_MIN'    => '2.3',
+			'HELPDESK_ABOUT_LINK_REPO'   => '<a href="'.$repo.'" target="_blank" rel="noopener">github.com/Kanonimpresor/helpdesk</a>',
+			'HELPDESK_ABOUT_LINK_ISSUES' => '<a href="'.$issues.'" target="_blank" rel="noopener">'.$issuesTxt.'</a>',
+			'HELPDESK_ABOUT_LINK_E107'   => '<a href="https://e107.org" target="_blank" rel="noopener">e107.org</a>',
+		);
 	}
 }
 
