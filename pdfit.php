@@ -86,12 +86,13 @@ function pdfit($hdu_pdf_id = 0, $hdu_pdf_dest = "f", $hdu_pdf_name = "Helpdesk.p
 
     global $helpdesk_obj, $sql, $hdu_assto,$tp;
     // Create objects
- 
-    $hdushow = new DB;
-    $hdu_udb = new DB;
+    // F2.2b — replace legacy `new DB` (class no longer autoloaded in
+    // e107 2.x) with named instances via e107::getDb().
+    $hdushow = e107::getDb('hdushow');
+    $hdu_udb = e107::getDb('hdu_udb');
     // Get the ticket record
     // get the helpdesk it is assigned to
-    $arg = "select * from #hdu_tickets left join #hdu_helpdesk on hdudesk_id=hdu_tech where hdu_id={$hdu_pdf_id}";
+    $arg = "select * from #hdu_tickets left join #hdu_helpdesk on hdudesk_id=hdu_tech where hdu_id = " . (int) $hdu_pdf_id;
     $hdu_res = $hdushow->db_Select_gen($arg,false);
     #die("W");
     $hdurow = $hdushow->db_Fetch();
@@ -181,7 +182,9 @@ $hdu_assto = $tp->toHTML($hdudesk_name);
     $hdu_pdf->Cell(40, 6, HDU_31, 0, 0);
     $hdu_pdf->MultiCell(140, 6, $hdu_summary, 0, 1);
     $hdu_pdf->Cell(40, 6, HDU_10, 0, 0);
-    if ($sql->db_Select("hdu_categories", "*", "hducat_id = '$hdu_category'"))
+    // F2.2b — $hdu_category comes from extract() of the ticket row; cast
+    // defensively to int (it is a FK) and drop the misleading quotes.
+    if ($sql->db_Select("hdu_categories", "*", "hducat_id = " . (int) $hdu_category))
     {
         $hdu_pdf_row = $sql->db_Fetch();
         extract($hdu_pdf_row);
@@ -223,7 +226,8 @@ $hdu_assto = $tp->toHTML($hdudesk_name);
     }
     $hdu_pdf->Cell(40, 6, HDU_4, 0, 0);
 
-    if ($sql->db_Select("hdu_resolve", "*", "hdures_id = '$hdu_resolution'"))
+    // F2.2b — same defensive cast as category.
+    if ($sql->db_Select("hdu_resolve", "*", "hdures_id = " . (int) $hdu_resolution))
     {
         $hdu_pdf_row = $sql->db_Fetch();
         extract($hdu_pdf_row);
@@ -251,7 +255,8 @@ $hdu_assto = $tp->toHTML($hdudesk_name);
     {
         if ($hdu_fix > 0)
         {
-            if ($sql->db_Select("hdu_fixes", "*", "hdufix_id = '$hdu_fix'"))
+            // F2.2b — same defensive cast as category/resolution.
+            if ($sql->db_Select("hdu_fixes", "*", "hdufix_id = " . (int) $hdu_fix))
             {
                 $hdu_pdf_row = $sql->db_Fetch();
                 extract($hdu_pdf_row);
@@ -309,18 +314,22 @@ $hdu_assto = $tp->toHTML($hdudesk_name);
         }
     }
     // ######################################## Comments #######################################
-    $hducomdb = new DB;
+    // F2.2b — legacy `new DB` no longer exists in e107 2.x; use the named
+    // instance service locator, which gives us a fresh cursor that does not
+    // interfere with the outer $sql fetch loop. Also cast $hdu_pdf_id.
+    $hducomdb  = e107::getDb('hducomdb');
+    $ticket_id = (int) $hdu_pdf_id;
     // Get the poster id
-    $hducomdb->db_Select("hdu_tickets", "hdu_poster,hdu_closed", "hdu_id='$hdu_pdf_id'");
+    $hducomdb->db_Select("hdu_tickets", "hdu_poster,hdu_closed", "hdu_id = " . $ticket_id);
     $hduc_owner = $hducomdb->db_Fetch();
     extract($hduc_owner);
-    $hduc_creat = explode(".", $hdu_poster);
-    $hduc_creatorid = $hduc_creat[0];
-    $hduc_closed = $hdu_closed;
+    $hduc_creat     = explode(".", (string) $hdu_poster, 2);
+    $hduc_creatorid = (int) ($hduc_creat[0] ?? 0);
+    $hduc_closed    = $hdu_closed;
 
     if ($helpdesk_obj->hduprefs_allread || $helpdesk_obj->hdu_technician || $helpdesk_obj->hdu_super || (USERID == $hduc_creatorid))
     {
-        if ($hducomdb->db_Select("hdu_comments", "*", "hduc_ticketid='$hdu_pdf_id' order by hduc_date desc"))
+        if ($hducomdb->db_Select("hdu_comments", "*", "hduc_ticketid = " . $ticket_id . " order by hduc_date desc"))
         {
             $hdu_pdf->AddPage("P");
 
@@ -334,9 +343,11 @@ $hdu_assto = $tp->toHTML($hdudesk_name);
             while ($hducrow = $hducomdb->db_Fetch())
             {
                 extract($hducrow);
-                $hduc_poster = explode(".", $hduc_poster);
-                $hduc_posterid = $hduc_poster[0];
-                $hduc_postername = $hduc_poster[1];
+                // F2.2b — split to a temp var; PHP 8 flags reusing $hduc_poster
+                // (string) as target of explode() (array).
+                $hduc_poster_parts = explode(".", (string) $hduc_poster, 2);
+                $hduc_posterid     = (int) ($hduc_poster_parts[0] ?? 0);
+                $hduc_postername   = (string) ($hduc_poster_parts[1] ?? '');
                 $hdu_pdf->Cell(40, 6, e107::getDate()->convert_date($hduc_date, "short"), 0, 0);
                 $hdu_pdf->Cell(40, 6, $hduc_postername, 0, 0);
                 $hdu_pdf->MultiCell(100, 6, $hduc_comment, 0, 1);

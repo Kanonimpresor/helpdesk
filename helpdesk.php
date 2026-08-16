@@ -163,7 +163,13 @@ switch ($hdu_aaction)
         // confirmed the delete and we are the supervisor
         if ($helpdesk_obj->hdu_super)
         {
-            $sql->delete("hdu_tickets", "hdu_id=$id", false);
+            // F2.2a — $id is already (int) sanitized at top of file (L95).
+            // Guard against $id<=0 to avoid mass-delete via crafted POST=0.
+            if ($id > 0)
+            {
+                $sql->delete("hdu_tickets", "hdu_id = " . $id, false);
+                $sql->delete("hdu_comments", "hduc_ticketid = " . $id, false);
+            }
             $hdu_savemsg .= HDU_234;
             $hdu_aaction = "list";
         }
@@ -272,9 +278,15 @@ if (isset($_POST['hdu_delrec']))
     {
         if ($helpdesk_obj->hdu_super)
         {
-            // only supervisor can delete tickets
-            $sql->delete("hdu_tickets", "hdu_id='$id'");
-            $sql->delete("hdu_comments", "hduc_ticketid ='$id'");
+            // F2.2a — only supervisor can delete tickets. $id is already (int).
+            // Guard against $id<=0 (would delete all rows because quoted '0'
+            // matched no ticket in legacy code but any crafted 0 could still
+            // be misleading in logs).
+            if ($id > 0)
+            {
+                $sql->delete("hdu_tickets", "hdu_id = " . $id);
+                $sql->delete("hdu_comments", "hduc_ticketid = " . $id);
+            }
             $sqlmsg .= HDU_160;
         }
         else
