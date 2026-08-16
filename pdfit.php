@@ -145,7 +145,8 @@ $hdu_assto = $tp->toHTML($hdudesk_name);
     $hdu_pdf->SetKeywords("Help");
     $hdu_pdf->SetSubject(SITENAME . " Helpdesk");
     $hdu_pdf->SetAuthor(SITENAME);
-    $hdu_pdf->AliasNbPages();
+    // F1.5 — TCPDF handles the {nb} total-pages alias automatically; AliasNbPages()
+    // is FPDF/UFPDF-only and throws in TCPDF. Removed.
     $hdu_pdf->AddPage();
     $hdu_pdf->SetFont('Times', 'bu', 14);
     $hdu_tit = HDU_120 . " " . $hdu_pdf_id;

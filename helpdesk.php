@@ -233,9 +233,11 @@ switch ($hdu_aaction)
                 $hdu_savemsg .= HDU_50 . " $hdu_result<br />";
         } // switch
         $_SESSION['hdu_savemsg'] = $hdu_savemsg;
-        // F1.1b — $PLUGINS_DIRECTORY es una var global legacy que ya no existe
-        // en e107 moderno. Usar la constante e_PLUGIN.
-        $location = SITEURL . str_replace(SITEURL, '', e_PLUGIN) . HELPDESK_FOLDER . "/helpdesk.php";
+        // F1.5 — Antes: SITEURL . str_replace(SITEURL, '', e_PLUGIN). Como
+        // e_PLUGIN empieza con "/" y no contiene SITEURL, el str_replace era
+        // no-op, produciendo doble path: http://host/e107_x//e107_x/e107_plugins/...
+        // -> 404 tras guardar ticket. e_PLUGIN_ABS ya trae la URL absoluta.
+        $location = e_PLUGIN_ABS . HELPDESK_FOLDER . "/helpdesk.php";
         header('Location:' . $location);
         break;
 

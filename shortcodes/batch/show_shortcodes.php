@@ -49,7 +49,9 @@ global $helpdesk_obj, $id;
 if (!$helpdesk_obj->hdu_new)
 {
 //    return "<a href='../../print.php?plugin:helpdesk_menu.$id'><img src='" . HELPDESK_IMAGES_PATH . "generic/" . (defined("IMODE")?IMODE."/":"lite/") . "printer.png' alt='" . HDU_104 . "' title='" . HDU_104 . "' style='border:0;' /></a>";
-    return "<a class='btn' href='../../print.php?plugin:helpdesk_menu.$id'>".HDU_104."</a>";
+    // F1.5 — path relativo '../../print.php' fallaba si el navegador estaba
+    // en una URL con rewrite. e_HTTP es la ruta absoluta al root del sitio.
+    return "<a class='btn' href='" . e_HTTP . "print.php?plugin:helpdesk_menu." . $id . "'>" . HDU_104 . "</a>";
 }
 return null;
 }
