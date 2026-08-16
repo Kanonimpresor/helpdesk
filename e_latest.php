@@ -15,7 +15,7 @@ $hduprefs_defaultres = $helpdesk_obj->hduprefs_defaultres;
 // $hdu_row = $sql->db_Fetch();
 // extract($hdu_row);
 
-$open_tickets = E107::getDb()->db_Count('hdunit', '(*)', "WHERE hdu_resolution='$hduprefs_defaultres' and hdu_closed=0");
+$open_tickets = E107::getDb()->db_Count('hdu_tickets', '(*)', "WHERE hdu_resolution='$hduprefs_defaultres' and hdu_closed=0");
 if (empty($open_tickets))
 {
     $open_tickets = 0;

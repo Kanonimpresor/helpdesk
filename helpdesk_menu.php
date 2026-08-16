@@ -19,14 +19,14 @@ if ($helpdesk_obj->hdu_read)
 {
 $hurl=e_PLUGIN. HELPDESK_FOLDER . "/helpdesk.php";
     // Get the counts for each of the three display items, total, open, not assigned
-    // $hdu_totcount = $sql->db_Count("hdunit", "(*)");
-    // $hdu_opencount = $sql->db_Count("hdunit", "(*)", "where hdu_closed=0");
-    // $hdu_notassigned = $sql->db_Count("hdunit", "(*)", "where hdu_allocated=0");
+    // $hdu_totcount = $sql->db_Count("hdu_tickets", "(*)");
+    // $hdu_opencount = $sql->db_Count("hdu_tickets", "(*)", "where hdu_closed=0");
+    // $hdu_notassigned = $sql->db_Count("hdu_tickets", "(*)", "where hdu_allocated=0");
     $sql = e107::getdb();
     $hdu_arg1 = "select
-(select count(*)  from #hdunit ) as hdu_totcount,
-(select count(*)  from #hdunit where hdu_closed=0) as hdu_opencount,
-(select count(*)  from #hdunit where hdu_allocated=0) as hdu_notassigned";
+(select count(*)  from #hdu_tickets ) as hdu_totcount,
+(select count(*)  from #hdu_tickets where hdu_closed=0) as hdu_opencount,
+(select count(*)  from #hdu_tickets where hdu_allocated=0) as hdu_notassigned";
     $sql->db_Select_gen($hdu_arg1, false);
     extract($sql->db_Fetch());
     $hdu_text = HDU_65 . " $hdu_totcount

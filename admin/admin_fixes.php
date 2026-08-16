@@ -88,7 +88,7 @@ class hdu_fixes_ui extends e_admin_ui
 		$pluginPrefs = e107::pref("helpdesk");
 		$hdu_msg = "";
 
-		if (($sql->count("hdunit", "(*)", "where hdu_fix='$hdu_fix_id'") > 0))
+		if (($sql->count("hdu_tickets", "(*)", "where hdu_fix='$hdu_fix_id'") > 0))
 		{
 			// Record in use
 			$hdu_msg .= HDU_A84;

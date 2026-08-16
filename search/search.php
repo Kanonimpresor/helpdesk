@@ -10,7 +10,7 @@ $no_results = LAN_198;
 $where = "";
 
 $order = array('t.hdu_datestamp' => DESC);
-$table = "hdunit as t left join #hdu_categories as x on hdu_category=hducat_id left join #hdu_resolve as y on hdu_resolution=hdures_id";
+$table = "hdu_tickets as t left join #hdu_categories as x on hdu_category=hducat_id left join #hdu_resolve as y on hdu_resolution=hdures_id";
 
 $ps = $sch->parsesearch($table, $return_fields, $search_fields, $weights, 'search_helpdesk', $no_results, $where, $order);
 $text .= $ps['text'];

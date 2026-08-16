@@ -202,7 +202,7 @@ class helpdesk
             // close the ticket.  Reopening restarts the counter.
             $hdu_timecheck = time() - ($this->hduprefs_autoclosedays * 86400);
             $hdu_args = "hdu_closed='" . time() . "', hdu_resolution ='" . $this->hduprefs_autocloseres . "' where hdu_lastchanged < '$hdu_timecheck' and hdu_closed ='0' ";
-            $this->sql->update("hdunit", $hdu_args, false);
+            $this->sql->update("hdu_tickets", $hdu_args, false);
         }
     }
     // **********************************************************************************************
@@ -648,7 +648,7 @@ class helpdesk
             $hduc = $this->sql->insert("hdu_comments", $hduc_args);
 			$hduc_msg = $this->tp->lanVars(HDU_92, array($hdu_id));
         }
-        $this->sql->select("hdunit", "*", "where hdu_id = $hdu_id", "nowhere");
+        $this->sql->select("hdu_tickets", "*", "where hdu_id = $hdu_id", "nowhere");
         $hdu_row = $this->sql->fetch();
         extract($hdu_row);
         // print $hdu_tech . "AL";
@@ -667,11 +667,11 @@ class helpdesk
         {
             // maybe also need to check helpdesk class too!!!!
             // If technician or supervisor then set return to 1 to show comment is from helpdesk and ensure closed is taken off
-            $this->sql->update("hdunit", "hdu_return = '1',hdu_lastcomment='" . time() . "',hdu_lastchanged='" . time() . "' $hdu_allocon where hdu_id = '$hdu_id'");
+            $this->sql->update("hdu_tickets", "hdu_return = '1',hdu_lastcomment='" . time() . "',hdu_lastchanged='" . time() . "' $hdu_allocon where hdu_id = '$hdu_id'");
         }
         else
         {
-            $this->sql->update("hdunit", "hdu_return = '0',hdu_lastcomment='" . time() . "',hdu_lastchanged='" . time() . "' $hdu_allocon where hdu_id = '$hdu_id'");
+            $this->sql->update("hdu_tickets", "hdu_return = '0',hdu_lastcomment='" . time() . "',hdu_lastchanged='" . time() . "' $hdu_allocon where hdu_id = '$hdu_id'");
         }
     }
     // **********************************************************************************************
@@ -743,7 +743,7 @@ class helpdesk
         {
             // Not creating a new one so get the record
             $this->sql->gen("
-		select * from #hdunit
+		select * from #hdu_tickets
 		left join #hdu_categories on hdu_category=hducat_id
 		left join #hdu_helpdesk on hducat_helpdesk=hdudesk_id
 		left join #hdu_resolve on  hdu_resolution=hdures_id
@@ -1180,7 +1180,7 @@ function changed()
                 }
                 // Insert the record
                 // check if an existing identical ticket exists
-                if ($this->sql->select("hdunit", "hdu_id", "hdu_category='" . intval($_POST['hdu_category']) . "'
+                if ($this->sql->select("hdu_tickets", "hdu_id", "hdu_category='" . intval($_POST['hdu_category']) . "'
 and hdu_summary='" . $this->tp->toDB($_POST['hdu_summary']) . "' and hdu_description='" . $this->tp->toDB($_POST['hdu_description']) . "' and
 hdu_priority='" . intval($_POST['hdu_priority']) . "'"))
                 {
@@ -1220,7 +1220,7 @@ hdu_priority='" . intval($_POST['hdu_priority']) . "'"))
 	'" . $this->tp->toDB($hdu_callout) . "',
 	'" . $this->tp->toDB($hdu_eqptcost) . "',
 	'" . $hdu_a_totalcost . "'";
-                    $id = $this->sql->insert("hdunit", $hdu_args, false);
+                    $id = $this->sql->insert("hdu_tickets", $hdu_args, false);
                     if ($id > 0)
                     {
                         // Ticket created
@@ -1269,7 +1269,7 @@ hdu_priority='" . intval($_POST['hdu_priority']) . "'"))
                     $hdu_args .= "hdu_callout = '" . $this->tp->toDB($hdu_callout) . "',";
                     $hdu_args .= "hdu_totalcost = '" . $hdu_a_totalcost . "'";
                     $hdu_args .= " where hdu_id = '" . intval($id) . "' " ;
-                    if ($this->sql->update("hdunit", $hdu_args, false))
+                    if ($this->sql->update("hdu_tickets", $hdu_args, false))
                     {
                         $hdu_result = $id;
                     }
@@ -1340,7 +1340,7 @@ hdu_priority='" . intval($_POST['hdu_priority']) . "'"))
         $hdu_a_tech;
         // get the record for this particular ticket
         $this->sql->gen("
-		select * from #hdunit
+		select * from #hdu_tickets
 		left join #hdu_categories on hdu_category=hducat_id
 		left join #hdu_helpdesk on hducat_helpdesk=hdudesk_id
 		left join #hdu_resolve on  hdu_resolution=hdures_id

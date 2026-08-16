@@ -95,7 +95,7 @@ class hdu_resolve_ui extends e_admin_ui
 		$pluginPrefs = e107::pref("helpdesk");
 		$hdu_msg = "";
 
-		if (($sql->count("hdunit", "(*)", "where hdu_resolution='$hdu_ac_id'") > 0) || $pluginPrefs['hduprefs_defaultres'] == $hdu_ac_id || $pluginPrefs['hduprefs_autocloseres'] == $hdu_ac_id)
+		if (($sql->count("hdu_tickets", "(*)", "where hdu_resolution='$hdu_ac_id'") > 0) || $pluginPrefs['hduprefs_defaultres'] == $hdu_ac_id || $pluginPrefs['hduprefs_autocloseres'] == $hdu_ac_id)
 		{
 			// Record in use
 			$hdu_msg .= HDU_A104;

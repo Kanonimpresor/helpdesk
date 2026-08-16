@@ -107,7 +107,7 @@ $hdu_pdf->SetAuthor(SITENAME);
 //$hdu_pdf->AliasNbPages();
 $hdu_pdf->AddPage();
 
-$hdu_udb->db_Select_gen("select * from #hdunit
+$hdu_udb->db_Select_gen("select * from #hdu_tickets
 left join #hdu_categories on hducat_id=hdu_category
 left join #hdu_helpdesk on hdudesk_id=hdu_tech", $hdu_dbarg);
 $hdu_avg = 0;

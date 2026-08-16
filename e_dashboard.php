@@ -9,7 +9,7 @@ class helpdesk_dashboard // include plugin-folder in the name.
 	function status() // Status Panel in the admin area
 	{
 
-		$total_tickets = e107::getDb()->count('hdunit', '(*)');
+		$total_tickets = e107::getDb()->count('hdu_tickets', '(*)');
 
 		$var[0]['icon'] 	= "<img src='".e_PLUGIN. "helpdesk/images/hdu_16.png' alt='' />";
 		$var[0]['title'] 	= HDU_198;
@@ -28,7 +28,7 @@ class helpdesk_dashboard // include plugin-folder in the name.
 		$helpdesk_obj  = e107::getSingleton('helpdesk_obj', e_PLUGIN . HELPDESK_FOLDER . "/includes/helpdesk_class.php");
 		$hduprefs_defaultres = $helpdesk_obj->hduprefs_defaultres;
 	 
-		$open_tickets = e107::getDb()->count('hdunit', '(*)', "WHERE hdu_resolution='$hduprefs_defaultres' and hdu_closed=0");
+		$open_tickets = e107::getDb()->count('hdu_tickets', '(*)', "WHERE hdu_resolution='$hduprefs_defaultres' and hdu_closed=0");
 
 		$var[0]['icon'] 	= "<img src='".e_PLUGIN. "helpdesk/images/hdu_16.png' alt='' />";
 		$var[0]['title'] 	= HDU_197;

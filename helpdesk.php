@@ -163,7 +163,7 @@ switch ($hdu_aaction)
         // confirmed the delete and we are the supervisor
         if ($helpdesk_obj->hdu_super)
         {
-            $sql->delete("hdunit", "hdu_id=$id", false);
+            $sql->delete("hdu_tickets", "hdu_id=$id", false);
             $hdu_savemsg .= HDU_234;
             $hdu_aaction = "list";
         }
@@ -273,7 +273,7 @@ if (isset($_POST['hdu_delrec']))
         if ($helpdesk_obj->hdu_super)
         {
             // only supervisor can delete tickets
-            $sql->delete("hdunit", "hdu_id='$id'");
+            $sql->delete("hdu_tickets", "hdu_id='$id'");
             $sql->delete("hdu_comments", "hduc_ticketid ='$id'");
             $sqlmsg .= HDU_160;
         }
@@ -345,7 +345,7 @@ if ($hdu_goto > 0)
 {
     $filter = "where hdu_id ='" . $hdu_goto . "' ";
 }
-$hdu_totalrecs = $sql->count("hdunit", "(*)", $filter, false);
+$hdu_totalrecs = $sql->count("hdu_tickets", "(*)", $filter, false);
 // *
 // * Display table with tickets in
 // *
@@ -387,7 +387,7 @@ else
 {
     $hdu_args = "
 		select hdu_id,hdu_datestamp,hdu_poster,hdu_posterid,hdu_summary,hdu_priority,hducat_category,hdures_resolution,hdudesk_name,hdures_help
-			from #hdunit
+			from #hdu_tickets
 			left join #hdu_categories on hdu_category =hducat_id
 			left join #hdu_resolve on hdu_resolution =hdures_id
 			left join #hdu_helpdesk on hdu_tech = hdudesk_id

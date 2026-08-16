@@ -91,7 +91,7 @@ function pdfit($hdu_pdf_id = 0, $hdu_pdf_dest = "f", $hdu_pdf_name = "Helpdesk.p
     $hdu_udb = new DB;
     // Get the ticket record
     // get the helpdesk it is assigned to
-    $arg = "select * from #hdunit left join #hdu_helpdesk on hdudesk_id=hdu_tech where hdu_id={$hdu_pdf_id}";
+    $arg = "select * from #hdu_tickets left join #hdu_helpdesk on hdudesk_id=hdu_tech where hdu_id={$hdu_pdf_id}";
     $hdu_res = $hdushow->db_Select_gen($arg,false);
     #die("W");
     $hdurow = $hdushow->db_Fetch();
@@ -311,7 +311,7 @@ $hdu_assto = $tp->toHTML($hdudesk_name);
     // ######################################## Comments #######################################
     $hducomdb = new DB;
     // Get the poster id
-    $hducomdb->db_Select("hdunit", "hdu_poster,hdu_closed", "hdu_id='$hdu_pdf_id'");
+    $hducomdb->db_Select("hdu_tickets", "hdu_poster,hdu_closed", "hdu_id='$hdu_pdf_id'");
     $hduc_owner = $hducomdb->db_Fetch();
     extract($hduc_owner);
     $hduc_creat = explode(".", $hdu_poster);

@@ -96,7 +96,7 @@ $hdu_pdf->SetAuthor(SITENAME);
 $hdu_pdf->AliasNbPages();
 $hdu_pdf->AddPage();
 
-$hdu_udb->db_Select("hdunit", "*", $hdu_dbarg);
+$hdu_udb->db_Select("hdu_tickets", "*", $hdu_dbarg);
 $hdu_avg = 0;
 $hdu_count = 0;
 while ($hdu_row = $hdu_udb->db_Fetch())

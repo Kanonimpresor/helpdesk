@@ -43,7 +43,7 @@ function print_item($id)
     }
  
     $hdu_arg = "
-select * from #hdunit
+select * from #hdu_tickets
 		left join #hdu_categories on hdu_category=hducat_id
 		left join #hdu_helpdesk on hducat_helpdesk=hdudesk_id
 		left join #hdu_resolve on  hdu_resolution=hdures_id
@@ -77,7 +77,7 @@ function email_item($id)
         $helpdesk_obj = new helpdesk;
     }
 
-    $hdu_arg = "select * from #hdunit
+    $hdu_arg = "select * from #hdu_tickets
 		left join #hdu_categories on hdu_category=hducat_id
 		left join #hdu_helpdesk on hducat_helpdesk=hdudesk_id
 		left join #hdu_resolve on  hdu_resolution=hdures_id

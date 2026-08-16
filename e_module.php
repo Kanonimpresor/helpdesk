@@ -26,7 +26,7 @@ function helpdesk_menu_postuserset($data)
             {
                 // if the user id is greater than 0 then update the posters details
                 $newname = $row['user_id'] . "." . $data['username'];
-                $hdu_db->db_Update("hdunit", "hdu_poster ='" . $tp->toDB($newname) . "' where SUBSTRING_INDEX(hdu_poster,'.',1)='" . $row['user_id'] . "'", false);
+                $hdu_db->db_Update("hdu_tickets", "hdu_poster ='" . $tp->toDB($newname) . "' where SUBSTRING_INDEX(hdu_poster,'.',1)='" . $row['user_id'] . "'", false);
             }
         }
     }

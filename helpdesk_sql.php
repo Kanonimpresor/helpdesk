@@ -45,7 +45,7 @@ CREATE TABLE hdu_resolve (
   PRIMARY KEY  (hdures_id),
   KEY hdures_id (hdures_id)
   ) ENGINE=InnoDB;
-CREATE TABLE hdunit (
+CREATE TABLE hdu_tickets (
   hdu_id int(10) unsigned NOT NULL auto_increment,
   hdu_datestamp int(10) unsigned NOT NULL default '0',
   hdu_poster varchar(100) NOT NULL default '',
