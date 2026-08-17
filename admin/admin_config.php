@@ -302,9 +302,38 @@ class helpdesk_prefs_ui extends e_admin_ui
 	// left-panel help menu area. (replaces e_help.php used in old plugins)
 	public function renderHelp()
 	{
-		$caption = LAN_HELP;
-		$text = 'Some help text';
+		$info = $this->hdu_aboutDynamic();
+		$name = 'Helpdesk';
+		$ver  = $info['HELPDESK_ABOUT_VERSION'];
+		$docs = $info['HELPDESK_ABOUT_URL_REPO'] . '#readme';
+		$supp = $info['HELPDESK_ABOUT_URL_ISSUES'];
 
+		$capTitle   = defset('LAN_PLUGIN_HELPDESK_HELP_CAPTION',  'Helpdesk — quick help');
+		$tagline    = defset('LAN_PLUGIN_HELPDESK_HELP_TAGLINE',  defset('LAN_PLUGIN_HELPDESK_ABOUT_TAGLINE', 'A lightweight ticketing system for e107 CMS.'));
+		$tip        = defset('LAN_PLUGIN_HELPDESK_HELP_TIP',      'Visit the User Guide tab for setup walkthroughs and the About tab for credits and support links.');
+		$btnDocs    = defset('LAN_PLUGIN_HELPDESK_BTN_DOCS',      'Documentation');
+		$btnSupport = defset('LAN_PLUGIN_HELPDESK_BTN_SUPPORT',   'Support');
+		$moreInfo   = defset('LAN_PLUGIN_HELPDESK_HELP_MORE',     'More info');
+
+		$text = '<div class="hdu-help-widget">'
+			.'<h4 style="margin-top:0">'.$capTitle.'</h4>'
+			.'<p><strong>'.$name.'</strong> <span class="label label-default">v'.$ver.'</span></p>'
+			.'<p class="text-muted">'.$tagline.'</p>'
+			.'<div class="alert alert-info" style="padding:8px 10px;margin-bottom:10px">'
+				.'<i class="fa fa-lightbulb-o"></i> '.$tip
+			.'</div>'
+			.'<a href="'.$docs.'" target="_blank" rel="noopener" class="btn btn-default btn-block">'
+				.'<i class="fa fa-book"></i> '.$btnDocs
+			.'</a>'
+			.'<a href="'.$supp.'" target="_blank" rel="noopener" class="btn btn-default btn-block">'
+				.'<i class="fa fa-life-ring"></i> '.$btnSupport
+			.'</a>'
+			.'<p class="text-center" style="margin-top:8px;margin-bottom:0">'
+				.'<a href="'.e_SELF.'?mode=main&amp;action=about">'.$moreInfo.' &raquo;</a>'
+			.'</p>'
+			.'</div>';
+
+		$caption = defined('LAN_HELP') ? LAN_HELP : 'Help';
 		return array('caption' => $caption, 'text' => $text);
 	}
 
@@ -403,10 +432,14 @@ class helpdesk_prefs_ui extends e_admin_ui
 		$issuesTxt = defined('LAN_PLUGIN_HELPDESK_ABOUT_LINK_ISSUES_TEXT') ? LAN_PLUGIN_HELPDESK_ABOUT_LINK_ISSUES_TEXT : 'Report an issue';
 
 		return array(
+			'HELPDESK_ABOUT_NAME'        => defset('LAN_PLUGIN_HELPDESK_ABOUT_NAME', 'Helpdesk'),
 			'HELPDESK_ABOUT_VERSION'     => $version !== '' ? $version : 'dev',
 			'HELPDESK_ABOUT_DATE'        => $date    !== '' ? $date    : '—',
+			'HELPDESK_ABOUT_YEAR'        => date('Y'),
 			'HELPDESK_ABOUT_PHP_MIN'     => '8.0',
 			'HELPDESK_ABOUT_E107_MIN'    => '2.3',
+			'HELPDESK_ABOUT_URL_REPO'    => $repo,
+			'HELPDESK_ABOUT_URL_ISSUES'  => $issues,
 			'HELPDESK_ABOUT_LINK_REPO'   => '<a href="'.$repo.'" target="_blank" rel="noopener">github.com/Kanonimpresor/helpdesk</a>',
 			'HELPDESK_ABOUT_LINK_ISSUES' => '<a href="'.$issues.'" target="_blank" rel="noopener">'.$issuesTxt.'</a>',
 			'HELPDESK_ABOUT_LINK_E107'   => '<a href="https://e107.org" target="_blank" rel="noopener">e107.org</a>',
