@@ -401,10 +401,12 @@ class helpdesk_prefs_ui extends e_admin_ui
 	 */
 	private function hdu_expandTokens($tmpl, array $dynamic = array())
 	{
-		return preg_replace_callback('/\{(HELPDESK_[A-Z0-9_]+)\}/', function($m) use ($dynamic) {
+		return preg_replace_callback('/\{(HELPDESK_[A-Z0-9_]+|LAN_PLUGIN_HELPDESK_[A-Z0-9_]+)\}/', function($m) use ($dynamic) {
 			$key = $m[1];
+			// Dynamic runtime values (from controller) win over LAN constants.
 			if (array_key_exists($key, $dynamic)) { return $dynamic[$key]; }
-			$const = 'LAN_PLUGIN_' . $key;
+			// {HELPDESK_FOO} → LAN_PLUGIN_HELPDESK_FOO
+			$const = (strpos($key, 'LAN_PLUGIN_') === 0) ? $key : 'LAN_PLUGIN_' . $key;
 			return defined($const) ? constant($const) : '';
 		}, $tmpl);
 	}
