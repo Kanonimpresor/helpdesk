@@ -310,27 +310,50 @@ class helpdesk_prefs_ui extends e_admin_ui
 
 	/**
 	 * F3b — Action `guide` (URL: admin_config.php?mode=main&action=guide).
-	 * Renders the multi-tab User Guide using the 4-layer pattern:
-	 * template + shortcode batch + LAN file lazy-loaded here.
+	 * Renders the multi-tab User Guide using e107's form-handler tabs
+	 * (same pattern as the booking plugin — Bootstrap-version agnostic).
 	 */
 	public function guidePage()
 	{
 		e107::lan('helpdesk', 'admin_help', true);
 		$tmpl = e107::getTemplate('helpdesk', 'helpdesk_guide');
-		if (empty($tmpl['main'])) { return '<div class="alert alert-warning">Guide template missing.</div>'; }
-		return $this->hdu_expandTokens($tmpl['main']);
+		if (empty($tmpl) || !is_array($tmpl))
+		{
+			return '<div class="alert alert-warning">Guide template missing.</div>';
+		}
+
+		$tabs = array(
+			'overview'      => array('LAN_PLUGIN_HELPDESK_GUIDE_TAB0_TITLE', 'Overview',        'fa-info-circle'),
+			'roles'         => array('LAN_PLUGIN_HELPDESK_GUIDE_TAB1_TITLE', 'Roles',           'fa-users'),
+			'lifecycle'     => array('LAN_PLUGIN_HELPDESK_GUIDE_TAB2_TITLE', 'Lifecycle',       'fa-random'),
+			'categories'    => array('LAN_PLUGIN_HELPDESK_GUIDE_TAB3_TITLE', 'Categories',      'fa-folder-open'),
+			'resolutions'   => array('LAN_PLUGIN_HELPDESK_GUIDE_TAB4_TITLE', 'Resolutions',     'fa-check-circle'),
+			'notifications' => array('LAN_PLUGIN_HELPDESK_GUIDE_TAB5_TITLE', 'Notifications',   'fa-envelope'),
+			'faq'           => array('LAN_PLUGIN_HELPDESK_GUIDE_TAB6_TITLE', 'FAQ',             'fa-question-circle'),
+		);
+
+		$tabData = array();
+		foreach ($tabs as $id => $t)
+		{
+			$label = defset($t[0], $t[1]);
+			$icon  = '<i class="fa '.$t[2].'"></i> ';
+			$chunk = !empty($tmpl[$id]) ? $this->hdu_expandTokens($tmpl[$id]) : '';
+			$tabData[$id] = array('caption' => $icon.$label, 'text' => $chunk);
+		}
+
+		return '<div class="hdu-guide">'.e107::getForm()->tabs($tabData).'</div>';
 	}
 
 	/**
 	 * F3b — Action `about` (URL: admin_config.php?mode=main&action=about).
-	 * Dynamic version/date read from plugin.xml inside the shortcode batch.
+	 * Dynamic version/date read from plugin.xml.
 	 */
 	public function aboutPage()
 	{
 		e107::lan('helpdesk', 'admin_about', true);
 		$tmpl = e107::getTemplate('helpdesk', 'helpdesk_about');
 		if (empty($tmpl['main'])) { return '<div class="alert alert-warning">About template missing.</div>'; }
-		return $this->hdu_expandTokens($tmpl['main'], $this->hdu_aboutDynamic());
+		return '<div class="hdu-about">'.$this->hdu_expandTokens($tmpl['main'], $this->hdu_aboutDynamic()).'</div>';
 	}
 
 	/**
