@@ -345,6 +345,7 @@ class helpdesk_prefs_ui extends e_admin_ui
 	public function guidePage()
 	{
 		e107::lan('helpdesk', 'admin_help', true);
+		e107::css('helpdesk', 'css/helpdesk_admin.css');
 		$tmpl = e107::getTemplate('helpdesk', 'helpdesk_guide');
 		if (empty($tmpl) || !is_array($tmpl))
 		{
@@ -380,6 +381,7 @@ class helpdesk_prefs_ui extends e_admin_ui
 	public function aboutPage()
 	{
 		e107::lan('helpdesk', 'admin_about', true);
+		e107::css('helpdesk', 'css/helpdesk_admin.css');
 		$tmpl = e107::getTemplate('helpdesk', 'helpdesk_about');
 		if (empty($tmpl['main'])) { return '<div class="alert alert-warning">About template missing.</div>'; }
 		return '<div class="hdu-about">'.$this->hdu_expandTokens($tmpl['main'], $this->hdu_aboutDynamic()).'</div>';

@@ -1,0 +1,113 @@
+/**
+ * Helpdesk plugin — Admin polish (Fase 3b).
+ *
+ * Scope: About + Guide tabs. Selectors are namespaced under
+ *   `.hdu-about` and `.hdu-guide`
+ * so we never bleed into the rest of the e107 admin.
+ */
+
+/* ─── Guide: tab-content spacing + typography ─────────────────────────── */
+.hdu-guide .tab-content {
+	background: #fff;
+	border: 1px solid #ddd;
+	border-top: none;
+	border-radius: 0 0 4px 4px;
+	padding: 20px 22px;
+	margin-bottom: 20px;
+}
+.hdu-guide .tab-content > .tab-pane {
+	line-height: 1.55;
+}
+.hdu-guide .tab-content h4 {
+	margin-top: 0;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #eee;
+	color: #337ab7;
+}
+.hdu-guide .tab-content p.lead {
+	font-size: 15px;
+	color: #555;
+}
+.hdu-guide .tab-content ol,
+.hdu-guide .tab-content ul,
+.hdu-guide .tab-content dl {
+	margin-bottom: 12px;
+}
+.hdu-guide .tab-content ol li,
+.hdu-guide .tab-content ul li {
+	margin-bottom: 6px;
+}
+.hdu-guide .tab-content dl dt {
+	margin-top: 10px;
+	color: #333;
+	font-weight: 600;
+}
+.hdu-guide .tab-content dl dd {
+	margin-left: 18px;
+	color: #555;
+}
+.hdu-guide .tab-content code {
+	font-size: 90%;
+	color: #c7254e;
+	background: #f9f2f4;
+	padding: 2px 5px;
+	border-radius: 3px;
+}
+.hdu-guide .tab-content table.table {
+	background: #fff;
+}
+.hdu-guide .tab-content table.table th {
+	background: #f6f8fa;
+}
+.hdu-guide .tab-content .alert {
+	margin-top: 14px;
+	margin-bottom: 0;
+}
+
+/* Bigger, more prominent nav-tabs so it's clear they're clickable. */
+.hdu-guide .nav-tabs > li > a {
+	font-weight: 500;
+}
+.hdu-guide .nav-tabs > li > a i.fa {
+	margin-right: 4px;
+	opacity: .8;
+}
+.hdu-guide .nav-tabs > li.active > a i.fa {
+	opacity: 1;
+}
+
+/* ─── About: panel polish ─────────────────────────────────────────────── */
+.hdu-about .panel {
+	box-shadow: 0 1px 2px rgba(0,0,0,.04);
+}
+.hdu-about .panel-heading i.fa {
+	margin-right: 5px;
+}
+.hdu-about .media {
+	display: flex;
+	align-items: center;
+}
+.hdu-about .media-body small {
+	letter-spacing: .5px;
+	font-size: 11px;
+}
+.hdu-about .media-body strong {
+	font-size: 14px;
+	color: #333;
+	word-break: break-word;
+}
+.hdu-about .panel-primary .label {
+	background: rgba(255,255,255,.25);
+}
+
+/* ─── Sidebar help widget ─────────────────────────────────────────────── */
+.hdu-help-widget h4 {
+	color: #337ab7;
+	font-size: 15px;
+}
+.hdu-help-widget .label {
+	font-size: 90%;
+}
+.hdu-help-widget .btn-block + .btn-block {
+	margin-top: 6px;
+}
